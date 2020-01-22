@@ -6,8 +6,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,16 +21,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gridView = (GridView) findViewById(R.id.grid_view);
+
+
         Call<MoviesResponse> call = new APIclient().apIinterface().getMoviesResponses();
         call.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 if (response.isSuccessful()) {
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "Error ", Toast.LENGTH_LONG).show();
                     adapter = new Adapter(response.body(), MainActivity.this);
                     gridView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error ", Toast.LENGTH_LONG).show();
+
                 }
 
             }

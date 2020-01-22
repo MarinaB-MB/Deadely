@@ -41,11 +41,11 @@ public class Adapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = LayoutInflater.from(context).inflate(R.layout.item, null);
-        TextView text = view.findViewById(R.id.text);
+        TextView textView = view.findViewById(R.id.text);
         ImageView imageView = view.findViewById(R.id.image);
 
 
-        text.setText(resultList.get(position).getTitle());
+        textView.setText(resultList.get(position).getTitle());
         Glide.with(context)
                 .load(resultList.get(position).getPoster().getImage())
                 .into(imageView);
