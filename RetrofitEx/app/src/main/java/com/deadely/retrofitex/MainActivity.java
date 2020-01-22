@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gridView = (GridView) findViewById(R.id.grid_view);
-        Call<List<Result>> call = new APIclient().apIinterface().getResults();
-        call.enqueue(new Callback<List<Result>>() {
+        Call<MoviesResponse> call = new APIclient().apIinterface().getMoviesResponses();
+        call.enqueue(new Callback<MoviesResponse>() {
             @Override
-            public void onResponse(Call<List<Result>> call, Response<List<Result>> response) {
+            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 if (response.isSuccessful()) {
 
                 } else {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Result>> call, Throwable t) {
+            public void onFailure(Call<MoviesResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Error " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });

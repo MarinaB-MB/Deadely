@@ -13,15 +13,14 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import static android.view.LayoutInflater.from;
-
 public class Adapter extends BaseAdapter {
     public List<Result> resultList;
     public Context context;
 
-    public Adapter(List<Result> resultList, Context context) {
-        this.resultList = resultList;
+    public Adapter(MoviesResponse movieResponse, Context context) {
+
         this.context = context;
+        this.resultList = movieResponse.getResults();
     }
 
     @Override

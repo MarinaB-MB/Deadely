@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 
 public interface APIinterface {
     @GET("movies")
-    Call<List<Result>> getResults();
+    Call<MoviesResponse> getMoviesResponses();
 
 
 }
