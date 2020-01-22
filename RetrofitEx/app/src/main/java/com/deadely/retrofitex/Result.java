@@ -74,4 +74,5 @@ public class Result implements Parcelable {
             return new Result[size];
         }
     };
+
 }

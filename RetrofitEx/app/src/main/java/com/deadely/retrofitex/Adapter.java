@@ -47,7 +47,7 @@ public class Adapter extends BaseAdapter {
 
         text.setText(resultList.get(position).getTitle());
         Glide.with(context)
-                .load(resultList.get(position).getPoster())
+                .load(resultList.get(position).getPoster().getImage())
                 .into(imageView);
         return view;
     }
