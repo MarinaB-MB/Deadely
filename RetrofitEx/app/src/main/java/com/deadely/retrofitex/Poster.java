@@ -12,8 +12,6 @@ public class Poster implements Parcelable {
     @SerializedName("image")
     @Expose
     private String image;
-
-
     @SerializedName("source")
     @Expose
     private Source source;
