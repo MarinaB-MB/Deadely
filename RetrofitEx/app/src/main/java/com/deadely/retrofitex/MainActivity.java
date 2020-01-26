@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,12 +21,9 @@ import retrofit2.Response;
 public class MainActivity extends Activity {
     GridView gridView;
     Adapter adapter;
+    TextView textView;
     EditText editText;
-<<<<<<< HEAD
     public ImageView ivSearch, ivClose, ivNSearch;
-=======
-    public ImageView ivSearch, ivClose;
->>>>>>> 6041d362524645fa7be76ec5e75b6ec6c4d42f47
     private MoviesResponse mMovieResponse;
     private List<Result> resultList = new ArrayList<>();
 
@@ -38,15 +36,10 @@ public class MainActivity extends Activity {
         ivSearch = findViewById(R.id.iv_search);
         ivClose = findViewById(R.id.iv_close);
         ivNSearch = findViewById(R.id.noth_to_search);
+        textView = (TextView)findViewById(R.id.tv_nt_search);
 
-<<<<<<< HEAD
         getMovies();
         setListeners();
-
-=======
-        setListeners();
-        getMovies();
->>>>>>> 6041d362524645fa7be76ec5e75b6ec6c4d42f47
     }
 
     private void setListeners() {
@@ -59,6 +52,7 @@ public class MainActivity extends Activity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 gridView.setVisibility(View.VISIBLE);
+                textView.setVisibility(View.GONE);
                 ivNSearch.setVisibility(View.GONE);
                 if (s.toString().equals("")) {
                     initList();
@@ -103,35 +97,16 @@ public class MainActivity extends Activity {
         for (int i = 0; i < mMovieResponse.getResults().size(); i++) {
             if (mMovieResponse.getResults().get(i).getTitle().toLowerCase().contains(textToSearch.toLowerCase())) {
                 resultList.add(mMovieResponse.getResults().get(i));
-<<<<<<< HEAD
-
-
             }
         }
         if (resultList.isEmpty()) {
             gridView.setVisibility(View.GONE);
             ivNSearch.setVisibility(View.VISIBLE);
-
-
+            textView.setVisibility(View.VISIBLE);
         } else {
             gridView.setVisibility(View.VISIBLE);
             adapter.setData(resultList);
         }
-=======
-            }
-        }
-        if (resultList.isEmpty()) {
-                gridView.setVisibility(View.GONE);
-
-        } else {
-            adapter.setData(resultList);
-        }
-    }
-
-    public void initList() {
-        resultList.clear();
-        adapter.setData(mMovieResponse.getResults());
->>>>>>> 6041d362524645fa7be76ec5e75b6ec6c4d42f47
     }
 
     public void initList() {
