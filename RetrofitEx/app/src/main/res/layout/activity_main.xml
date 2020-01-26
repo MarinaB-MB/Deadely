@@ -3,10 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    android:orientation="vertical"
-    android:padding="8dp"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,8 +12,9 @@
 
         <ImageView
             android:id="@+id/iv_search"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_margin="5dp"
+            android:layout_height="30dp"
             android:layout_alignParentLeft="true"
             android:background="@drawable/search" />
 
@@ -32,15 +30,34 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/close" />
+            android:background="@drawable/close"
+            android:clickable="true"
+            android:onClick="btnClean"
+            />
     </RelativeLayout>
+    <ImageView
+        android:id="@+id/noth_to_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="150dp"
+        android:layout_marginBottom="250dp"
+        android:visibility="gone"
+        android:scaleType="centerCrop"
+        android:background="@drawable/noth_to_search" />
 
     <GridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:background="@color/dark_grey"
+        android:gravity="center_horizontal"
         android:horizontalSpacing="5dp"
         android:numColumns="2"
-        android:verticalSpacing="5dp" />
+        android:orientation="vertical"
+        android:verticalSpacing="5dp"
+        tools:listitem="@layout/item" />
 
 </LinearLayout>

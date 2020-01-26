@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RetrofitEx</string>
+    <string name="noth_to_search">Ничего не найдено</string>
 </resources>
