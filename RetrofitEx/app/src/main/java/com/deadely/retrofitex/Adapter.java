@@ -24,7 +24,11 @@ public class Adapter extends BaseAdapter {
         this.layoutInflater = LayoutInflater.from(context);
     }
 
+<<<<<<< HEAD
     public void setData(List<Result> resultList) {
+=======
+    public void setData(List<Result> resultList){
+>>>>>>> 6041d362524645fa7be76ec5e75b6ec6c4d42f47
         mResultList = resultList;
         notifyDataSetChanged();
     }
@@ -46,6 +50,7 @@ public class Adapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+<<<<<<< HEAD
 
         convertView = layoutInflater.inflate(R.layout.item, parent, false);
         TextView textView = convertView.findViewById(R.id.text);
@@ -57,6 +62,19 @@ public class Adapter extends BaseAdapter {
                 .load(result.getPoster().getImage())
                 .into(imageView);
 
+=======
+        if(convertView == null) {
+            convertView = layoutInflater.inflate(R.layout.item, parent, false);
+            TextView textView = convertView.findViewById(R.id.text);
+            ImageView imageView = convertView.findViewById(R.id.image);
+            Result result = mResultList.get(position);
+
+            textView.setText(result.getTitle());
+            Glide.with(context)
+                    .load(result.getPoster().getImage())
+                    .into(imageView);
+        }
+>>>>>>> 6041d362524645fa7be76ec5e75b6ec6c4d42f47
         return convertView;
     }
 

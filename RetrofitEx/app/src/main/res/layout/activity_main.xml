@@ -4,6 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6041d362524645fa7be76ec5e75b6ec6c4d42f47
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -56,8 +60,13 @@
         android:gravity="center_horizontal"
         android:horizontalSpacing="5dp"
         android:numColumns="2"
+<<<<<<< HEAD
         android:orientation="vertical"
         android:verticalSpacing="5dp"
+=======
+        android:verticalSpacing="5dp"
+        android:orientation="vertical"
+>>>>>>> 6041d362524645fa7be76ec5e75b6ec6c4d42f47
         tools:listitem="@layout/item" />
 
 </LinearLayout>

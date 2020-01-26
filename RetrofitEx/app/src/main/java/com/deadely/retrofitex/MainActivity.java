@@ -21,7 +21,11 @@ public class MainActivity extends Activity {
     GridView gridView;
     Adapter adapter;
     EditText editText;
+<<<<<<< HEAD
     public ImageView ivSearch, ivClose, ivNSearch;
+=======
+    public ImageView ivSearch, ivClose;
+>>>>>>> 6041d362524645fa7be76ec5e75b6ec6c4d42f47
     private MoviesResponse mMovieResponse;
     private List<Result> resultList = new ArrayList<>();
 
@@ -35,9 +39,14 @@ public class MainActivity extends Activity {
         ivClose = findViewById(R.id.iv_close);
         ivNSearch = findViewById(R.id.noth_to_search);
 
+<<<<<<< HEAD
         getMovies();
         setListeners();
 
+=======
+        setListeners();
+        getMovies();
+>>>>>>> 6041d362524645fa7be76ec5e75b6ec6c4d42f47
     }
 
     private void setListeners() {
@@ -94,6 +103,7 @@ public class MainActivity extends Activity {
         for (int i = 0; i < mMovieResponse.getResults().size(); i++) {
             if (mMovieResponse.getResults().get(i).getTitle().toLowerCase().contains(textToSearch.toLowerCase())) {
                 resultList.add(mMovieResponse.getResults().get(i));
+<<<<<<< HEAD
 
 
             }
@@ -107,6 +117,21 @@ public class MainActivity extends Activity {
             gridView.setVisibility(View.VISIBLE);
             adapter.setData(resultList);
         }
+=======
+            }
+        }
+        if (resultList.isEmpty()) {
+                gridView.setVisibility(View.GONE);
+
+        } else {
+            adapter.setData(resultList);
+        }
+    }
+
+    public void initList() {
+        resultList.clear();
+        adapter.setData(mMovieResponse.getResults());
+>>>>>>> 6041d362524645fa7be76ec5e75b6ec6c4d42f47
     }
 
     public void initList() {
