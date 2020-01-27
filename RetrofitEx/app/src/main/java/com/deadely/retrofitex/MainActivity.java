@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,8 @@ public class MainActivity extends Activity {
     public ImageView ivSearch, ivClose, ivNSearch;
     private MoviesResponse mMovieResponse;
     private List<Result> resultList = new ArrayList<>();
+    ProgressBar progressBar;
+    //SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,7 @@ public class MainActivity extends Activity {
         ivClose = findViewById(R.id.iv_close);
         ivNSearch = findViewById(R.id.noth_to_search);
         textView = (TextView)findViewById(R.id.tv_nt_search);
-
+        progressBar = (ProgressBar)findViewById(R.id.progress);
         getMovies();
         setListeners();
     }
@@ -87,12 +90,13 @@ public class MainActivity extends Activity {
 
             @Override
             public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Check your internet connectoin " , Toast.LENGTH_LONG).show();
             }
         });
     }
 
     public void searchItem(String textToSearch) {
+        progressBar.setVisibility(View.VISIBLE);
         resultList.clear();
         for (int i = 0; i < mMovieResponse.getResults().size(); i++) {
             if (mMovieResponse.getResults().get(i).getTitle().toLowerCase().contains(textToSearch.toLowerCase())) {
@@ -107,6 +111,7 @@ public class MainActivity extends Activity {
             gridView.setVisibility(View.VISIBLE);
             adapter.setData(resultList);
         }
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     public void initList() {

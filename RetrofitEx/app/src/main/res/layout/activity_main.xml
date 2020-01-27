@@ -35,6 +35,12 @@
             android:onClick="btnClean" />
     </RelativeLayout>
 
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
+
     <ImageView
         android:id="@+id/noth_to_search"
         android:layout_width="80dp"
@@ -44,15 +50,15 @@
         android:background="@drawable/noth_to_search"
         android:scaleType="centerCrop"
         android:visibility="gone" />
+
     <TextView
         android:id="@+id/tv_nt_search"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:maxLines="2"
         android:text="@string/noth_to_search"
-        android:layout_gravity="center_horizontal"
-        />
+        android:visibility="gone" />
 
     <GridView
         android:id="@+id/grid_view"
