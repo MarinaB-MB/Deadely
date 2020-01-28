@@ -5,72 +5,163 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/ll_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-        <ImageView
-            android:id="@+id/iv_search"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="5dp"
-            android:background="@drawable/search" />
-
-        <EditText
-            android:id="@+id/et_search"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_toLeftOf="@id/iv_close"
-            android:layout_toRightOf="@id/iv_search" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape">
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/search" />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_toLeftOf="@id/iv_close"
+                android:layout_toRightOf="@id/iv_search" />
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/close"
+                android:clickable="true"
+                android:onClick="btnClean" />
+        </RelativeLayout>
+
 
         <ImageView
-            android:id="@+id/iv_close"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/close"
-            android:clickable="true"
-            android:onClick="btnClean" />
-    </RelativeLayout>
+            android:id="@+id/noth_to_search"
+            android:layout_width="80dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="250dp"
+            android:background="@drawable/noth_to_search"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_nt_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:maxLines="2"
+            android:text="@string/noth_to_search"
+            android:visibility="gone" />
+
+        <GridView
+            android:id="@+id/grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:background="@color/dark_grey"
+            android:gravity="center_horizontal"
+            android:horizontalSpacing="5dp"
+            android:numColumns="2"
+            android:orientation="vertical"
+            android:verticalSpacing="5dp"
+            tools:listitem="@layout/item" />
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible" />
-
-    <ImageView
-        android:id="@+id/noth_to_search"
-        android:layout_width="80dp"
-        android:layout_height="90dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="250dp"
-        android:background="@drawable/noth_to_search"
-        android:scaleType="centerCrop"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/tv_nt_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:maxLines="2"
-        android:text="@string/noth_to_search"
-        android:visibility="gone" />
-
-    <GridView
-        android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:background="@color/dark_grey"
-        android:gravity="center_horizontal"
-        android:horizontalSpacing="5dp"
-        android:numColumns="2"
-        android:orientation="vertical"
-        android:verticalSpacing="5dp"
-        tools:listitem="@layout/item" />
+        android:padding="40dp"
+        android:visibility="visible" />
+
 
 </LinearLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:orientation="vertical">-->
+
+    <!--    <RelativeLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@drawable/shape">-->
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/iv_search"-->
+    <!--            android:layout_width="30dp"-->
+    <!--            android:layout_height="30dp"-->
+    <!--            android:layout_alignParentLeft="true"-->
+    <!--            android:layout_margin="5dp"-->
+    <!--            android:background="@drawable/search" />-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/et_search"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="40dp"-->
+    <!--            android:layout_toLeftOf="@id/iv_close"-->
+    <!--            android:layout_toRightOf="@id/iv_search" />-->
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/iv_close"-->
+    <!--            android:layout_width="30dp"-->
+    <!--            android:layout_height="30dp"-->
+    <!--            android:layout_alignParentRight="true"-->
+    <!--            android:background="@drawable/close"-->
+    <!--            android:clickable="true"-->
+    <!--            android:onClick="btnClean" />-->
+    <!--    </RelativeLayout>-->
+
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/progress"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:visibility="invisible" />-->
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/noth_to_search"-->
+    <!--        android:layout_width="80dp"-->
+    <!--        android:layout_height="90dp"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:layout_marginTop="250dp"-->
+    <!--        android:background="@drawable/noth_to_search"-->
+    <!--        android:scaleType="centerCrop"-->
+    <!--        android:visibility="gone" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_nt_search"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:maxLines="2"-->
+    <!--        android:text="@string/noth_to_search"-->
+    <!--        android:visibility="gone" />-->
+
+    <!--    <GridView-->
+    <!--        android:id="@+id/grid_view"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:background="@color/dark_grey"-->
+    <!--        android:gravity="center_horizontal"-->
+    <!--        android:horizontalSpacing="5dp"-->
+    <!--        android:numColumns="2"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:verticalSpacing="5dp"-->
+    <!--        tools:listitem="@layout/item" />-->
+
+    <!--</LinearLayout>-->
+
+

@@ -12,8 +12,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,9 +27,12 @@ public class MainActivity extends Activity {
     EditText editText;
     public ImageView ivSearch, ivClose, ivNSearch;
     private MoviesResponse mMovieResponse;
-    private List<Result> resultList = new ArrayList<>();
+    private ArrayList<Result> resultList = new ArrayList<>();
     ProgressBar progressBar;
     //SwipeRefreshLayout swipeRefreshLayout;
+
+    public static final String MOVIES = "MainActivity.MOVIES";
+    public static final String MOVIES_SEARCH = "MainActivity.MOVIES_SEARCH";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +43,26 @@ public class MainActivity extends Activity {
         ivSearch = findViewById(R.id.iv_search);
         ivClose = findViewById(R.id.iv_close);
         ivNSearch = findViewById(R.id.noth_to_search);
-        textView = (TextView)findViewById(R.id.tv_nt_search);
-        progressBar = (ProgressBar)findViewById(R.id.progress);
-        getMovies();
+        textView = (TextView) findViewById(R.id.tv_nt_search);
+        progressBar = (ProgressBar) findViewById(R.id.progress);
+        if (savedInstanceState == null) {
+            getMovies();
+        }
         setListeners();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable(MOVIES, mMovieResponse);
+        outState.putParcelableArrayList(MOVIES_SEARCH, resultList);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mMovieResponse = savedInstanceState.getParcelable(MOVIES);
+        resultList = savedInstanceState.getParcelableArrayList(MOVIES_SEARCH);
     }
 
     private void setListeners() {
@@ -90,33 +110,41 @@ public class MainActivity extends Activity {
 
             @Override
             public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Check your internet connectoin " , Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Check your internet connectoin ", Toast.LENGTH_LONG).show();
             }
         });
     }
 
     public void searchItem(String textToSearch) {
-        progressBar.setVisibility(View.VISIBLE);
-        resultList.clear();
-        for (int i = 0; i < mMovieResponse.getResults().size(); i++) {
-            if (mMovieResponse.getResults().get(i).getTitle().toLowerCase().contains(textToSearch.toLowerCase())) {
-                resultList.add(mMovieResponse.getResults().get(i));
+        if (mMovieResponse != null && resultList != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            resultList.clear();
+            for (int i = 0; i < mMovieResponse.getResults().size(); i++) {
+                if (mMovieResponse.getResults().get(i).getTitle().toLowerCase().contains(textToSearch.toLowerCase())) {
+                    resultList.add(mMovieResponse.getResults().get(i));
+                }
             }
-        }
-        if (resultList.isEmpty()) {
-            gridView.setVisibility(View.GONE);
-            ivNSearch.setVisibility(View.VISIBLE);
-            textView.setVisibility(View.VISIBLE);
+            if (resultList.isEmpty()) {
+                gridView.setVisibility(View.GONE);
+                ivNSearch.setVisibility(View.VISIBLE);
+                textView.setVisibility(View.VISIBLE);
+            } else {
+                gridView.setVisibility(View.VISIBLE);
+                adapter.setData(resultList);
+            }
+            progressBar.setVisibility(View.INVISIBLE);
         } else {
-            gridView.setVisibility(View.VISIBLE);
-            adapter.setData(resultList);
+            getMovies();
         }
-        progressBar.setVisibility(View.INVISIBLE);
     }
 
     public void initList() {
-        resultList.clear();
-        adapter.setData(mMovieResponse.getResults());
+        if (mMovieResponse != null) {
+            resultList.clear();
+            adapter.setData(mMovieResponse.getResults());
+        } else {
+            getMovies();
+        }
     }
 
     public void btnClean(View view) {
