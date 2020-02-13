@@ -1,4 +1,4 @@
-package com.deadely.myapplication;
+package com.deadely.myapplication.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -18,6 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 
+import com.deadely.myapplication.network.APIclient;
+import com.deadely.myapplication.Adapters.Adapter;
+import com.deadely.myapplication.dataclass.MoviesResponse;
+import com.deadely.myapplication.dataclass.Result;
+import com.deadely.myapplication.R;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -26,7 +32,7 @@ import retrofit2.Response;
 
 public class MainActivity extends Activity {
 
-    RAdapter radapter;
+    Adapter adapter;
     TextView textView;
     EditText editText;
     public ImageView ivSearch, ivClose, ivNSearch;
@@ -121,8 +127,8 @@ public class MainActivity extends Activity {
                         progressBar.setVisibility(View.VISIBLE);
 
                         recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
-                        radapter = new RAdapter(mMovieResponse, MainActivity.this);
-                        recyclerView.setAdapter(radapter);
+                        adapter = new Adapter(mMovieResponse, MainActivity.this);
+                        recyclerView.setAdapter(adapter);
 
                         progressBar.setVisibility(View.GONE);
                         mSwipeRefreshLayout.setVisibility(View.VISIBLE);
@@ -156,7 +162,7 @@ public class MainActivity extends Activity {
                     searchLayout.setVisibility(View.VISIBLE);
                 } else {
                     mSwipeRefreshLayout.setVisibility(View.VISIBLE);
-                    radapter.setData(resultList);
+                    adapter.setData(resultList);
                 }
             } else {
                 getMovies();
@@ -167,7 +173,7 @@ public class MainActivity extends Activity {
     public void initList() {
         if (mMovieResponse != null) {
             resultList.clear();
-            radapter.setData(mMovieResponse.getResults());
+            adapter.setData(mMovieResponse.getResults());
         } else {
             getMovies();
         }

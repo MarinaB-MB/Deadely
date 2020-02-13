@@ -1,4 +1,4 @@
-package com.deadely.myapplication;
+package com.deadely.myapplication.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.deadely.myapplication.dataclass.MoviesResponse;
+import com.deadely.myapplication.dataclass.Result;
+import com.deadely.myapplication.R;
+import com.deadely.myapplication.activities.SecActivity;
 
 import java.util.List;
 
-public class RAdapter extends RecyclerView.Adapter<RAdapter.MyViewHolder> {
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> {
     public List<Result> mResultList;
 
     public Context context;
@@ -39,7 +43,7 @@ public class RAdapter extends RecyclerView.Adapter<RAdapter.MyViewHolder> {
         }
     }
 
-    public RAdapter(MoviesResponse movieResponse, Context context) {
+    public MainAdapter(MoviesResponse movieResponse, Context context) {
         this.context = context;
         this.mResultList = movieResponse.getResults();
         this.layoutInflater = LayoutInflater.from(context);

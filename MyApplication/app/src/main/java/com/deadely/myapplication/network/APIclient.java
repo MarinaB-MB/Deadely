@@ -1,4 +1,4 @@
-package com.deadely.myapplication;
+package com.deadely.myapplication.network;
 
 
 import retrofit2.Retrofit;

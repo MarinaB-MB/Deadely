@@ -1,4 +1,4 @@
-package com.deadely.myapplication;
+package com.deadely.myapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,10 @@ import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.Glide;
+import com.deadely.myapplication.network.APIclient;
+import com.deadely.myapplication.dataclass.MoviesResponse;
+import com.deadely.myapplication.dataclass.Result;
+import com.deadely.myapplication.R;
 import com.google.android.gms.maps.GoogleMap;
 
 import java.util.List;
