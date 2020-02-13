@@ -13,19 +13,24 @@
 
         <ImageView
             android:id="@+id/iv_poster"
-            android:layout_width="300dp"
-            android:paddingTop="20dp"
-            android:layout_height="500dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingTop="20dp"
+            android:scaleType="centerCrop"
             tools:background="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
-            android:paddingTop="8dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:maxLines="2"
+            android:paddingTop="8dp"
             tools:text="aaaaaaaaaaaaaaaaaaaa" />
     </LinearLayout>
-    </LinearLayout>
+</LinearLayout>
