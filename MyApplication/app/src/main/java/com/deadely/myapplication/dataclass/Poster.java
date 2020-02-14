@@ -1,4 +1,5 @@
 package com.deadely.myapplication.dataclass;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -44,10 +45,8 @@ public class Poster implements Parcelable {
         dest.writeParcelable((Parcelable) this.source, flags);
     }
 
-
     public Poster() {
     }
-
 
     protected Poster(Parcel in) {
         this.image = in.readString();

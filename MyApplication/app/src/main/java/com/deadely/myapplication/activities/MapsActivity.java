@@ -26,12 +26,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-
         LatLng location = new LatLng(45, 34);
         mMap.addMarker(new MarkerOptions().position(location).title("Marker"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
