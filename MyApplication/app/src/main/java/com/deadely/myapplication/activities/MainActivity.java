@@ -33,29 +33,27 @@ import retrofit2.Response;
 
 public class MainActivity extends Activity {
 
+    public static final String MOVIES = "MainActivity.MOVIES";
+    public static final String MOVIES_SEARCH = "MainActivity.MOVIES_SEARCH";
+
     @BindView(R.id.et_search)
     EditText editText;
-
     @BindView(R.id.progress)
     ProgressBar progressBar;
-
     @BindView(R.id.r_view)
     RecyclerView recyclerView;
-
     @BindView(R.id.nSearch_layout)
     ConstraintLayout searchLayout;
-
     @BindView(R.id.rw_layout)
     LinearLayout rwLayout;
-
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.progress_layout)
+    ConstraintLayout progressLayout;
 
     private MoviesResponse mMovieResponse;
     private ArrayList<Result> resultList = new ArrayList<>();
-    MainAdapter adapter;
-    public static final String MOVIES = "MainActivity.MOVIES";
-    public static final String MOVIES_SEARCH = "MainActivity.MOVIES_SEARCH";
+    public MainAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +63,8 @@ public class MainActivity extends Activity {
 
         if (savedInstanceState == null) {
             getMovies();
-        }else setListeners();
+        }
+//        setListeners();
 
         mSwipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> {
             mSwipeRefreshLayout.setRefreshing(false);
@@ -112,6 +111,10 @@ public class MainActivity extends Activity {
     }
 
     private void getMovies() {
+        rwLayout.setVisibility(View.GONE);
+        searchLayout.setVisibility(View.GONE);
+        progressLayout.setVisibility(View.VISIBLE);
+
         Call<MoviesResponse> call = new APIclient().apIinterface().getMoviesResponses();
         call.enqueue(new Callback<MoviesResponse>() {
             @Override
@@ -120,18 +123,23 @@ public class MainActivity extends Activity {
                     MoviesResponse moviesResponse = response.body();
                     mMovieResponse = moviesResponse;
                     if (mMovieResponse != null) {
-                        rwLayout.setVisibility(View.GONE);
-                        searchLayout.setVisibility(View.GONE);
-                        progressBar.setVisibility(View.VISIBLE);
-
                         recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
                         adapter = new MainAdapter(mMovieResponse, MainActivity.this);
                         recyclerView.setAdapter(adapter);
-
-                        progressBar.setVisibility(View.GONE);
-                        rwLayout.setVisibility(View.VISIBLE);
+                        if (mMovieResponse.getResults().isEmpty()) {
+                            searchLayout.setVisibility(View.VISIBLE);
+                            rwLayout.setVisibility(View.GONE);
+                            progressLayout.setVisibility(View.GONE);
+                        } else {
+                            searchLayout.setVisibility(View.GONE);
+                            rwLayout.setVisibility(View.VISIBLE);
+                            progressLayout.setVisibility(View.GONE);
+                        }
                     }
                 } else {
+                    searchLayout.setVisibility(View.VISIBLE);
+                    rwLayout.setVisibility(View.GONE);
+                    progressLayout.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Error ", Toast.LENGTH_LONG).show();
                 }
             }
@@ -146,9 +154,7 @@ public class MainActivity extends Activity {
     }
 
     public void searchItem(String textToSearch) {
-
         if (mMovieResponse != null && resultList != null) {
-
             resultList.clear();
             for (int i = 0; i < mMovieResponse.getResults().size(); i++) {
                 if (mMovieResponse.getResults().get(i).getTitle().toLowerCase().contains(textToSearch.toLowerCase())) {

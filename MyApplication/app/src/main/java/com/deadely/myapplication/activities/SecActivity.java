@@ -24,9 +24,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SecActivity extends FragmentActivity {
+
     @BindView(R.id.iv_poster)
     ImageView imageView;
-
     @BindView(R.id.tv_title)
     TextView textView;
 
