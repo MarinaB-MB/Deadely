@@ -1,4 +1,4 @@
-package com.deadely.myapplication.activities;
+package com.deadely.myapplication.main;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,8 +7,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.deadely.myapplication.R;
-import com.deadely.myapplication.adapters.MainAdapter;
 import com.deadely.myapplication.dataclass.MoviesResponse;
 import com.deadely.myapplication.dataclass.Result;
 import com.deadely.myapplication.network.APIclient;
@@ -32,30 +29,23 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends Activity {
+    public static final String MOVIES = "MainActivity.MOVIES";
+    public static final String MOVIES_SEARCH = "MainActivity.MOVIES_SEARCH";
 
     @BindView(R.id.et_search)
     EditText editText;
-
-    @BindView(R.id.progress)
-    ProgressBar progressBar;
-
-    @BindView(R.id.r_view)
+    @BindView(R.id.progress_layout)
+    ConstraintLayout progressLayout;
+    @BindView(R.id.rv_movies)
     RecyclerView recyclerView;
-
-    @BindView(R.id.nSearch_layout)
-    ConstraintLayout searchLayout;
-
-    @BindView(R.id.rw_layout)
-    LinearLayout rwLayout;
-
+    @BindView(R.id.noth_search_layout)
+    ConstraintLayout nSearchLayout;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private MoviesResponse mMovieResponse;
     private ArrayList<Result> resultList = new ArrayList<>();
-    MainAdapter adapter;
-    public static final String MOVIES = "MainActivity.MOVIES";
-    public static final String MOVIES_SEARCH = "MainActivity.MOVIES_SEARCH";
+    public MainAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +55,13 @@ public class MainActivity extends Activity {
 
         if (savedInstanceState == null) {
             getMovies();
-        }else setListeners();
+        } else
 
-        mSwipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> {
-            mSwipeRefreshLayout.setRefreshing(false);
-            initList();
-        }, 4000));
+            mSwipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> {
+                mSwipeRefreshLayout.setRefreshing(false);
+                initList();
+            }, 4000));
+
         setListeners();
     }
 
@@ -96,8 +87,10 @@ public class MainActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                rwLayout.setVisibility(View.VISIBLE);
-                searchLayout.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                nSearchLayout.setVisibility(View.GONE);
+                progressLayout.setVisibility(View.GONE);
+
                 if (s.toString().equals("")) {
                     initList();
                 } else {
@@ -112,6 +105,10 @@ public class MainActivity extends Activity {
     }
 
     private void getMovies() {
+        nSearchLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+        progressLayout.setVisibility(View.VISIBLE);
+
         Call<MoviesResponse> call = new APIclient().apIinterface().getMoviesResponses();
         call.enqueue(new Callback<MoviesResponse>() {
             @Override
@@ -120,26 +117,35 @@ public class MainActivity extends Activity {
                     MoviesResponse moviesResponse = response.body();
                     mMovieResponse = moviesResponse;
                     if (mMovieResponse != null) {
-                        rwLayout.setVisibility(View.GONE);
-                        searchLayout.setVisibility(View.GONE);
-                        progressBar.setVisibility(View.VISIBLE);
 
                         recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
                         adapter = new MainAdapter(mMovieResponse, MainActivity.this);
                         recyclerView.setAdapter(adapter);
 
-                        progressBar.setVisibility(View.GONE);
-                        rwLayout.setVisibility(View.VISIBLE);
+                        if (mMovieResponse.getResults().isEmpty()) {
+                            nSearchLayout.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
+                            progressLayout.setVisibility(View.GONE);
+                        }
+                        nSearchLayout.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        progressLayout.setVisibility(View.GONE);
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Error ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Check your internet connection ", Toast.LENGTH_LONG).show();
+                    nSearchLayout.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
+                    progressLayout.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Check your internet connectoin ", Toast.LENGTH_LONG).show();
-                searchLayout.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(), "Check your internet connection ", Toast.LENGTH_LONG).show();
+                nSearchLayout.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.GONE);
+                progressLayout.setVisibility(View.GONE);
+
             }
         });
 
@@ -156,10 +162,10 @@ public class MainActivity extends Activity {
                 }
             }
             if (resultList.isEmpty()) {
-                rwLayout.setVisibility(View.GONE);
-                searchLayout.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+                nSearchLayout.setVisibility(View.VISIBLE);
             } else {
-                rwLayout.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.VISIBLE);
                 adapter.setData(resultList);
             }
         } else {

@@ -1,4 +1,4 @@
-package com.deadely.myapplication.activities;
+package com.deadely.myapplication.maps;
 
 import android.os.Bundle;
 
