@@ -8,6 +8,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.deadely.myapplication.R;
 import com.deadely.myapplication.dataclass.MoviesResponse;
 import com.deadely.myapplication.dataclass.Result;
+import com.deadely.myapplication.film.FilmActivity;
 import com.deadely.myapplication.network.APIclient;
 
 import java.util.ArrayList;
@@ -38,12 +41,10 @@ public class MainActivity extends Activity implements MainAdapter.OnClickListene
     EditText editText;
     @BindView(R.id.progress)
     ProgressBar progressBar;
-    @BindView(R.id.r_view)
+    @BindView(R.id.rv_movies)
     RecyclerView recyclerView;
-    @BindView(R.id.nSearch_layout)
+    @BindView(R.id.noth_search_layout)
     ConstraintLayout searchLayout;
-    @BindView(R.id.rw_layout)
-    LinearLayout rwLayout;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.progress_layout)
@@ -100,7 +101,7 @@ public class MainActivity extends Activity implements MainAdapter.OnClickListene
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 recyclerView.setVisibility(View.VISIBLE);
-                nSearchLayout.setVisibility(View.GONE);
+                searchLayout.setVisibility(View.GONE);
                 progressLayout.setVisibility(View.GONE);
 
                 if (s.toString().equals("")) {
@@ -117,7 +118,7 @@ public class MainActivity extends Activity implements MainAdapter.OnClickListene
     }
 
     private void getMovies() {
-        rwLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
         searchLayout.setVisibility(View.GONE);
         progressLayout.setVisibility(View.VISIBLE);
 
@@ -131,18 +132,18 @@ public class MainActivity extends Activity implements MainAdapter.OnClickListene
                     if (mMovieResponse != null) {
                         if (mMovieResponse.getResults().isEmpty()) {
                             searchLayout.setVisibility(View.VISIBLE);
-                            rwLayout.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.GONE);
                             progressLayout.setVisibility(View.GONE);
                         } else {
                             adapter.setData(mMovieResponse.getResults());
                             searchLayout.setVisibility(View.GONE);
-                            rwLayout.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.VISIBLE);
                             progressLayout.setVisibility(View.GONE);
                         }
                     }
                 } else {
                     searchLayout.setVisibility(View.VISIBLE);
-                    rwLayout.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
                     progressLayout.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Error ", Toast.LENGTH_LONG).show();
                 }
@@ -151,7 +152,7 @@ public class MainActivity extends Activity implements MainAdapter.OnClickListene
             @Override
             public void onFailure(Call<MoviesResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Check your internet connection ", Toast.LENGTH_LONG).show();
-                nSearchLayout.setVisibility(View.GONE);
+                searchLayout.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 progressLayout.setVisibility(View.GONE);
 
@@ -170,7 +171,7 @@ public class MainActivity extends Activity implements MainAdapter.OnClickListene
             }
             if (resultList.isEmpty()) {
                 recyclerView.setVisibility(View.GONE);
-                nSearchLayout.setVisibility(View.VISIBLE);
+                searchLayout.setVisibility(View.VISIBLE);
             } else {
                 recyclerView.setVisibility(View.VISIBLE);
                 adapter.setData(resultList);
@@ -195,15 +196,14 @@ public class MainActivity extends Activity implements MainAdapter.OnClickListene
 
     @Override
     public void onClickItem(int position) {
-        Intent intent = new Intent(this, SecActivity.class);
+        Intent intent = new Intent(this, FilmActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putInt("POS", position);
         if (resultList.isEmpty()) {
-            bundle.putParcelable("MOVIE", mMovieResponse.getResults().get(position));
+            bundle.putParcelable(FilmActivity.MOVIE, mMovieResponse.getResults().get(position));
         } else {
-            bundle.putParcelable("MOVIE", resultList.get(position));
+            bundle.putParcelable(FilmActivity.MOVIE, resultList.get(position));
         }
-        intent.putExtra("BUNDLE", bundle);
+        intent.putExtra(FilmActivity.BUNDLE, bundle);
         startActivity(intent);
     }
 }

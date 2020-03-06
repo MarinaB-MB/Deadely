@@ -20,7 +20,6 @@ import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> {
 
-    public static final String POS = "MainAdapter.POSITION";
 
     public List<Result> mResultList;
     public Context context;

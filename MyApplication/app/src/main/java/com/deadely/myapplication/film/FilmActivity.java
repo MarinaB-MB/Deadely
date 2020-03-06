@@ -5,81 +5,47 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.Glide;
 import com.deadely.myapplication.R;
-import com.deadely.myapplication.dataclass.MoviesResponse;
 import com.deadely.myapplication.dataclass.Result;
 import com.deadely.myapplication.maps.MapsActivity;
-import com.deadely.myapplication.network.APIclient;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class FilmActivity extends FragmentActivity {
+
+    public static final String BUNDLE = "FilmActivity.BUNDLE";
+    public static final String MOVIE = "FilmActivity.MOVIE";
 
     @BindView(R.id.iv_poster)
     ImageView imageView;
     @BindView(R.id.tv_title)
     TextView textView;
 
-    MoviesResponse mMovieResponse;
-    public List<Result> mResultList;
-    ArrayList<Result> resultList;
+    Result movie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film);
         ButterKnife.bind(this);
-
-        getMovies();
-
-    }
-
-    private void getMovies() {
-        Call<MoviesResponse> call = new APIclient().apIinterface().getMoviesResponses();
-        call.enqueue(new Callback<MoviesResponse>() {
-
-            @Override
-            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                if (response.isSuccessful()) {
-                    MoviesResponse moviesResponse = response.body();
-                    mMovieResponse = moviesResponse;
-                    mResultList = moviesResponse.getResults();
-                    if (mMovieResponse != null) {
-
-                        int position = getIntent().getIntExtra("POS", 0);
-
-
-                        Result result = mResultList.get(position);
-
-                        textView.setText(result.getTitle());
-                        Glide.with(FilmActivity.this)
-                                .load(result.getPoster().getImage())
-                                .into(imageView);
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "Check your internet connection ", Toast.LENGTH_LONG).show();
-                }
+        if (getIntent().getExtras() != null) {
+            Bundle bundle = getIntent().getExtras().getBundle(BUNDLE);
+            if (bundle != null) {
+                movie = bundle.getParcelable(MOVIE);
             }
-
-            @Override
-            public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Check your internet connection ", Toast.LENGTH_LONG).show();
-            }
-        });
-
+        }
+        if (movie != null) {
+            textView.setText(movie.getTitle());
+            Glide.with(FilmActivity.this)
+                    .load(movie.getPoster().getImage())
+                    .into(imageView);
+        }
     }
 
     @OnClick(R.id.btn_map)
