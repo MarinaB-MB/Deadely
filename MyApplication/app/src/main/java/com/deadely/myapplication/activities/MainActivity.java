@@ -1,6 +1,7 @@
 package com.deadely.myapplication.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -31,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements MainAdapter.OnClickListener {
 
     public static final String MOVIES = "MainActivity.MOVIES";
     public static final String MOVIES_SEARCH = "MainActivity.MOVIES_SEARCH";
@@ -71,6 +72,7 @@ public class MainActivity extends Activity {
             initList();
         }, 4000));
         setListeners();
+
     }
 
     @Override
@@ -88,6 +90,10 @@ public class MainActivity extends Activity {
     }
 
     private void setListeners() {
+        recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
+        adapter = new MainAdapter(MainActivity.this);
+        adapter.setOnClickListener(this);
+        recyclerView.setAdapter(adapter);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -123,14 +129,12 @@ public class MainActivity extends Activity {
                     MoviesResponse moviesResponse = response.body();
                     mMovieResponse = moviesResponse;
                     if (mMovieResponse != null) {
-                        recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
-                        adapter = new MainAdapter(mMovieResponse, MainActivity.this);
-                        recyclerView.setAdapter(adapter);
                         if (mMovieResponse.getResults().isEmpty()) {
                             searchLayout.setVisibility(View.VISIBLE);
                             rwLayout.setVisibility(View.GONE);
                             progressLayout.setVisibility(View.GONE);
                         } else {
+                            adapter.setData(mMovieResponse.getResults());
                             searchLayout.setVisibility(View.GONE);
                             rwLayout.setVisibility(View.VISIBLE);
                             progressLayout.setVisibility(View.GONE);
@@ -173,7 +177,6 @@ public class MainActivity extends Activity {
         }
     }
 
-
     public void initList() {
         if (mMovieResponse != null) {
             resultList.clear();
@@ -187,7 +190,19 @@ public class MainActivity extends Activity {
         editText.getText().clear();
     }
 
-
+    @Override
+    public void onClickItem(int position) {
+        Intent intent = new Intent(this, SecActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("POS", position);
+        if (resultList.isEmpty()) {
+            bundle.putParcelable("MOVIE", mMovieResponse.getResults().get(position));
+        } else {
+            bundle.putParcelable("MOVIE", resultList.get(position));
+        }
+        intent.putExtra("BUNDLE", bundle);
+        startActivity(intent);
+    }
 }
 
 
