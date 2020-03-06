@@ -1,4 +1,4 @@
-package com.deadely.myapplication.adapters;
+package com.deadely.myapplication.main;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,11 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.deadely.myapplication.R;
+import com.deadely.myapplication.dataclass.MoviesResponse;
 import com.deadely.myapplication.dataclass.Result;
+import com.deadely.myapplication.film.FilmActivity;
 
 import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> {
+
+    public static final String POS = "MainAdapter.POSITION";
+
     public List<Result> mResultList;
     public Context context;
     private LayoutInflater layoutInflater;
@@ -35,11 +40,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
         ImageView imageView;
         TextView textView;
 
+
         public MyViewHolder(View view) {
             super(view);
-            imageView = view.findViewById(R.id.image);
-            ;
-            textView = view.findViewById(R.id.text);
+            imageView = view.findViewById(R.id.iv_image);
+            textView = view.findViewById(R.id.tv_text);
         }
     }
 
@@ -62,6 +67,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         Result result = mResultList.get(position);
+
 
         holder.textView.setText(result.getTitle());
         Glide.with(context)

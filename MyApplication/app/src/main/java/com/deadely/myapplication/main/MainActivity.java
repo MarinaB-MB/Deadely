@@ -1,4 +1,4 @@
-package com.deadely.myapplication.activities;
+package com.deadely.myapplication.main;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,8 +8,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.deadely.myapplication.R;
-import com.deadely.myapplication.adapters.MainAdapter;
 import com.deadely.myapplication.dataclass.MoviesResponse;
 import com.deadely.myapplication.dataclass.Result;
 import com.deadely.myapplication.network.APIclient;
@@ -67,10 +64,11 @@ public class MainActivity extends Activity implements MainAdapter.OnClickListene
         }
 //        setListeners();
 
-        mSwipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> {
-            mSwipeRefreshLayout.setRefreshing(false);
-            initList();
-        }, 4000));
+            mSwipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> {
+                mSwipeRefreshLayout.setRefreshing(false);
+                initList();
+            }, 4000));
+
         setListeners();
 
     }
@@ -101,8 +99,10 @@ public class MainActivity extends Activity implements MainAdapter.OnClickListene
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                rwLayout.setVisibility(View.VISIBLE);
-                searchLayout.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                nSearchLayout.setVisibility(View.GONE);
+                progressLayout.setVisibility(View.GONE);
+
                 if (s.toString().equals("")) {
                     initList();
                 } else {
@@ -150,8 +150,11 @@ public class MainActivity extends Activity implements MainAdapter.OnClickListene
 
             @Override
             public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Check your internet connectoin ", Toast.LENGTH_LONG).show();
-                searchLayout.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(), "Check your internet connection ", Toast.LENGTH_LONG).show();
+                nSearchLayout.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.GONE);
+                progressLayout.setVisibility(View.GONE);
+
             }
         });
 
@@ -166,10 +169,10 @@ public class MainActivity extends Activity implements MainAdapter.OnClickListene
                 }
             }
             if (resultList.isEmpty()) {
-                rwLayout.setVisibility(View.GONE);
-                searchLayout.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+                nSearchLayout.setVisibility(View.VISIBLE);
             } else {
-                rwLayout.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.VISIBLE);
                 adapter.setData(resultList);
             }
         } else {

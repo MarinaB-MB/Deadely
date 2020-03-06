@@ -1,4 +1,4 @@
-package com.deadely.myapplication.activities;
+package com.deadely.myapplication.film;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,17 +13,20 @@ import com.bumptech.glide.Glide;
 import com.deadely.myapplication.R;
 import com.deadely.myapplication.dataclass.MoviesResponse;
 import com.deadely.myapplication.dataclass.Result;
+import com.deadely.myapplication.maps.MapsActivity;
 import com.deadely.myapplication.network.APIclient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SecActivity extends FragmentActivity {
+public class FilmActivity extends FragmentActivity {
 
     @BindView(R.id.iv_poster)
     ImageView imageView;
@@ -32,13 +35,19 @@ public class SecActivity extends FragmentActivity {
 
     MoviesResponse mMovieResponse;
     public List<Result> mResultList;
+    ArrayList<Result> resultList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sec);
+        setContentView(R.layout.activity_film);
         ButterKnife.bind(this);
 
+        getMovies();
+
+    }
+
+    private void getMovies() {
         Call<MoviesResponse> call = new APIclient().apIinterface().getMoviesResponses();
         call.enqueue(new Callback<MoviesResponse>() {
 
@@ -56,23 +65,25 @@ public class SecActivity extends FragmentActivity {
                         Result result = mResultList.get(position);
 
                         textView.setText(result.getTitle());
-                        Glide.with(SecActivity.this)
+                        Glide.with(FilmActivity.this)
                                 .load(result.getPoster().getImage())
                                 .into(imageView);
                     }
                 } else {
-                    Toast.makeText(SecActivity.this, "Error ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Check your internet connection ", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                Toast.makeText(SecActivity.this, "Error ", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Check your internet connection ", Toast.LENGTH_LONG).show();
             }
         });
+
     }
 
-    public void onClick(View v) {
+    @OnClick(R.id.btn_map)
+    void onClick(View v) {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
