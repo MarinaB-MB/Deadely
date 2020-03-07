@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">M_V_P</string>
+    <string name="noth_to_search">Ничего не найдено</string>
+    <string name="search">Поиск</string>
+    <string name="btn_map">Карта</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
