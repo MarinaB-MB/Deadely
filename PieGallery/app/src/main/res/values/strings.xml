@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">PieGallery</string>
+    <string name="favorites">Избранное</string>
+    <string name="photo">Фото</string>
+    <string name="info">Информация</string>
+    <string name="title_activity_nav">NavActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="list_of_libs">Список библиотек, используемых в проекте</string>
+    <string name="developer">Разработчик: MarinaB</string>
+    <string name="libs_list">Dagger 2 + Room + RecyclerView + SwipeRefreshLayout + Glide</string>
+    <string name="show_on_map">Показать на карте</string>
+    <string name="add_to_favorite">Добавить в избранное</string>
+    <string name="added_to_favorites">Добавлено в Избранное</string>
+    <string name="deleted_from_favorites">Удалено из Избранного</string>
+    <string name="title_activity_map">Map</string>
+    <string name="add_to_list">Добавьте, чтобы увидеть</string>
+    <string name="add_before_deleting">Добавьте, прежде чем удалить</string>
+    <string name="already_exist">Уже в Избранном</string>
+    <string name="add_to_fav">Добавлено в Избранное</string>
+    <string name="dont_exist">Такого элемента не существует в Избранном</string>
+    <string name="deleted_from_fav">Удалено из Избранного</string>
+    <string name="fav_list_is_empty">Список \"Избранное\" пуст</string>
+    <string name="clear_list">Очистить список</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="error">Возникла ошибка</string>
+    <string name="check_connection">Проверьте Ваше соединение с Интернетом</string>
+</resources>

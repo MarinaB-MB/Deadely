@@ -1,0 +1,104 @@
+package com.deadely.piegallery.dataclasses;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+@Entity(tableName = "links_table")
+public class Links implements Parcelable {
+    @NonNull
+    @ColumnInfo(name = "links_self")
+    @SerializedName("self")
+    @Expose
+    @PrimaryKey
+    private String self;
+
+    @ColumnInfo(name = "links_html")
+    @SerializedName("html")
+    @Expose
+    private String html;
+
+    @SerializedName("download")
+    @Expose
+    private String download;
+
+    @SerializedName("download_location")
+    @Expose
+    private String downloadLocation;
+
+
+    public String getSelf() {
+        return self;
+    }
+
+    public void setSelf(String self) {
+        this.self = self;
+    }
+
+    public String getHtml() {
+        return html;
+    }
+
+    public void setHtml(String html) {
+        this.html = html;
+    }
+
+    public String getDownload() {
+        return download;
+    }
+
+    public void setDownload(String download) {
+        this.download = download;
+    }
+
+    public String getDownloadLocation() {
+        return downloadLocation;
+    }
+
+    public void setDownloadLocation(String downloadLocation) {
+        this.downloadLocation = downloadLocation;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.self);
+        dest.writeString(this.html);
+        dest.writeString(this.download);
+        dest.writeString(this.downloadLocation);
+    }
+
+    public Links() {
+    }
+
+    protected Links(Parcel in) {
+        this.self = in.readString();
+        this.html = in.readString();
+        this.download = in.readString();
+        this.downloadLocation = in.readString();
+    }
+
+    public static final Creator<Links> CREATOR = new Creator<Links>() {
+        @Override
+        public Links createFromParcel(Parcel source) {
+            return new Links(source);
+        }
+
+        @Override
+        public Links[] newArray(int size) {
+            return new Links[size];
+        }
+    };
+}
+
