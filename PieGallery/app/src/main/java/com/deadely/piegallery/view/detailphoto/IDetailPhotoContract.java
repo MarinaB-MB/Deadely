@@ -16,9 +16,9 @@ public interface IDetailPhotoContract {
     }
 
     interface IView {
-        void addToFavorite(String status);
+        void addToFavorite(int status);
 
-        void deleteFromFavorite(String status);
+        void deleteFromFavorite(int status);
 
         void showProgress();
 

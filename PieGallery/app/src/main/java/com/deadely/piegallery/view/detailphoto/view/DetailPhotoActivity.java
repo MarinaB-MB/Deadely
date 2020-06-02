@@ -96,12 +96,12 @@ public class DetailPhotoActivity extends AppCompatActivity implements IDetailPho
     }
 
     @Override
-    public void addToFavorite(String status) {
+    public void addToFavorite(int status) {
         Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void deleteFromFavorite(String status) {
+    public void deleteFromFavorite(int status) {
         Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
     }
 

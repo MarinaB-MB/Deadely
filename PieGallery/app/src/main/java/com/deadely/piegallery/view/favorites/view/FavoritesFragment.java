@@ -29,6 +29,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -43,6 +44,7 @@ public class FavoritesFragment extends Fragment implements IFavoritesContract.IV
     SwipeRefreshLayout swiperlFav;
     @BindView(R.id.tv_empty)
     TextView tvEmpty;
+    private Unbinder unbinder;
 
 
     private List<Favorites> favoritesList;
@@ -52,7 +54,7 @@ public class FavoritesFragment extends Fragment implements IFavoritesContract.IV
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         initView();
         return view;
     }
@@ -128,5 +130,11 @@ public class FavoritesFragment extends Fragment implements IFavoritesContract.IV
         Intent intent = new Intent(getContext(), DetailPhotoActivity.class);
         intent.putExtra(ID, favoritesList.get(position).getPhoto().getId());
         startActivity(intent);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

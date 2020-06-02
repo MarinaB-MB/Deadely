@@ -1,5 +1,6 @@
 package com.deadely.piegallery.view.detailphoto.presenter;
 
+import com.deadely.piegallery.App;
 import com.deadely.piegallery.R;
 import com.deadely.piegallery.database.AppDBHelper;
 import com.deadely.piegallery.dataclasses.Favorites;
@@ -22,6 +23,7 @@ public class DetailPhotoPresenter implements IDetailPhotoContract.IPresenter {
 
     public DetailPhotoPresenter(DetailPhotoActivity detailPhotoActivity) {
         this.detailPhotoActivity = detailPhotoActivity;
+        db = App.getInstance().getDatabaseInstance();
     }
 
     @Override
@@ -37,14 +39,14 @@ public class DetailPhotoPresenter implements IDetailPhotoContract.IPresenter {
     @Override
     public void deleteElement(String id) {
         if (db.getFavoritesDao().getAllFavorites().size() == 0) {
-            detailPhotoActivity.addToFavorite(String.valueOf(R.string.fav_list_is_empty));
+            detailPhotoActivity.addToFavorite(R.string.fav_list_is_empty);
         } else {
             Favorites favorites = db.getFavoritesDao().findByPhotoId(id);
             if (favorites != null) {
                 db.getFavoritesDao().deleteByPhotoId(id);
-                detailPhotoActivity.addToFavorite(String.valueOf(R.string.deleted_from_fav));
+                detailPhotoActivity.addToFavorite(R.string.deleted_from_fav);
             } else {
-                detailPhotoActivity.addToFavorite(String.valueOf(R.string.dont_exist));
+                detailPhotoActivity.addToFavorite(R.string.dont_exist);
             }
         }
     }
@@ -53,14 +55,16 @@ public class DetailPhotoPresenter implements IDetailPhotoContract.IPresenter {
     public void addElement(String id) {
         if (db.getFavoritesDao().getAllFavorites().size() == 0) {
             db.getFavoritesDao().insert(new Favorites(db.getPhotoDao().getById(id)));
-            detailPhotoActivity.addToFavorite(String.valueOf(R.string.add_to_fav));
+            String.valueOf(R.string.add_to_fav);
+            detailPhotoActivity.addToFavorite(R.string.add_to_fav);
         } else {
             Favorites favorites = db.getFavoritesDao().findByPhotoId(id);
             if (favorites != null) {
-                detailPhotoActivity.addToFavorite(String.valueOf(R.string.already_exist));
+                String.valueOf(R.string.already_exist);
+                detailPhotoActivity.addToFavorite(R.string.already_exist);
             } else {
                 db.getFavoritesDao().insert(new Favorites(db.getPhotoDao().getById(id)));
-                detailPhotoActivity.addToFavorite(String.valueOf(R.string.add_to_fav));
+                detailPhotoActivity.addToFavorite(R.string.add_to_fav);
             }
         }
     }
