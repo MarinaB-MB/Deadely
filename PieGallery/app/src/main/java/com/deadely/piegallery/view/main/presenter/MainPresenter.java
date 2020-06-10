@@ -1,14 +1,13 @@
 package com.deadely.piegallery.view.main.presenter;
 
+import com.deadely.piegallery.base.BasePresenter;
 import com.deadely.piegallery.view.main.IMainContract;
-import com.deadely.piegallery.view.main.view.MainActivity;
+
+import javax.inject.Inject;
 
 
-public class MainPresenter implements IMainContract.IPresenter {
-    private MainActivity mMainActivity;
-
-    public MainPresenter(MainActivity mainActivity) {
-        this.mMainActivity = mainActivity;
+public class MainPresenter extends BasePresenter<IMainContract.View> implements IMainContract.Presenter {
+    @Inject
+    public MainPresenter() {
     }
-
 }

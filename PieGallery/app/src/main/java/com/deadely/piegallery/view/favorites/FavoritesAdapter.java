@@ -59,6 +59,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
         Glide.with(context)
                 .load(favorite.getPhoto().getUrls().getFull())
+                .error(R.drawable.ic_launcher_background)
                 .into(holder.imageView);
 
         holder.itemView.setOnClickListener(v -> {

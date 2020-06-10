@@ -2,29 +2,30 @@ package com.deadely.piegallery.view.photos.presenter;
 
 import com.deadely.piegallery.App;
 import com.deadely.piegallery.R;
+import com.deadely.piegallery.base.BasePresenter;
 import com.deadely.piegallery.database.AppDBHelper;
 import com.deadely.piegallery.dataclasses.Photo;
 import com.deadely.piegallery.network.APIclient;
 import com.deadely.piegallery.network.APIinterface;
 import com.deadely.piegallery.view.photos.IPhotosContract;
-import com.deadely.piegallery.view.photos.view.PhotosFragment;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PhotosPresenter implements IPhotosContract.IPresenter {
+public class PhotosPresenter extends BasePresenter<IPhotosContract.View> implements IPhotosContract.Presenter {
 
     private static final String LATEST = "latest";
     private List<Photo> mPhotoList;
-    private PhotosFragment photosFragment;
 
     private AppDBHelper db;
 
-    public PhotosPresenter(PhotosFragment photosFragment) {
-        this.photosFragment = photosFragment;
+    @Inject
+    public PhotosPresenter() {
     }
 
     @Override
@@ -37,7 +38,7 @@ public class PhotosPresenter implements IPhotosContract.IPresenter {
         db = App.getInstance().getDatabaseInstance();
         mPhotoList = db.getPhotoDao().getAllPhotos();
         if (mPhotoList.size() != 0) {
-            photosFragment.setPhotoList(mPhotoList);
+            getMvpView().setPhotoList(mPhotoList);
         } else {
             getRequest();
         }
@@ -59,26 +60,26 @@ public class PhotosPresenter implements IPhotosContract.IPresenter {
                     for (int i = 0; i < mPhotoList.size(); i++) {
                         db.getPhotoDao().insert(mPhotoList.get(i));
                     }
-                    photosFragment.setPhotoList(db.getPhotoDao().getAllPhotos());
+                    getMvpView().setPhotoList(db.getPhotoDao().getAllPhotos());
                 } else {
-                    photosFragment.showErrorConn(String.valueOf(R.string.error));
+                    getMvpView().showErrorConn(String.valueOf(R.string.error));
                 }
             }
 
             @Override
             public void onFailure(Call<List<Photo>> call, Throwable t) {
-                photosFragment.showErrorConn(String.valueOf(R.string.check_connection));
+                getMvpView().showErrorConn(String.valueOf(R.string.check_connection));
             }
         });
     }
 
     @Override
     public void showProgressBar() {
-        photosFragment.showProgress();
+        getMvpView().showProgress();
     }
 
     @Override
     public void hideProgressBar() {
-        photosFragment.hideProgress();
+        getMvpView().hideProgress();
     }
 }

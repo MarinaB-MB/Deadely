@@ -1,10 +1,13 @@
 package com.deadely.piegallery.view.main;
 
+import com.deadely.piegallery.base.IBaseMvpPresenter;
+import com.deadely.piegallery.base.IBaseMvpView;
+
 public interface IMainContract {
-    interface IView {
+    interface View extends IBaseMvpView {
     }
 
-    interface IPresenter {
+    interface Presenter extends IBaseMvpPresenter<View> {
     }
 
 }

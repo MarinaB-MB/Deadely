@@ -1,11 +1,13 @@
 package com.deadely.piegallery.view.favorites;
 
+import com.deadely.piegallery.base.IBaseMvpPresenter;
+import com.deadely.piegallery.base.IBaseMvpView;
 import com.deadely.piegallery.dataclasses.Favorites;
 
 import java.util.List;
 
 public interface IFavoritesContract {
-    interface IView {
+    interface View extends IBaseMvpView {
         void showProgress();
 
         void setEmptyList();
@@ -15,7 +17,7 @@ public interface IFavoritesContract {
         void setPhotoList(List<Favorites> list);
     }
 
-    interface IPresenter {
+    interface Presenter extends IBaseMvpPresenter<View> {
         void showProgressBar();
 
         void hideProgressBar();

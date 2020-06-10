@@ -5,6 +5,9 @@ import android.app.Application;
 import androidx.room.Room;
 
 import com.deadely.piegallery.database.AppDBHelper;
+import com.deadely.piegallery.di.component.AppComponent;
+import com.deadely.piegallery.di.component.DaggerAppComponent;
+import com.deadely.piegallery.di.module.AppModule;
 
 public class App extends Application {
     private static App instance;
@@ -13,6 +16,8 @@ public class App extends Application {
     public AppDBHelper getDatabaseInstance() {
         return db;
     }
+
+    private AppComponent component;
 
     public static App getInstance() {
         return instance;
@@ -28,4 +33,12 @@ public class App extends Application {
                 .build();
     }
 
+    public AppComponent getComponent() {
+        if (component == null) {
+            component = DaggerAppComponent.builder()
+                    .appModule(new AppModule(this))
+                    .build();
+        }
+        return component;
+    }
 }

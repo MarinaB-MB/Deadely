@@ -3,25 +3,28 @@ package com.deadely.piegallery.view.main.view;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.deadely.piegallery.R;
+import com.deadely.piegallery.base.BaseActivity;
+import com.deadely.piegallery.di.component.ActivityComponent;
 import com.deadely.piegallery.view.favorites.view.FavoritesFragment;
 import com.deadely.piegallery.view.info.view.InfoFragment;
 import com.deadely.piegallery.view.main.IMainContract;
-import com.deadely.piegallery.view.main.presenter.MainPresenter;
 import com.deadely.piegallery.view.photos.view.PhotosFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements IMainContract.IView {
+public class MainActivity extends BaseActivity implements IMainContract.View {
 
     @BindView(R.id.bottom_nav)
     BottomNavigationView bottomNav;
-    private MainPresenter presenter;
+    @Inject
+    public IMainContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,11 @@ public class MainActivity extends AppCompatActivity implements IMainContract.IVi
         ButterKnife.bind(this);
         loadFragment(new PhotosFragment());
         initView();
+    }
+
+    @Override
+    protected void inject(ActivityComponent activityComponent) {
+        activityComponent.inject(this);
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -44,8 +52,7 @@ public class MainActivity extends AppCompatActivity implements IMainContract.IVi
     }
 
     private void initView() {
-        presenter = new MainPresenter(this);
-
+        presenter.attachView(this);
         bottomNav.setOnNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.nav_favorites:

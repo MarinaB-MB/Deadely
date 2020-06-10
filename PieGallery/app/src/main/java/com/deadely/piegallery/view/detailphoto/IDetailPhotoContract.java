@@ -1,9 +1,11 @@
 package com.deadely.piegallery.view.detailphoto;
 
+import com.deadely.piegallery.base.IBaseMvpPresenter;
+import com.deadely.piegallery.base.IBaseMvpView;
 import com.deadely.piegallery.dataclasses.Photo;
 
 public interface IDetailPhotoContract {
-    interface IPresenter {
+    interface Presenter  extends IBaseMvpPresenter<View> {
         void showProgressBar();
 
         void hideProgressBar();
@@ -15,7 +17,7 @@ public interface IDetailPhotoContract {
         void getPhoto(String id);
     }
 
-    interface IView {
+    interface View extends IBaseMvpView {
         void addToFavorite(int status);
 
         void deleteFromFavorite(int status);

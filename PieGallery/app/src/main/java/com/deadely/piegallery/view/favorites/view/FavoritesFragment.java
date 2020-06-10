@@ -7,25 +7,26 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.deadely.piegallery.R;
+import com.deadely.piegallery.base.BaseFragment;
 import com.deadely.piegallery.dataclasses.Favorites;
+import com.deadely.piegallery.di.component.FragmentComponent;
 import com.deadely.piegallery.view.detailphoto.view.DetailPhotoActivity;
 import com.deadely.piegallery.view.favorites.FavoritesAdapter;
 import com.deadely.piegallery.view.favorites.IFavoritesContract;
-import com.deadely.piegallery.view.favorites.presenter.FavoritesPresenter;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +36,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.deadely.piegallery.view.photos.view.PhotosFragment.ID;
 
-public class FavoritesFragment extends Fragment implements IFavoritesContract.IView, FavoritesAdapter.OnClickListener {
+public class FavoritesFragment extends BaseFragment implements IFavoritesContract.View, FavoritesAdapter.OnClickListener {
     @BindView(R.id.rv_fav_list)
     RecyclerView rvFavList;
     @BindView(R.id.pb_fav)
@@ -48,19 +49,20 @@ public class FavoritesFragment extends Fragment implements IFavoritesContract.IV
 
 
     private List<Favorites> favoritesList;
-    private FavoritesPresenter presenter;
+    @Inject
+    public IFavoritesContract.Presenter presenter;
     private FavoritesAdapter favoritesAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+    public android.view.View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        android.view.View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         unbinder = ButterKnife.bind(this, view);
         initView();
         return view;
     }
 
-    private void initView() {
-        presenter = new FavoritesPresenter(this);
+    public void initView() {
+        presenter.attachView(this);
 
         rvFavList.setLayoutManager(new GridLayoutManager(getContext(), 2));
         favoritesAdapter = new FavoritesAdapter(getContext());
@@ -75,6 +77,11 @@ public class FavoritesFragment extends Fragment implements IFavoritesContract.IV
         setHasOptionsMenu(true);
 
         getData();
+    }
+
+    @Override
+    protected void inject(FragmentComponent fragmentComponent) {
+        fragmentComponent.inject(this);
     }
 
     @Override
@@ -136,5 +143,6 @@ public class FavoritesFragment extends Fragment implements IFavoritesContract.IV
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        presenter.detachView();
     }
 }

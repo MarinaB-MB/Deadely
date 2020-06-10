@@ -12,14 +12,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 import com.deadely.piegallery.R;
+import com.deadely.piegallery.base.BaseActivity;
 import com.deadely.piegallery.dataclasses.Photo;
+import com.deadely.piegallery.di.component.ActivityComponent;
 import com.deadely.piegallery.view.detailphoto.IDetailPhotoContract;
-import com.deadely.piegallery.view.detailphoto.presenter.DetailPhotoPresenter;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +30,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.deadely.piegallery.view.photos.view.PhotosFragment.ID;
 
-public class DetailPhotoActivity extends AppCompatActivity implements IDetailPhotoContract.IView {
+public class DetailPhotoActivity extends BaseActivity implements IDetailPhotoContract.View {
     @BindView(R.id.iv_detail_photo)
     ImageView ivDetailPhoto;
     @BindView(R.id.tv_username)
@@ -45,7 +47,8 @@ public class DetailPhotoActivity extends AppCompatActivity implements IDetailPho
     TextView tvStatus;
 
     private String id;
-    private DetailPhotoPresenter presenter;
+    @Inject
+    public IDetailPhotoContract.Presenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +56,11 @@ public class DetailPhotoActivity extends AppCompatActivity implements IDetailPho
         ButterKnife.bind(this);
         super.onCreate(savedInstanceState);
         initView();
+    }
+
+    @Override
+    protected void inject(ActivityComponent activityComponent) {
+        activityComponent.inject(this);
     }
 
     private void initView() {
@@ -64,7 +72,7 @@ public class DetailPhotoActivity extends AppCompatActivity implements IDetailPho
         if (getIntent().getExtras() != null) {
             id = getIntent().getExtras().getString(ID);
         }
-        presenter = new DetailPhotoPresenter(this);
+        presenter.attachView(this);
         getData();
 
     }

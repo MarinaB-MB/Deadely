@@ -61,6 +61,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
 
         Glide.with(context)
                 .load(photo.getUrls().getFull())
+                .error(R.drawable.ic_launcher_background)
                 .into(holder.imageView);
 
         holder.itemView.setOnClickListener(v -> {

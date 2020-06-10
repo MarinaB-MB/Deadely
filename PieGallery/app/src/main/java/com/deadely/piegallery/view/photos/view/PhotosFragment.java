@@ -4,24 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.deadely.piegallery.R;
+import com.deadely.piegallery.base.BaseFragment;
 import com.deadely.piegallery.dataclasses.Photo;
+import com.deadely.piegallery.di.component.FragmentComponent;
 import com.deadely.piegallery.view.detailphoto.view.DetailPhotoActivity;
 import com.deadely.piegallery.view.photos.IPhotosContract;
 import com.deadely.piegallery.view.photos.PhotoAdapter;
-import com.deadely.piegallery.view.photos.presenter.PhotosPresenter;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,12 +31,13 @@ import butterknife.Unbinder;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class PhotosFragment extends Fragment implements IPhotosContract.IView, PhotoAdapter.OnClickListener {
+public class PhotosFragment extends BaseFragment implements IPhotosContract.View, PhotoAdapter.OnClickListener {
     public static String ID = "photo_id";
 
     private List<Photo> mPhotoResponse;
     private PhotoAdapter photoAdapter;
-    private PhotosPresenter photosPresenter;
+    @Inject
+    public IPhotosContract.Presenter photosPresenter;
     private Unbinder unbinder;
 
     @BindView(R.id.progress_bar)
@@ -48,15 +50,15 @@ public class PhotosFragment extends Fragment implements IPhotosContract.IView, P
     TextView tvStatus;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_photos, container, false);
+    public android.view.View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        android.view.View view = inflater.inflate(R.layout.fragment_photos, container, false);
         unbinder = ButterKnife.bind(this, view);
         initView();
         return view;
     }
 
     private void initView() {
-        photosPresenter = new PhotosPresenter(this);
+        photosPresenter.attachView(this);
 
         GridLayoutManager LayoutManager = new GridLayoutManager(getContext(), 2);
         rvPhotoList.setLayoutManager(LayoutManager);
@@ -117,5 +119,11 @@ public class PhotosFragment extends Fragment implements IPhotosContract.IView, P
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        photosPresenter.detachView();
+    }
+
+    @Override
+    protected void inject(FragmentComponent fragmentComponent) {
+        fragmentComponent.inject(this);
     }
 }

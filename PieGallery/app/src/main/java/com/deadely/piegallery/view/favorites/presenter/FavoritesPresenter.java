@@ -1,27 +1,27 @@
 package com.deadely.piegallery.view.favorites.presenter;
 
 import com.deadely.piegallery.App;
+import com.deadely.piegallery.base.BasePresenter;
 import com.deadely.piegallery.database.AppDBHelper;
 import com.deadely.piegallery.database.dao.FavoritesDao;
 import com.deadely.piegallery.view.favorites.IFavoritesContract;
-import com.deadely.piegallery.view.favorites.view.FavoritesFragment;
 
-public class FavoritesPresenter implements IFavoritesContract.IPresenter {
+import javax.inject.Inject;
 
-    private FavoritesFragment fragment;
+public class FavoritesPresenter extends BasePresenter<IFavoritesContract.View> implements IFavoritesContract.Presenter {
 
-    public FavoritesPresenter(FavoritesFragment favoritesFragment) {
-        this.fragment = favoritesFragment;
+    @Inject
+    public FavoritesPresenter() {
     }
 
     @Override
     public void showProgressBar() {
-        fragment.showProgress();
+        getMvpView().showProgress();
     }
 
     @Override
     public void hideProgressBar() {
-        fragment.hideProgress();
+        getMvpView().hideProgress();
     }
 
     @Override
@@ -38,9 +38,9 @@ public class FavoritesPresenter implements IFavoritesContract.IPresenter {
         FavoritesDao favoritesDao = db.getFavoritesDao();
 
         if (favoritesDao.getAllFavorites().size() == 0) {
-            fragment.setEmptyList();
+            getMvpView().setEmptyList();
         } else {
-            fragment.setPhotoList(favoritesDao.getAllFavorites());
+            getMvpView().setPhotoList(favoritesDao.getAllFavorites());
         }
     }
 }
