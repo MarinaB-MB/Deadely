@@ -9,9 +9,13 @@ import com.deadely.piegallery.view.favorites.IFavoritesContract;
 import javax.inject.Inject;
 
 public class FavoritesPresenter extends BasePresenter<IFavoritesContract.View> implements IFavoritesContract.Presenter {
+    private FavoritesDao favoritesDao;
+    private AppDBHelper db;
 
     @Inject
-    public FavoritesPresenter() {
+    public FavoritesPresenter(FavoritesDao favoritesDao, AppDBHelper db) {
+        this.favoritesDao = favoritesDao;
+        this.db = db;
     }
 
     @Override
@@ -34,9 +38,6 @@ public class FavoritesPresenter extends BasePresenter<IFavoritesContract.View> i
 
     @Override
     public void getPhotoList() {
-        AppDBHelper db = App.getInstance().getDatabaseInstance();
-        FavoritesDao favoritesDao = db.getFavoritesDao();
-
         if (favoritesDao.getAllFavorites().size() == 0) {
             getMvpView().setEmptyList();
         } else {

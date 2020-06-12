@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,8 +51,8 @@ public class PhotosFragment extends BaseFragment implements IPhotosContract.View
     TextView tvStatus;
 
     @Override
-    public android.view.View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        android.view.View view = inflater.inflate(R.layout.fragment_photos, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_photos, container, false);
         unbinder = ButterKnife.bind(this, view);
         initView();
         return view;

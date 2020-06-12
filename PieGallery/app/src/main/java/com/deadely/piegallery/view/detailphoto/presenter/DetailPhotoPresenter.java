@@ -1,12 +1,10 @@
 package com.deadely.piegallery.view.detailphoto.presenter;
 
-import com.deadely.piegallery.App;
 import com.deadely.piegallery.R;
 import com.deadely.piegallery.base.BasePresenter;
 import com.deadely.piegallery.database.AppDBHelper;
 import com.deadely.piegallery.dataclasses.Favorites;
 import com.deadely.piegallery.dataclasses.Photo;
-import com.deadely.piegallery.network.APIclient;
 import com.deadely.piegallery.network.APIinterface;
 import com.deadely.piegallery.view.detailphoto.IDetailPhotoContract;
 
@@ -17,13 +15,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailPhotoPresenter extends BasePresenter<IDetailPhotoContract.View> implements IDetailPhotoContract.Presenter {
-    private AppDBHelper db;
-
-    private APIinterface apiInterface;
+    public AppDBHelper db;
+    public APIinterface apiInterface;
 
     @Inject
-    public DetailPhotoPresenter() {
-        db = App.getInstance().getDatabaseInstance();
+    public DetailPhotoPresenter(AppDBHelper db, APIinterface apiInterface) {
+        this.db = db;
+        this.apiInterface = apiInterface;
     }
 
     @Override
@@ -71,7 +69,6 @@ public class DetailPhotoPresenter extends BasePresenter<IDetailPhotoContract.Vie
 
     @Override
     public void getPhoto(String id) {
-        apiInterface = new APIclient().apIinterface();
         Call<Photo> call = apiInterface.getPhoto(id, 150, 150);
         call.enqueue(new Callback<Photo>() {
             @Override

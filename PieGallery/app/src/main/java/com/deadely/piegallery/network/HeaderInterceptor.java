@@ -1,4 +1,4 @@
-package com.deadely.piegallery;
+package com.deadely.piegallery.network;
 
 import java.io.IOException;
 

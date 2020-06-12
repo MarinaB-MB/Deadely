@@ -1,11 +1,9 @@
 package com.deadely.piegallery.view.photos.presenter;
 
-import com.deadely.piegallery.App;
 import com.deadely.piegallery.R;
 import com.deadely.piegallery.base.BasePresenter;
 import com.deadely.piegallery.database.AppDBHelper;
 import com.deadely.piegallery.dataclasses.Photo;
-import com.deadely.piegallery.network.APIclient;
 import com.deadely.piegallery.network.APIinterface;
 import com.deadely.piegallery.view.photos.IPhotosContract;
 
@@ -21,11 +19,13 @@ public class PhotosPresenter extends BasePresenter<IPhotosContract.View> impleme
 
     private static final String LATEST = "latest";
     private List<Photo> mPhotoList;
-
+    private APIinterface apIinterface;
     private AppDBHelper db;
 
     @Inject
-    public PhotosPresenter() {
+    public PhotosPresenter(APIinterface apIinterface, AppDBHelper db) {
+        this.apIinterface = apIinterface;
+        this.db = db;
     }
 
     @Override
@@ -35,7 +35,6 @@ public class PhotosPresenter extends BasePresenter<IPhotosContract.View> impleme
 
     @Override
     public void getPhotoList() {
-        db = App.getInstance().getDatabaseInstance();
         mPhotoList = db.getPhotoDao().getAllPhotos();
         if (mPhotoList.size() != 0) {
             getMvpView().setPhotoList(mPhotoList);
@@ -45,11 +44,9 @@ public class PhotosPresenter extends BasePresenter<IPhotosContract.View> impleme
     }
 
     private void getRequest() {
-        db = App.getInstance().getDatabaseInstance();
         db.getPhotoDao().deleteAll();
         db.getFavoritesDao().deleteAll();
 
-        APIinterface apIinterface = new APIclient().apIinterface();
         Call<List<Photo>> call = apIinterface.getPhotos(1, 50, LATEST);
         call.enqueue(new Callback<List<Photo>>() {
             @Override
