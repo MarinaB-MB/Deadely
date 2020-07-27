@@ -1,10 +1,11 @@
-package com.deadely.itl_en
+package com.deadely.itl_en.main.auth.view
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import butterknife.OnClick
+import com.deadely.itl_en.R
 
 class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

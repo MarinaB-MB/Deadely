@@ -17,4 +17,7 @@
     <color name="pink">#E83371</color>
     <color name="brown">#320501</color>
     <color name="red">#BF0A0A</color>
+
+    <color name="main">#FFA286</color>
+    <color name="mainDark">#FF8A65</color>
 </resources>
