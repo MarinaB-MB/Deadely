@@ -1,10 +1,8 @@
 package com.deadely.itl_en.main.splash.view
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.deadely.itl_en.R
-import com.deadely.itl_en.main.auth.view.AuthActivity
 
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,13 +12,32 @@ class SplashScreenActivity : AppCompatActivity() {
         initView()
     }
 
+    companion object {
+        const val TAG = "SplashScreenActivity"
+    }
+
     private fun initView() {
         actionBar?.hide()
-
         openMainScreen()
     }
 
     private fun openMainScreen() {
-        startActivity(Intent(this, AuthActivity::class.java))
+
+//        val call: Call<MutableList<User>> = RestDBService().apIinterface()?.getUsers()!!
+//        call.enqueue(object : Callback<MutableList<User>> {
+//            override fun onResponse(call: Call<MutableList<User>>, response: Response<MutableList<User>>) {
+//                if (response.isSuccessful && !response.body()?.isEmpty()!!) {
+//                    Log.e(TAG, "onResponse: isSuccessful")
+//                } else {
+//                    Log.e(TAG, "onResponse: isSuccessful")
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<MutableList<User>>, t: Throwable) {
+//
+//            }
+//
+//        })
+//        startActivity(Intent(this, AuthActivity::class.java))
     }
 }

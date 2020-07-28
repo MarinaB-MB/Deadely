@@ -10,15 +10,15 @@ interface IRestDBService {
     //user response
 
     @GET("users")
-    open fun getUsers(): Call<MutableList<User?>?>?
+    open fun getUsers(): Call<MutableList<User>>
 
     @GET("users/{id}")
-    fun getUserById(@Path("id") id: String?): Call<User?>?
+    fun getUserById(@Path("id") id: String): Call<User>
 
     @POST("users")
-    fun createUser(@Body user: User?): Call<User?>?
+    fun createUser(@Body user: User): Call<User>
 
     @PUT("users/{objectId}")
-    fun updateUser(@Path("objectId") id: String?,
-                   @Body user: User?): Call<User?>?
+    fun updateUser(@Path("objectId") id: String,
+                   @Body user: User): Call<User>
 }

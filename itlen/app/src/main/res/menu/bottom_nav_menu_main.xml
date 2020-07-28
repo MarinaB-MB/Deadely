@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/mnu_stats"
+        android:icon="@drawable/ic_baseline_bar_chart_24"
+        android:title="@string/title_stats"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/mnu_study"
+        android:icon="@drawable/ic_baseline_play_arrow_24"
+        android:title="@string/title_study"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/mnu_vocab"
+        android:icon="@drawable/ic_baseline_library_books_24"
+        android:title="@string/title_vocab"
+        app:showAsAction="ifRoom" />
+</menu>

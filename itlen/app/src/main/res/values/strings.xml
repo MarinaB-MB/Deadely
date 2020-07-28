@@ -8,4 +8,5 @@
     <string name="app_name_en"><![CDATA[<en>]]></string>
     <string name="user_settings">Настройки профиля</string>
     <string name="unexpected_error">Возникла ошибка. Пожалуйста обратитесь позже</string>
+
 </resources>
