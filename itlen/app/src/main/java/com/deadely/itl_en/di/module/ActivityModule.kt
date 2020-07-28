@@ -10,7 +10,6 @@ class ActivityModule {
     fun ActivityModule(activity: AppCompatActivity?) {
         this.activity = activity
     }
-
     fun getActivity(): AppCompatActivity? {
         return activity
     }
