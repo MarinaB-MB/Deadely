@@ -2,6 +2,7 @@ package com.deadely.itl_en.main.splash.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.deadely.itl_en.R
 import com.deadely.itl_en.main.auth.view.AuthActivity
@@ -22,12 +23,15 @@ class SplashScreenActivity : AppCompatActivity(), ISplashScreenContract.View {
     }
 
     private fun initView() {
-        actionBar?.hide()
         openAuthScreen()
     }
 
     override fun openRegScreen() {
         startActivity(Intent(this, RegActivity::class.java))
+    }
+
+    override fun showMessage(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     override fun openAuthScreen() {

@@ -10,5 +10,7 @@
     <string name="unexpected_error">Возникла ошибка. Пожалуйста обратитесь позже</string>
     <string name="insert_pass">Введите пароль:</string>
     <string name="next">Далее</string>
+    <string name="reg">Регистрация</string>
+    <string name="auth">Авторизация</string>
 
 </resources>

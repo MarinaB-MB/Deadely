@@ -5,7 +5,11 @@ interface ISplashScreenContract {
         fun openMainScreen()
         fun openAuthScreen()
         fun openRegScreen()
+        fun showMessage(msg: String)
     }
 
-    interface ViewPresenter {}
+    interface Presenter {
+        fun getUsers()
+        fun getActiveUser()
+    }
 }
