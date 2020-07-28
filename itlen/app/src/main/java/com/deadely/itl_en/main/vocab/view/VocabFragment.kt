@@ -1,4 +1,4 @@
-package com.deadely.itl_en.main.vocab
+package com.deadely.itl_en.main.vocab.view
 
 import android.os.Bundle
 import android.view.LayoutInflater

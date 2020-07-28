@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_study"
-        android:name="com.deadely.itl_en.main.study.StudyFragment"
+        android:name="com.deadely.itl_en.main.study.view.StudyFragment"
         android:label="@string/title_study"
         tools:layout="@layout/fragment_study" />
 
     <fragment
         android:id="@+id/navigation_stats"
-        android:name="com.deadely.itl_en.main.stat.StatFragment"
+        android:name="com.deadely.itl_en.main.stat.view.StatFragment"
         android:label="@string/title_stats"
         tools:layout="@layout/fragment_stat" />
 
     <fragment
         android:id="@+id/navigation_vocab"
-        android:name="com.deadely.itl_en.main.vocab.VocabFragment"
+        android:name="com.deadely.itl_en.main.vocab.view.VocabFragment"
         android:label="@string/title_vocab"
         tools:layout="@layout/fragment_vocab" />
 </navigation>

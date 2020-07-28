@@ -1,10 +1,15 @@
 package com.deadely.itl_en.main.splash.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.deadely.itl_en.R
+import com.deadely.itl_en.main.auth.view.AuthActivity
+import com.deadely.itl_en.main.main.view.MainActivity
+import com.deadely.itl_en.main.reg.view.RegActivity
+import com.deadely.itl_en.main.splash.ISplashScreenContract
 
-class SplashScreenActivity : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity(), ISplashScreenContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -18,26 +23,19 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun initView() {
         actionBar?.hide()
-        openMainScreen()
+        openAuthScreen()
     }
 
-    private fun openMainScreen() {
-
-//        val call: Call<MutableList<User>> = RestDBService().apIinterface()?.getUsers()!!
-//        call.enqueue(object : Callback<MutableList<User>> {
-//            override fun onResponse(call: Call<MutableList<User>>, response: Response<MutableList<User>>) {
-//                if (response.isSuccessful && !response.body()?.isEmpty()!!) {
-//                    Log.e(TAG, "onResponse: isSuccessful")
-//                } else {
-//                    Log.e(TAG, "onResponse: isSuccessful")
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<MutableList<User>>, t: Throwable) {
-//
-//            }
-//
-//        })
-//        startActivity(Intent(this, AuthActivity::class.java))
+    override fun openRegScreen() {
+        startActivity(Intent(this, RegActivity::class.java))
     }
+
+    override fun openAuthScreen() {
+        startActivity(Intent(this, AuthActivity::class.java))
+    }
+
+    override fun openMainScreen() {
+        startActivity(Intent(this, MainActivity::class.java))
+    }
+
 }

@@ -3,9 +3,9 @@ package com.deadely.itl_en.main.main
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.deadely.itl_en.main.stat.StatFragment
-import com.deadely.itl_en.main.study.StudyFragment
-import com.deadely.itl_en.main.vocab.VocabFragment
+import com.deadely.itl_en.main.stat.view.StatFragment
+import com.deadely.itl_en.main.study.view.StudyFragment
+import com.deadely.itl_en.main.vocab.view.VocabFragment
 
 class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter((fragmentManager!!)) {
 

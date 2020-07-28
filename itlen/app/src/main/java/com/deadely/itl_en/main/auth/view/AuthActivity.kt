@@ -22,9 +22,9 @@ class AuthActivity : AppCompatActivity() {
 
     }
 
-    @OnClick(R.id.btnGo)
+    @OnClick(R.id.btnAuth)
     fun onClick(view: View) {
-        Log.d(TAG, "onClick: Clicked")
+        Log.e(TAG, "onClick: Clicked")
     }
 
 }

@@ -8,5 +8,7 @@
     <string name="app_name_en"><![CDATA[<en>]]></string>
     <string name="user_settings">Настройки профиля</string>
     <string name="unexpected_error">Возникла ошибка. Пожалуйста обратитесь позже</string>
+    <string name="insert_pass">Введите пароль:</string>
+    <string name="next">Далее</string>
 
 </resources>

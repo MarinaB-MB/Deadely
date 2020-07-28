@@ -19,6 +19,7 @@
             android:textColor="@color/black" />
 
         <EditText
+            android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/margin22" />
@@ -40,8 +41,10 @@
             android:textColor="@color/black" />
 
         <EditText
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
             android:textSize="@dimen/margin22" />
     </LinearLayout>
 
@@ -60,9 +63,9 @@
             android:textColor="@color/black" />
 
         <EditText
+            android:id="@+id/etPassOne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:textSize="@dimen/margin22" />
     </LinearLayout>
 
@@ -81,14 +84,14 @@
             android:textColor="@color/black" />
 
         <EditText
+            android:id="@+id/etPassTwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:textSize="@dimen/margin22" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnGo"
+        android:id="@+id/btnAuth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

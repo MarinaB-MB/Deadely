@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin16"
+    tools:context=".main.auth.view.AuthActivity">
+
+  <LinearLayout
+      android:id="@+id/llEmail"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/margin16"
+      android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Введите email:"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:textSize="@dimen/margin22" />
+  </LinearLayout>
+
+  <LinearLayout
+      android:id="@+id/llPassOne"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/llEmail"
+      android:layout_marginTop="@dimen/margin16"
+      android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/insert_pass"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/etPassOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/margin22" />
+  </LinearLayout>
+
+  <Button
+      android:id="@+id/btnReg"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:background="@drawable/btn_bg"
+      android:text="@string/next"
+      android:textColor="@color/white" />
+</RelativeLayout>

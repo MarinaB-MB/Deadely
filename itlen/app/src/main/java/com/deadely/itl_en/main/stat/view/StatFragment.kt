@@ -1,4 +1,4 @@
-package com.deadely.itl_en.main.stat
+package com.deadely.itl_en.main.stat.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
