@@ -1,6 +1,7 @@
 package com.deadely.itl_en.main.main.view
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.deadely.itl_en.R
@@ -9,6 +10,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    private var prevMenuItem: MenuItem? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,18 +31,18 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-                when (position) {
-                    0 -> bottom_navigation.menu.findItem(R.id.mnu_stats).isChecked = true
-                    1 -> bottom_navigation.menu.findItem(R.id.mnu_study).isChecked = true
-                    2 -> bottom_navigation.menu.findItem(R.id.mnu_vocab).isChecked = true
-                }
+                if (prevMenuItem != null)
+                    prevMenuItem?.isChecked = false;
+                else
+                    bottom_navigation.menu.getItem(0).isChecked = false;
+
+                bottom_navigation.menu.getItem(position).isChecked = true;
+                prevMenuItem = bottom_navigation.menu.getItem(position);
             }
         })
 
-//        val navController = Navigation.findNavController(this, R.id.nav_frag)
         bottom_navigation.setOnNavigationItemSelectedListener { menuItem ->
             if (!menuItem.isChecked) {
-//                navController.navigate(menuItem.itemId)
                 when (menuItem.itemId) {
                     R.id.mnu_stats -> vp_main.currentItem = 0
                     R.id.mnu_study -> vp_main.currentItem = 1
