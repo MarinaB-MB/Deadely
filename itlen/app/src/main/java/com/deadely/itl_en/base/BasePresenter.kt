@@ -4,15 +4,15 @@ import com.deadely.itl_en.base.mvp.IBaseMvpPresenter
 import com.deadely.itl_en.base.mvp.IBaseMvpView
 
 
-class BasePresenter<T : IBaseMvpView> : IBaseMvpPresenter<T> {
+open class BasePresenter<T : IBaseMvpView> : IBaseMvpPresenter<T> {
 
-    protected var mMvpView: T? = null
+    private var mMvpView: T? = null
 
-    fun attachView(mvpView: T) {
+    override fun attachView(mvpView: T) {
         mMvpView = mvpView
     }
 
-    fun detachView() {
+    override fun detachView() {
         mMvpView = null
     }
 

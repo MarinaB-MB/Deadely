@@ -3,16 +3,25 @@ package com.deadely.itl_en.ui.reg.view
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import butterknife.OnClick
 import com.deadely.itl_en.R
+import com.deadely.itl_en.base.BaseActivity
+import com.deadely.itl_en.di.component.ActivityComponent
 import com.deadely.itl_en.ui.reg.IRegContract
+import javax.inject.Inject
 
-class RegActivity : AppCompatActivity(), IRegContract.View {
+class RegActivity : BaseActivity(), IRegContract.View {
+    @Inject
+    private lateinit var presenter: IRegContract.Presenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
         initView()
+    }
+
+    override fun inject(activityComponent: ActivityComponent) {
+        TODO("Not yet implemented")
     }
 
     private fun initView() {

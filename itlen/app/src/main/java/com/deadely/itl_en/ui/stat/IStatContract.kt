@@ -1,10 +1,13 @@
 package com.deadely.itl_en.ui.stat
 
+import com.deadely.itl_en.base.mvp.IBaseMvpPresenter
+import com.deadely.itl_en.base.mvp.IBaseMvpView
+
 interface IStatContract {
-    interface View {
+    interface View : IBaseMvpView {
         fun showMessage(msg: String)
     }
 
-    interface Presenter {
+    interface Presenter : IBaseMvpPresenter<View> {
     }
 }

@@ -3,15 +3,16 @@ package com.deadely.itl_en.ui.splash.view
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.deadely.itl_en.R
+import com.deadely.itl_en.base.BaseActivity
+import com.deadely.itl_en.di.component.ActivityComponent
 import com.deadely.itl_en.ui.auth.view.AuthActivity
 import com.deadely.itl_en.ui.main.view.MainActivity
 import com.deadely.itl_en.ui.reg.view.RegActivity
 import com.deadely.itl_en.ui.splash.ISplashScreenContract
 import javax.inject.Inject
 
-class SplashScreenActivity : AppCompatActivity(), ISplashScreenContract.View {
+class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
 
     @Inject
     lateinit var presenter: ISplashScreenContract.Presenter
@@ -23,12 +24,16 @@ class SplashScreenActivity : AppCompatActivity(), ISplashScreenContract.View {
         initView()
     }
 
+    override fun inject(activityComponent: ActivityComponent) {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         const val TAG = "SplashScreenActivity"
     }
 
     private fun initView() {
-
+        presenter.attachView(this)
 //        openAuthScreen()
     }
 

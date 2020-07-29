@@ -2,21 +2,29 @@ package com.deadely.itl_en.ui.main.view
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.deadely.itl_en.R
+import com.deadely.itl_en.base.BaseActivity
+import com.deadely.itl_en.di.component.ActivityComponent
+import com.deadely.itl_en.ui.main.IMainContract
 import com.deadely.itl_en.ui.main.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity() {
-
+class MainActivity : BaseActivity(), IMainContract.View {
+    @Inject
+    private lateinit var presenter: IMainContract.Presenter
     private var prevMenuItem: MenuItem? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initView()
+    }
+
+    override fun inject(activityComponent: ActivityComponent) {
+        TODO("Not yet implemented")
     }
 
     private fun initView() {
@@ -51,5 +59,9 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    override fun showMessage(msg: String) {
+        TODO("Not yet implemented")
     }
 }

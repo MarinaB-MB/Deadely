@@ -1,5 +1,6 @@
 package com.deadely.itl_en.ui.splash.presenter
 
+import com.deadely.itl_en.base.BasePresenter
 import com.deadely.itl_en.dataclasses.User
 import com.deadely.itl_en.network.RestDBService
 import com.deadely.itl_en.ui.splash.ISplashScreenContract
@@ -7,7 +8,7 @@ import retrofit2.Call
 import retrofit2.Response
 import javax.inject.Inject
 
-class SplashScreenPresenter : ISplashScreenContract.Presenter {
+class SplashScreenPresenter : BasePresenter<ISplashScreenContract.View>, ISplashScreenContract.Presenter {
 
     @Inject
     constructor(

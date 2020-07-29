@@ -1,3 +1,5 @@
 package com.deadely.itl_en.ui.vocab.presenter
 
-class VocabPresenter {}
+import javax.inject.Inject
+
+class VocabPresenter @Inject constructor() {}

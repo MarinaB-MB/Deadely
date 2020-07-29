@@ -1,3 +1,6 @@
 package com.deadely.itl_en.ui.study.presenter
-class StudyPresenter {}
+
+import javax.inject.Inject
+
+class StudyPresenter @Inject constructor() {}
 
