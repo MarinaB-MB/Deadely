@@ -28,7 +28,7 @@ public class App extends Application {
         return component;
     }
 
-    public App getApplication() {
+    public App getInstance() {
         return instance;
     }
 }

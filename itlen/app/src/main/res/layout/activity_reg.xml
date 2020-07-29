@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/margin16"
-    tools:context=".main.auth.view.AuthActivity">
+    tools:context=".ui.auth.view.AuthActivity">
 
     <LinearLayout
         android:id="@+id/llName"
