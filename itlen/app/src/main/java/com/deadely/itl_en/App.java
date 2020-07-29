@@ -3,11 +3,15 @@ package com.deadely.itl_en;
 import android.app.Application;
 
 import com.deadely.itl_en.di.component.AppComponent;
+import com.deadely.itl_en.di.component.DaggerAppComponent;
 import com.deadely.itl_en.di.module.AppModule;
 
 public class App extends Application {
-    private static App instance;
+    private App instance;
     private AppComponent component;
+
+    public App() {
+    }
 
     @Override
     public void onCreate() {
@@ -24,7 +28,7 @@ public class App extends Application {
         return component;
     }
 
-    public static App getInstance() {
+    public App getApplication() {
         return instance;
     }
 }
