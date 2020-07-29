@@ -8,7 +8,7 @@ import retrofit2.Response
 
 class SplashScreenPresenter : ISplashScreenContract.Presenter {
     override fun getUsers() {
-        val call = RestDBService().apIinterface()?.getUsers()
+        val call = RestDBService().getClient()?.getUsers()
         call?.enqueue(object : retrofit2.Callback<MutableList<User>> {
             override fun onResponse(call: Call<MutableList<User>>, response: Response<MutableList<User>>) {
                 if (response.isSuccessful && !response.body()?.isEmpty()!!) {
