@@ -2,21 +2,33 @@ package com.deadely.itl_en.dataclasses
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-data class Group(@SerializedName("_id") val _id: String,
-                 @SerializedName("image") val image: List<String>,
-                 @SerializedName("title") val title: String) : Parcelable {
+@Entity(tableName = "group_table")
+data class Group(
+        @PrimaryKey(autoGenerate = false)
+        @ColumnInfo(name = "group_id")
+        @NonNull
+        @SerializedName("_id") val _id: String,
+        @SerializedName("image") val image: String?,
+        @SerializedName("title") val title: String?,
+        @SerializedName("lessons") val lessons: List<Lesson>? = null) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readString()!!,
-            parcel.createStringArrayList()!!,
-            parcel.readString()!!) {
+            parcel.readString().toString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.createTypedArrayList(Lesson)) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(_id)
-        parcel.writeStringList(image)
+        parcel.writeString(image)
         parcel.writeString(title)
+        parcel.writeTypedList(lessons)
     }
 
     override fun describeContents(): Int {

@@ -2,27 +2,35 @@ package com.deadely.itl_en.dataclasses
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "stat_table")
 data class Stat(
-
-        @SerializedName("_id") val _id: String,
-        @SerializedName("date") val date: String,
-        @SerializedName("words") val words: List<Words>,
-        @SerializedName("user") val user: List<User>
+        @PrimaryKey(autoGenerate = false)
+        @ColumnInfo(name = "star_id")
+        @SerializedName("_id") @NonNull val _id: String,
+        @SerializedName("date") val date: String?,
+        @SerializedName("words") val words: List<Words>? = null,
+        @Embedded
+        @SerializedName("user") val user: User? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readString()!!,
-            parcel.readString()!!,
+            parcel.readString().toString(),
+            parcel.readString(),
             parcel.createTypedArrayList(Words)!!,
-            parcel.createTypedArrayList(User)!!) {
+            parcel.readParcelable(User::class.java.classLoader)!!) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(_id)
         parcel.writeString(date)
         parcel.writeTypedList(words)
-        parcel.writeTypedList(user)
+        parcel.writeParcelable(user, flags)
     }
 
     override fun describeContents(): Int {

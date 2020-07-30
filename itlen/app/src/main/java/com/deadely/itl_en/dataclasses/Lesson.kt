@@ -2,27 +2,40 @@ package com.deadely.itl_en.dataclasses
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-data class Lesson(@SerializedName("_id") val _id: String,
-                  @SerializedName("checked") val checked: Boolean,
-                  @SerializedName("title") val title: String,
-                  @SerializedName("words") val words: List<String>,
-                  @SerializedName("group") val group: List<Group>) : Parcelable {
+@Entity(tableName = "lessons_table")
+data class Lesson(
+        @PrimaryKey(autoGenerate = false)
+        @ColumnInfo(name = "lesson_id")
+        @NonNull
+        @SerializedName("_id") val _id: String,
+        @ColumnInfo(name = "lesson_checked")
+        @SerializedName("checked") val checked: Boolean,
+        @ColumnInfo(name = "lesson_title")
+        @SerializedName("title") val title: String?,
+        @SerializedName("words") val words: List<Words>? = null,
+        @Embedded
+        @SerializedName("group") val group: Group) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readString()!!,
+            parcel.readString().toString(),
             parcel.readByte() != 0.toByte(),
-            parcel.readString()!!,
-            parcel.createStringArrayList()!!,
-            parcel.createTypedArrayList(Group)!!) {
+            parcel.readString(),
+            parcel.createTypedArrayList(Words),
+            parcel.readParcelable(Group::class.java.classLoader)!!) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(_id)
         parcel.writeByte(if (checked) 1 else 0)
         parcel.writeString(title)
-        parcel.writeStringList(words)
-        parcel.writeTypedList(group)
+        parcel.writeTypedList(words)
+        parcel.writeParcelable(group, flags)
     }
 
     override fun describeContents(): Int {
