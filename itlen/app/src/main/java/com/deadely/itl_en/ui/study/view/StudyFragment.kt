@@ -12,9 +12,9 @@ import javax.inject.Inject
 
 class StudyFragment : BaseFragment(), IStudyContract.View {
     @Inject
-    private lateinit var presenter: IStudyContract.Presenter
+    lateinit var presenter: IStudyContract.Presenter
     override fun inject(fragmentComponent: FragmentComponent?) {
-        TODO("Not yet implemented")
+        fragmentComponent?.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

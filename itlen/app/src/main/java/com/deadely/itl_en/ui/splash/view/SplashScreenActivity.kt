@@ -25,7 +25,7 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
     }
 
     override fun inject(activityComponent: ActivityComponent) {
-        TODO("Not yet implemented")
+        activityComponent.inject(this)
     }
 
     companion object {

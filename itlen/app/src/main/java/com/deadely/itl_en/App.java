@@ -7,11 +7,8 @@ import com.deadely.itl_en.di.component.DaggerAppComponent;
 import com.deadely.itl_en.di.module.AppModule;
 
 public class App extends Application {
-    private App instance;
     private AppComponent component;
-
-    public App() {
-    }
+    public static App instance;
 
     @Override
     public void onCreate() {
@@ -28,7 +25,7 @@ public class App extends Application {
         return component;
     }
 
-    public App getInstance() {
+    public static App getInstance() {
         return instance;
     }
 }

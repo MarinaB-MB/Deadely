@@ -9,7 +9,7 @@ import com.deadely.itl_en.di.module.FragmentModule
 abstract class BaseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val fragmentComponent = App().instance.component.fragmentComponent(FragmentModule(this))
+        val fragmentComponent = App.instance.component.fragmentComponent(FragmentModule(this))
         inject(fragmentComponent)
     }
 

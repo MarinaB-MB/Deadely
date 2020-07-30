@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity(), IMainContract.View {
     @Inject
-    private lateinit var presenter: IMainContract.Presenter
+    lateinit var presenter: IMainContract.Presenter
     private var prevMenuItem: MenuItem? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ class MainActivity : BaseActivity(), IMainContract.View {
     }
 
     override fun inject(activityComponent: ActivityComponent) {
-        TODO("Not yet implemented")
+        activityComponent.inject(this)
     }
 
     private fun initView() {

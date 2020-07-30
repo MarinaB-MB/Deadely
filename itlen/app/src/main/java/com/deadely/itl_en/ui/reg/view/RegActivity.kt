@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class RegActivity : BaseActivity(), IRegContract.View {
     @Inject
-    private lateinit var presenter: IRegContract.Presenter
+    lateinit var presenter: IRegContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,7 @@ class RegActivity : BaseActivity(), IRegContract.View {
     }
 
     override fun inject(activityComponent: ActivityComponent) {
-        TODO("Not yet implemented")
+        activityComponent.inject(this)
     }
 
     private fun initView() {

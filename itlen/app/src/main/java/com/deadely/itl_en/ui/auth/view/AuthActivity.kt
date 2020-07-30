@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class AuthActivity : BaseActivity(), IAuthContract.View {
     @Inject
-    private lateinit var presenter: IAuthContract.Presenter
+    lateinit var presenter: IAuthContract.Presenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
@@ -22,7 +22,7 @@ class AuthActivity : BaseActivity(), IAuthContract.View {
     }
 
     override fun inject(activityComponent: ActivityComponent) {
-        TODO("Not yet implemented")
+        activityComponent.inject(this)
     }
 
     companion object {
