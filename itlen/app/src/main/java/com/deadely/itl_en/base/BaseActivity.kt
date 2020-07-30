@@ -9,8 +9,8 @@ import com.deadely.itl_en.di.module.ActivityModule
 abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val activityComponent: ActivityComponent = App.instance.component.activityComponent(ActivityModule(this))
-        inject(activityComponent)
+        val activityComponent = App.instance.component.activityComponent(ActivityModule(this))
+        inject(activityComponent!!)
     }
 
     protected abstract fun inject(activityComponent: ActivityComponent)

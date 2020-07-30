@@ -31,7 +31,6 @@ class SplashScreenPresenter : BasePresenter<ISplashScreenContract.View>, ISplash
             }
 
             override fun onFailure(call: Call<MutableList<User>>, t: Throwable) {
-//                getMvpView().showError();
             }
 
         })
