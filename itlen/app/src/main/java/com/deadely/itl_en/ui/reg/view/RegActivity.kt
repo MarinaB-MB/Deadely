@@ -16,7 +16,7 @@ class RegActivity : BaseActivity(), IRegContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auth)
+        setContentView(R.layout.activity_reg)
         initView()
     }
 

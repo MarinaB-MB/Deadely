@@ -22,16 +22,17 @@ class SplashScreenPresenter @Inject constructor(private var apiInterface: IRestD
         val call = apiInterface.getUsers()
         call.enqueue(object : retrofit2.Callback<MutableList<User>> {
             override fun onResponse(call: Call<MutableList<User>>, response: Response<MutableList<User>>) {
-                if (response.isSuccessful && !response.body()?.isEmpty()!!) {
-                    val users: List<User> = response.body()!!
-                    if (users.isNotEmpty()) {
+                if (response.isSuccessful) {
+                    if (response.body()?.size == 0) {
+                        getMvpView()?.openRegScreen()
+                    } else {
+                        val users: List<User> = response.body()!!
                         for (user in users) {
                             ud.addUser(user)
                         }
                         getActiveUser()
-                    } else {
-                        getMvpView()?.openRegScreen()
                     }
+
                 } else {
                     getMvpView()?.showMessage(FieldConverter().getString(R.string.unexpected_error));
                 }
