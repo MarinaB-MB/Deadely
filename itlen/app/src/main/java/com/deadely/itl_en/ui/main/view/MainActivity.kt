@@ -15,7 +15,9 @@ import javax.inject.Inject
 class MainActivity : BaseActivity(), IMainContract.View {
     @Inject
     lateinit var presenter: IMainContract.Presenter
+
     private var prevMenuItem: MenuItem? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,6 +30,8 @@ class MainActivity : BaseActivity(), IMainContract.View {
     }
 
     private fun initView() {
+        presenter.attachView(this)
+
         vp_main.adapter = ViewPagerAdapter(supportFragmentManager)
         vp_main.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
@@ -39,11 +43,11 @@ class MainActivity : BaseActivity(), IMainContract.View {
             }
 
             override fun onPageSelected(position: Int) {
-                if (prevMenuItem != null)
+                if (prevMenuItem != null) {
                     prevMenuItem?.isChecked = false;
-                else
+                } else {
                     bottom_navigation.menu.getItem(0).isChecked = false;
-
+                }
                 bottom_navigation.menu.getItem(position).isChecked = true;
                 prevMenuItem = bottom_navigation.menu.getItem(position);
             }
@@ -62,6 +66,6 @@ class MainActivity : BaseActivity(), IMainContract.View {
     }
 
     override fun showMessage(msg: String) {
-        TODO("Not yet implemented")
+
     }
 }

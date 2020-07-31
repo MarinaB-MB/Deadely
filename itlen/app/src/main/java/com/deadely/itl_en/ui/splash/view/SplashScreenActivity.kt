@@ -2,6 +2,7 @@ package com.deadely.itl_en.ui.splash.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.widget.Toast
 import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BaseActivity
@@ -12,10 +13,15 @@ import com.deadely.itl_en.ui.reg.view.RegActivity
 import com.deadely.itl_en.ui.splash.ISplashScreenContract
 import javax.inject.Inject
 
+
 class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
 
     @Inject
     lateinit var presenter: ISplashScreenContract.Presenter
+
+    companion object {
+        const val TAG = "SplashScreenActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,34 +30,38 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
         initView()
     }
 
-    override fun inject(activityComponent: ActivityComponent) {
-        activityComponent.inject(this)
-    }
-
-    companion object {
-        const val TAG = "SplashScreenActivity"
-    }
-
     private fun initView() {
         presenter.attachView(this)
         presenter.getUsers()
-//        openAuthScreen()
     }
 
     override fun openRegScreen() {
-        startActivity(Intent(this, RegActivity::class.java))
+        Handler().postDelayed({
+            startActivity(Intent(this, RegActivity::class.java))
+            finish()
+        }, 1000)
+    }
+
+    override fun openAuthScreen() {
+        Handler().postDelayed({
+            startActivity(Intent(this, AuthActivity::class.java))
+            finish()
+        }, 1000)
+    }
+
+    override fun openMainScreen() {
+        Handler().postDelayed({
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }, 1000)
     }
 
     override fun showMessage(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
-    override fun openAuthScreen() {
-        startActivity(Intent(this, AuthActivity::class.java))
-    }
-
-    override fun openMainScreen() {
-        startActivity(Intent(this, MainActivity::class.java))
+    override fun inject(activityComponent: ActivityComponent) {
+        activityComponent.inject(this)
     }
 
 }
