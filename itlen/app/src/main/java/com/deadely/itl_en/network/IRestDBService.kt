@@ -1,5 +1,6 @@
 package com.deadely.itl_en.network
 
+import com.deadely.itl_en.dataclasses.PostUser
 import com.deadely.itl_en.dataclasses.User
 import retrofit2.Call
 import retrofit2.http.*
@@ -16,7 +17,7 @@ interface IRestDBService {
     fun getUserById(@Path("id") id: String): Call<User>
 
     @POST("users")
-    fun createUser(@Body user: User): Call<User>
+    fun createUser(@Body post: PostUser): Call<User>
 
     @PUT("users/{objectId}")
     fun updateUser(@Path("objectId") id: String,

@@ -12,7 +12,9 @@
     <string name="next">Далее</string>
     <string name="reg">Регистрация</string>
     <string name="auth">Авторизация</string>
+
     <string name="empty_fields">Поля не должны быть пустыми</string>
-    <string name="pass_length">Длина пароля должна быть не менее 6 символов</string>
+    <string name="short_pass_length">Длина пароля должна быть не менее 6 символов</string>
+    <string name="pass_is_not_compare">Пароли не совпадают</string>
 
 </resources>

@@ -49,17 +49,17 @@ class AuthActivity : BaseActivity(), IAuthContract.View {
     }
 
     override fun checkFieldsWithDB(): Boolean {
-        if (etEmail.text.toString() == "" && etPassOne.text.toString() == "") {
+        return if (etEmail.text.toString() == "" || etPassOne.text.toString() == "") {
             showMessage(FieldConverter().getString(R.string.empty_fields))
-            return false
+            false
         } else {
             if (etPassOne.text.toString().length < 6) {
-                showMessage(FieldConverter().getString(R.string.pass_length))
+                showMessage(FieldConverter().getString(R.string.short_pass_length))
+                false
             } else {
-                return presenter.compareUserDate(etEmail.text.toString(), etPassOne.text.toString())
+                presenter.compareUserDate(etEmail.text.toString(), etPassOne.text.toString())
             }
         }
-        return false
     }
 
     override fun authUser() {

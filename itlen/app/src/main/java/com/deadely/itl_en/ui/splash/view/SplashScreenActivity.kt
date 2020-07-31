@@ -2,7 +2,6 @@ package com.deadely.itl_en.ui.splash.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.widget.Toast
 import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BaseActivity
@@ -36,24 +35,18 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
     }
 
     override fun openRegScreen() {
-        Handler().postDelayed({
-            startActivity(Intent(this, RegActivity::class.java))
-            finish()
-        }, 1000)
+        startActivity(Intent(this, RegActivity::class.java))
+        finish()
     }
 
     override fun openAuthScreen() {
-//        Handler().postDelayed({
-            startActivity(Intent(this, AuthActivity::class.java))
-            finish()
-//        }, 1000)
+        startActivity(Intent(this, AuthActivity::class.java))
+        finish()
     }
 
     override fun openMainScreen() {
-        Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }, 1000)
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     override fun showMessage(msg: String) {
