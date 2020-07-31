@@ -7,10 +7,11 @@ interface IAuthContract {
     interface View : IBaseMvpView {
         fun openMainScreen()
         fun showMessage(msg: String)
-        fun checkFields(): Boolean
+        fun checkFieldsWithDB(): Boolean
         fun authUser()
     }
 
     interface Presenter : IBaseMvpPresenter<View> {
+        fun compareUserDate(email: String, pass: String): Boolean
     }
 }

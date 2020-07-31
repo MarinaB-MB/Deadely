@@ -43,10 +43,10 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
     }
 
     override fun openAuthScreen() {
-        Handler().postDelayed({
+//        Handler().postDelayed({
             startActivity(Intent(this, AuthActivity::class.java))
             finish()
-        }, 1000)
+//        }, 1000)
     }
 
     override fun openMainScreen() {

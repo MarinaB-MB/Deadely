@@ -18,6 +18,7 @@ class SplashScreenPresenter @Inject constructor(private var apiInterface: IRestD
 
     override fun getUsers() {
         ud = db.userDao()
+        ud.deleteAllUsers()
 
         val call = apiInterface.getUsers()
         call.enqueue(object : retrofit2.Callback<MutableList<User>> {
@@ -45,7 +46,8 @@ class SplashScreenPresenter @Inject constructor(private var apiInterface: IRestD
     }
 
     override fun getActiveUser() {
-        if (ud.getActiveUser(true) != null) {
+        val user = ud.getActiveUser(true)
+        if (user != null) {
             getMvpView()?.openMainScreen()
         } else {
             getMvpView()?.openAuthScreen()
