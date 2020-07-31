@@ -8,5 +8,5 @@ import dagger.Component
 @Component(modules = [AppModule::class])
 interface AppComponent {
     fun activityComponent(activityModule: ActivityModule?): ActivityComponent?
-    fun fragmentComponent(fragmentModuke: FragmentModule?): FragmentComponent?
+    fun fragmentComponent(fragmentModule: FragmentModule?): FragmentComponent?
 }

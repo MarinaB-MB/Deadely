@@ -34,6 +34,7 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
 
     private fun initView() {
         presenter.attachView(this)
+        presenter.getUsers()
 //        openAuthScreen()
     }
 

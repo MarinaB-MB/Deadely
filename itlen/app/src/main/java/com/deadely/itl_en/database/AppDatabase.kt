@@ -1,8 +1,6 @@
 package com.deadely.itl_en.database
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.deadely.itl_en.database.converters.DateTypeConverter
@@ -21,22 +19,22 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun lessonDao(): LessonDao
     abstract fun wordDao(): WordDao
 
-    companion object {
-        var instance: AppDatabase? = null
-
-        fun getAppDatabase(context: Context): AppDatabase? {
-            if (instance == null) {
-                instance = Room.databaseBuilder(context.applicationContext,
-                        AppDatabase::class.java, "itl")
-                        .allowMainThreadQueries()
-                        .build()
-            }
-            return instance
-        }
-
-        fun destroyInstance() {
-            instance = null
-        }
-    }
+//    companion object {
+//        var instance: AppDatabase? = null
+//
+//        fun getAppDatabase(): AppDatabase? {
+//            if (instance == null) {
+//                instance = Room.databaseBuilder(App.instance.applicationContext,
+//                        AppDatabase::class.java, "itl")
+//                        .allowMainThreadQueries()
+//                        .build()
+//            }
+//            return instance
+//        }
+//
+//        fun destroyInstance() {
+//            instance = null
+//        }
+//    }
 
 }

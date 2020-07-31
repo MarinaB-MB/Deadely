@@ -1,6 +1,7 @@
 package com.deadely.itl_en.di.component
 
 import com.deadely.itl_en.di.module.ActivityModule
+import com.deadely.itl_en.di.module.DatabaseModule
 import com.deadely.itl_en.di.module.NetModule
 import com.deadely.itl_en.di.module.PresenterModule
 import com.deadely.itl_en.ui.auth.view.AuthActivity
@@ -9,7 +10,7 @@ import com.deadely.itl_en.ui.reg.view.RegActivity
 import com.deadely.itl_en.ui.splash.view.SplashScreenActivity
 import dagger.Subcomponent
 
-@Subcomponent(modules = [ActivityModule::class, PresenterModule::class, NetModule::class])
+@Subcomponent(modules = [ActivityModule::class, PresenterModule::class, NetModule::class, DatabaseModule::class])
 interface ActivityComponent {
     fun inject(activity: SplashScreenActivity?)
     fun inject(activity: AuthActivity?)
