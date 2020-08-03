@@ -34,6 +34,7 @@ dependencies {
     final RETROFIT_VERSION = '2.9.0'
     final OK_HTTP_VERSION = '4.8.0'
     final BUTTER_KNIFE_VERSION = '10.2.1'
+    final MP_CHARTS_VERSION = 'v3.0.3'
 
 // default
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -94,4 +95,7 @@ dependencies {
 
     kapt 'com.google.dagger:dagger-compiler:2.28.1'
     implementation 'com.google.dagger:dagger:2.28.1'
+
+// mpcharts
+    implementation "com.github.PhilJay:MPAndroidChart:$MP_CHARTS_VERSION"
 }

@@ -10,6 +10,7 @@ import com.deadely.itl_en.di.component.FragmentComponent
 import com.deadely.itl_en.ui.stat.IStatContract
 import javax.inject.Inject
 
+
 class StatFragment : BaseFragment(), IStatContract.View {
     @Inject
     lateinit var presenter: IStatContract.Presenter
@@ -19,7 +20,13 @@ class StatFragment : BaseFragment(), IStatContract.View {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        initView()
         return inflater.inflate(R.layout.fragment_stat, container, false)
+
+    }
+
+    private fun initView() {
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
