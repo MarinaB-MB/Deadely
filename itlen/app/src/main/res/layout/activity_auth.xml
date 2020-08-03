@@ -15,45 +15,56 @@
 
         <TextView
             android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Введите email:"
-        android:textColor="@color/black" />
+            android:layout_height="wrap_content"
+            android:text="Введите email:"
+            android:textColor="@color/black" />
 
-    <EditText
-        android:id="@+id/etEmail"
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/margin22" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llPassOne"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:textSize="@dimen/margin22" />
-  </LinearLayout>
+        android:layout_below="@id/llEmail"
+        android:layout_marginTop="@dimen/margin16"
+        android:orientation="vertical">
 
-  <LinearLayout
-      android:id="@+id/llPassOne"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/llEmail"
-      android:layout_marginTop="@dimen/margin16"
-      android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/insert_pass"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etPassOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/margin22" />
+    </LinearLayout>
 
     <TextView
+        android:padding="@dimen/margin5"
+        android:id="@+id/tvCreateAcc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/insert_pass"
-        android:textColor="@color/black" />
+        android:layout_below="@id/llPassOne"
+        android:layout_marginTop="@dimen/margin10"
+        android:gravity="end"
+        android:text="@string/create_acc"
+        android:textColor="@color/main" />
 
-    <EditText
-        android:id="@+id/etPassOne"
+    <Button
+        android:id="@+id/btnAuth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/margin22" />
-  </LinearLayout>
-
-  <Button
-      android:id="@+id/btnAuth"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:background="@drawable/btn_bg"
-      android:text="@string/next"
-      android:textColor="@color/white" />
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_bg"
+        android:text="@string/next"
+        android:textColor="@color/white" />
 </RelativeLayout>

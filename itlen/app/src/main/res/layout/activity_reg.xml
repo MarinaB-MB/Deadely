@@ -25,7 +25,6 @@
             android:textSize="@dimen/margin22" />
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/llEmail"
         android:layout_width="match_parent"
@@ -89,6 +88,18 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/margin22" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvLogIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llPassTwo"
+        android:layout_marginTop="@dimen/margin10"
+        android:gravity="end"
+        android:padding="@dimen/margin5"
+        android:text="@string/login"
+        android:textColor="@color/main" />
+
 
     <Button
         android:id="@+id/btnReg"

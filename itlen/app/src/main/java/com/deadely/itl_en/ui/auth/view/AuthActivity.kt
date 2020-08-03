@@ -8,6 +8,7 @@ import com.deadely.itl_en.base.BaseActivity
 import com.deadely.itl_en.di.component.ActivityComponent
 import com.deadely.itl_en.ui.auth.IAuthContract
 import com.deadely.itl_en.ui.main.view.MainActivity
+import com.deadely.itl_en.ui.reg.view.RegActivity
 import com.deadely.itl_en.utils.FieldConverter
 import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.android.synthetic.main.activity_reg.etEmail
@@ -20,6 +21,7 @@ class AuthActivity : BaseActivity(), IAuthContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+        presenter.onCreate(savedInstanceState)
         initView()
     }
 
@@ -33,6 +35,9 @@ class AuthActivity : BaseActivity(), IAuthContract.View {
 
     private fun initView() {
         title = getString(R.string.auth)
+
+        tvCreateAcc.setOnClickListener { openRegScreen() }
+
         btnAuth.setOnClickListener {
             if (checkFieldsWithDB()) openMainScreen()
         }
@@ -62,8 +67,9 @@ class AuthActivity : BaseActivity(), IAuthContract.View {
         }
     }
 
-    override fun authUser() {
-
+    override fun openRegScreen() {
+        startActivity(Intent(applicationContext, RegActivity::class.java))
+        finish()
     }
 
 }

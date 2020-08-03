@@ -8,10 +8,12 @@ interface IRegContract {
         fun openMainScreen()
         fun showMessage(msg: String)
         fun checkFields(): Boolean
+        fun openAuthScreen()
     }
 
     interface Presenter : IBaseMvpPresenter<View> {
+        fun getUsersList(): Boolean
         fun createNewUser(name: String, email: String, password: String, active: Boolean)
-        fun setActiveUser()
+        fun clearActiveUser()
     }
 }

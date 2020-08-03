@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BaseActivity
 import com.deadely.itl_en.di.component.ActivityComponent
+import com.deadely.itl_en.ui.auth.view.AuthActivity
 import com.deadely.itl_en.ui.main.view.MainActivity
 import com.deadely.itl_en.ui.reg.IRegContract
 import com.deadely.itl_en.utils.FieldConverter
@@ -25,6 +26,7 @@ class RegActivity : BaseActivity(), IRegContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reg)
+        presenter.onCreate(savedInstanceState)
         initView()
     }
 
@@ -34,6 +36,11 @@ class RegActivity : BaseActivity(), IRegContract.View {
 
     private fun initView() {
         title = getString(R.string.reg)
+
+        tvLogIn.setOnClickListener {
+            if (presenter.getUsersList()) openAuthScreen()
+            else showMessage(getString(R.string.create_user_before_auth))
+        }
 
         btnReg.setOnClickListener(View.OnClickListener {
             if (checkFields())
@@ -51,22 +58,27 @@ class RegActivity : BaseActivity(), IRegContract.View {
             showMessage(FieldConverter().getString(R.string.empty_fields))
             return false
         } else {
-            if (etPassOne.text.toString() != etPassTwo.text.toString()) {
+            return if (etPassOne.text.toString() != etPassTwo.text.toString()) {
                 showMessage(FieldConverter().getString(R.string.pass_is_not_compare))
-                return false
+                false
             } else {
                 if (etPassOne.text.toString().length < 6) {
                     showMessage(FieldConverter().getString(R.string.short_pass_length))
-                    return false
+                    false
                 } else {
                     email = etEmail.text.toString()
                     name = etName.text.toString()
                     pass = etPassOne.text.toString()
-                    return true
+                    true
                 }
 
             }
         }
+    }
+
+    override fun openAuthScreen() {
+        startActivity(Intent(applicationContext, AuthActivity::class.java))
+        finish()
     }
 
     override fun showMessage(msg: String) {

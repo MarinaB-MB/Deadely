@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BaseFragment
 import com.deadely.itl_en.di.component.FragmentComponent
@@ -21,7 +22,13 @@ class VocabFragment : BaseFragment(), IVocabContract.View {
         return inflater.inflate(R.layout.fragment_vocab, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter.onCreate(savedInstanceState)
+    }
+
     override fun showMessage(msg: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+
     }
 }

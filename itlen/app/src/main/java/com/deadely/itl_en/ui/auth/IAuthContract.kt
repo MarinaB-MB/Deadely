@@ -8,7 +8,7 @@ interface IAuthContract {
         fun openMainScreen()
         fun showMessage(msg: String)
         fun checkFieldsWithDB(): Boolean
-        fun authUser()
+        fun openRegScreen()
     }
 
     interface Presenter : IBaseMvpPresenter<View> {

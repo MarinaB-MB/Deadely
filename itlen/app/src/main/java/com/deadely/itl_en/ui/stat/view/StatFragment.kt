@@ -22,6 +22,11 @@ class StatFragment : BaseFragment(), IStatContract.View {
         return inflater.inflate(R.layout.fragment_stat, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter.onCreate(savedInstanceState)
+    }
+
     override fun showMessage(msg: String) {
 
     }

@@ -21,5 +21,5 @@ interface IRestDBService {
 
     @PUT("users/{objectId}")
     fun updateUser(@Path("objectId") id: String,
-                   @Body user: User): Call<User>
+                   @Body put: PostUser): Call<User>
 }
