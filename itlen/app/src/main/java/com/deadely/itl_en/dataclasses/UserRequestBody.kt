@@ -2,7 +2,7 @@ package com.deadely.itl_en.dataclasses
 
 import com.google.gson.annotations.SerializedName
 
-class PostUser {
+class UserRequestBody {
     @SerializedName("email")
     private var email: String?
 

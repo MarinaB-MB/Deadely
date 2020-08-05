@@ -18,23 +18,4 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun groupDao(): GroupDao
     abstract fun lessonDao(): LessonDao
     abstract fun wordDao(): WordDao
-
-//    companion object {
-//        var instance: AppDatabase? = null
-//
-//        fun getAppDatabase(): AppDatabase? {
-//            if (instance == null) {
-//                instance = Room.databaseBuilder(App.instance.applicationContext,
-//                        AppDatabase::class.java, "itl")
-//                        .allowMainThreadQueries()
-//                        .build()
-//            }
-//            return instance
-//        }
-//
-//        fun destroyInstance() {
-//            instance = null
-//        }
-//    }
-
 }

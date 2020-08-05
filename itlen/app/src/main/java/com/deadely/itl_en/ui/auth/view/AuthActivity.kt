@@ -21,6 +21,7 @@ class AuthActivity : BaseActivity(), IAuthContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+        presenter.attachView(this)
         presenter.onCreate(savedInstanceState)
         initView()
     }

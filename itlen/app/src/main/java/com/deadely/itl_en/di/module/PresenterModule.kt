@@ -2,6 +2,8 @@ package com.deadely.itl_en.di.module
 
 import com.deadely.itl_en.ui.auth.IAuthContract
 import com.deadely.itl_en.ui.auth.presenter.AuthPresenter
+import com.deadely.itl_en.ui.lessonlist.ILessonsListContract
+import com.deadely.itl_en.ui.lessonlist.presenter.LessonsListPresenter
 import com.deadely.itl_en.ui.main.IMainContract
 import com.deadely.itl_en.ui.main.presenter.MainPresenter
 import com.deadely.itl_en.ui.reg.IRegContract
@@ -38,5 +40,8 @@ abstract class PresenterModule {
     abstract fun bindStudyPresenter(presenter: StudyPresenter?): IStudyContract.Presenter?
 
     @Binds
-    abstract fun bindVocabPresenter(presenter: VocabPresenter?): IVocabContract.Presenter?
+    abstract fun bindVocabPresenter(presenter: VocabPresenter?): IVocabContract.Presenter
+
+    @Binds
+    abstract fun bindLessonsListPresenter(presenter: LessonsListPresenter?): ILessonsListContract.Presenter?
 }

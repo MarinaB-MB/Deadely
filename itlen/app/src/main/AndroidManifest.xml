@@ -15,6 +15,7 @@
         <activity android:name=".ui.reg.view.RegActivity" />
         <activity android:name=".ui.main.view.MainActivity" />
         <activity android:name=".ui.auth.view.AuthActivity" />
+        <activity android:name=".ui.lessonlist.view.LessonsListActivity" />
         <activity android:name=".ui.splash.view.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -5,8 +5,8 @@ import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BasePresenter
 import com.deadely.itl_en.database.AppDatabase
 import com.deadely.itl_en.database.dao.UserDao
-import com.deadely.itl_en.dataclasses.PostUser
 import com.deadely.itl_en.dataclasses.User
+import com.deadely.itl_en.dataclasses.UserRequestBody
 import com.deadely.itl_en.network.IRestDBService
 import com.deadely.itl_en.ui.reg.IRegContract
 import com.deadely.itl_en.utils.FieldConverter
@@ -30,7 +30,7 @@ class RegPresenter @Inject constructor(private var db: AppDatabase, private var 
     override fun createNewUser(name: String, password: String, email: String, active: Boolean) {
         clearActiveUser()
 
-        val post = PostUser(email, password, name, true)
+        val post = UserRequestBody(email, password, name, true)
         val call = apiInterface.createUser(post)
         call.enqueue(object : retrofit2.Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -55,7 +55,7 @@ class RegPresenter @Inject constructor(private var db: AppDatabase, private var 
         if (ud.getActiveUser(true) != null) {
             val id = ud.getActiveUser(true)._id
             val email = ud.getActiveUser(true).email
-            val put = PostUser(email.toString(), false)
+            val put = UserRequestBody(email.toString(), false)
 
             val call = apiInterface.updateUser(id, put)
             call.enqueue(object : retrofit2.Callback<User> {
