@@ -16,5 +16,4 @@ data class Group(
         @NonNull
         @SerializedName("_id") val _id: String,
         @SerializedName("image") val image: String,
-        @SerializedName("title") val title: String,
-        @SerializedName("lessons") val lessons: List<Lesson>? = null) : Parcelable
+        @SerializedName("title") val title: String) : Parcelable

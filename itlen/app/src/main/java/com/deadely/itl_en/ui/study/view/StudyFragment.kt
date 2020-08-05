@@ -20,7 +20,7 @@ import javax.inject.Inject
 class StudyFragment : BaseFragment(), IStudyContract.View {
     private lateinit var adapter: GroupAdapter
     private lateinit var list: MutableList<Group>
-    private val LESSON: String = "LESSON"
+    private val GROUP: String = "GROUP"
 
     @Inject
     lateinit var presenter: IStudyContract.Presenter
@@ -46,8 +46,8 @@ class StudyFragment : BaseFragment(), IStudyContract.View {
         adapter = GroupAdapter(context, emptyList())
         adapter.onClickListener = object : GroupAdapter.OnClickListener {
             override fun onClick(position: Int) {
-                var intent = Intent(context, LessonsListActivity::class.java)
-                intent.putExtra(LESSON, list[position])
+                val intent = Intent(context, LessonsListActivity::class.java)
+                intent.putExtra(GROUP, list[position])
                 startActivity(intent)
             }
         }
