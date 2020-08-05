@@ -15,8 +15,12 @@ data class User(
         @ColumnInfo(name = "user_id")
         @NonNull
         @SerializedName("_id") val _id: String,
+
         @SerializedName("email") val email: String,
+
         @SerializedName("active") val active: Boolean,
+
         @SerializedName("password") val password: String,
-        @SerializedName("name") val name: String?
+
+        @SerializedName("name") val name: String
 ) : Parcelable

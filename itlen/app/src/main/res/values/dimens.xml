@@ -10,4 +10,5 @@
     <dimen name="margin50">50sp</dimen>
     <dimen name="margin22">22dp</dimen>
     <dimen name="margin5">5dp</dimen>
+    <dimen name="margin14">14dp</dimen>
 </resources>

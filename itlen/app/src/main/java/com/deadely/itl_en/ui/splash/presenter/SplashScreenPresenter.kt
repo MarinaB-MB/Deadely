@@ -18,8 +18,6 @@ class SplashScreenPresenter @Inject constructor(private var apiInterface: IRestD
 
     override fun getUsers() {
         ud = db.userDao()
-        ud.deleteAllUsers()
-
         val call = apiInterface.getUsers()
         call.enqueue(object : retrofit2.Callback<MutableList<User>> {
             override fun onResponse(call: Call<MutableList<User>>, response: Response<MutableList<User>>) {

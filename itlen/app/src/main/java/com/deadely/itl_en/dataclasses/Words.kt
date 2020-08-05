@@ -3,7 +3,6 @@ package com.deadely.itl_en.dataclasses
 import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
@@ -21,15 +20,15 @@ data class Words(
 
         @SerializedName("tr") val tr: String,
 
-        @SerializedName("translate") val translate: Boolean,
+        @SerializedName("translate") val translate: String,
 
         @ColumnInfo(name = "words_checked")
         @SerializedName("checked") val checked: Boolean,
 
-        @Embedded
-        @SerializedName("lesson") val lesson: Lesson,
+        @ColumnInfo(name = "words_lesson_id")
+        @SerializedName("lesson_id") val lesson_id: String
 
-        @SerializedName("_created") val _created: String,
+//        @SerializedName("_created") val _created: String,
 
-        @SerializedName("_changed") val _changed: String
+//        @SerializedName("_changed") val _changed: String
 ) : Parcelable

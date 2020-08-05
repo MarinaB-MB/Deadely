@@ -1,8 +1,6 @@
 package com.deadely.itl_en.network
 
-import com.deadely.itl_en.dataclasses.Group
-import com.deadely.itl_en.dataclasses.User
-import com.deadely.itl_en.dataclasses.UserRequestBody
+import com.deadely.itl_en.dataclasses.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -35,4 +33,9 @@ interface IRestDBService {
     @GET("group/{id}")
     fun getGroupById(@Path("id") id: String): Call<Group>
 
+    @GET("stat")
+    fun getStats(): Call<MutableList<Stat>>
+
+    @GET("word")
+    fun getWords(): Call<MutableList<Words>>
 }

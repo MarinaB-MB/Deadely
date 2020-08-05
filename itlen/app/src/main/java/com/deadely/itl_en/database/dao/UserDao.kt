@@ -29,6 +29,4 @@ interface UserDao {
 
     @Query("SELECT * FROM user_table WHERE email LIKE :email AND password LIKE :pass")
     fun getByEmailAndPass(email: String, pass: String): User
-
-
 }

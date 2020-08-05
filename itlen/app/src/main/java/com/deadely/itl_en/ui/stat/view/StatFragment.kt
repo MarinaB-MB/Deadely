@@ -20,18 +20,18 @@ class StatFragment : BaseFragment(), IStatContract.View {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        initView()
         return inflater.inflate(R.layout.fragment_stat, container, false)
-
     }
 
     private fun initView() {
-
+        presenter.getStat()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        presenter.attachView(this)
         presenter.onCreate(savedInstanceState)
+        initView()
     }
 
     override fun showMessage(msg: String) {

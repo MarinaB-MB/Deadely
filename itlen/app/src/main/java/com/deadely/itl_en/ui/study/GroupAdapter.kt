@@ -39,6 +39,7 @@ class GroupAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.itemView.tvTitleGroup.text = group.title
         Glide.with(context)
                 .load(group.image)
+                .centerCrop()
                 .error(R.drawable.ic_baseline_error_outline_24)
                 .into(holder.itemView.ivGroup)
 

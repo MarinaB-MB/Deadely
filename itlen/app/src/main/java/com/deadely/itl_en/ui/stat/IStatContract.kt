@@ -9,5 +9,7 @@ interface IStatContract {
     }
 
     interface Presenter : IBaseMvpPresenter<View> {
+        fun getStat()
+
     }
 }

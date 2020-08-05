@@ -32,6 +32,8 @@ class MainActivity : BaseActivity(), IMainContract.View {
     private fun initView() {
         presenter.attachView(this)
 
+        vp_main.currentItem = 0
+
         vp_main.adapter = ViewPagerAdapter(supportFragmentManager)
         vp_main.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
