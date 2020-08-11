@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BaseFragment
 import com.deadely.itl_en.dataclasses.Words
 import com.deadely.itl_en.di.component.FragmentComponent
-import com.deadely.itl_en.ui.study.GroupAdapter
 import com.deadely.itl_en.ui.vocab.IVocabContract
 import com.deadely.itl_en.ui.vocab.WordsAdapter
 import kotlinx.android.synthetic.main.fragment_vocab.*
+import kotlinx.android.synthetic.main.layout_search.*
 import javax.inject.Inject
 
 class VocabFragment : BaseFragment(), IVocabContract.View {
@@ -42,15 +43,25 @@ class VocabFragment : BaseFragment(), IVocabContract.View {
     private fun initView() {
         rvWords.layoutManager = LinearLayoutManager(context)
         adapter = WordsAdapter(context, emptyList())
-        adapter.onClickListener = object : GroupAdapter.OnClickListener {
-            override fun onClick(position: Int) {
+        adapter.onClickListener = object : WordsAdapter.OnClickListener {
+            override fun onClick(words: Words) {
 //                val intent = Intent(context, WordDetailActivity::class.java)
-//                intent.putExtra(WORD, list[position])
+//                intent.putExtra(WORD, words)
 //                startActivity(intent)
             }
         }
         rvWords.adapter = adapter
         presenter.getWords()
+
+        etSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) searchWord(etSearch.text.toString())
+            false
+        }
+        ivClose.setOnClickListener { etSearch.text.clear() }
+    }
+
+    private fun searchWord(string: String) {
+
     }
 
     override fun initData(list: MutableList<Words>) {

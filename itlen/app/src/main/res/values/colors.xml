@@ -18,6 +18,10 @@
     <color name="brown">#320501</color>
     <color name="red">#BF0A0A</color>
 
-    <color name="main">#FFA286</color>
-    <color name="mainDark">#FF8A65</color>
+    <color name="main">#050A23</color>
+    <!--    <color name="main">#FFA286</color>-->
+    <color name="mainDark">@color/black</color>
+    <!--    <color name="mainDark">#FF8A65</color>-->
+
+    <color name="some">#2196F3</color>
 </resources>

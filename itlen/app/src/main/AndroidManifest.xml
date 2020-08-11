@@ -5,15 +5,18 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".App"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
-        android:name=".App"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MainTheme">
         <activity android:name=".ui.reg.view.RegActivity" />
-        <activity android:name=".ui.main.view.MainActivity" />
+        <activity
+            android:name=".ui.main.view.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.auth.view.AuthActivity" />
         <activity android:name=".ui.lessonlist.view.LessonsListActivity" />
         <activity android:name=".ui.splash.view.SplashScreenActivity">

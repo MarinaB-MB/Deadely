@@ -28,6 +28,8 @@
         android:layout_marginLeft="45dp"
         android:layout_marginRight="35dp"
         android:background="@drawable/search_bg"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
         android:hint="word"
         android:padding="@dimen/margin5"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -45,9 +45,9 @@ class StudyFragment : BaseFragment(), IStudyContract.View {
         rvGroups.layoutManager = GridLayoutManager(context, 2)
         adapter = GroupAdapter(context, emptyList())
         adapter.onClickListener = object : GroupAdapter.OnClickListener {
-            override fun onClick(position: Int) {
+            override fun onClick(group: Group) {
                 val intent = Intent(context, LessonsListActivity::class.java)
-                intent.putExtra(GROUP, list[position])
+                intent.putExtra(GROUP, group)
                 startActivity(intent)
             }
         }

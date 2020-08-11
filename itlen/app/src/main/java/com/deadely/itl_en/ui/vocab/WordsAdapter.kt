@@ -8,14 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.deadely.itl_en.R
 import com.deadely.itl_en.dataclasses.Words
-import com.deadely.itl_en.ui.study.GroupAdapter
 import kotlinx.android.synthetic.main.row_word.view.*
 
 class WordsAdapter(context: Context?, private var wordList: List<Words>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var context: Context = context!!
     var layoutInflater: LayoutInflater = LayoutInflater.from(context)
-    lateinit var onClickListener: GroupAdapter.OnClickListener
+    lateinit var onClickListener: WordsAdapter.OnClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView: View = layoutInflater.inflate(R.layout.row_word, parent, false)
@@ -29,7 +28,7 @@ class WordsAdapter(context: Context?, private var wordList: List<Words>) : Recyc
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val words = wordList[position]
         holder.itemView.tvWord.text = words.word
-        holder.itemView.setOnClickListener { if (onClickListener != null) onClickListener.onClick(position) }
+        holder.itemView.setOnClickListener { if (onClickListener != null) onClickListener.onClick(words) }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -45,6 +44,6 @@ class WordsAdapter(context: Context?, private var wordList: List<Words>) : Recyc
     }
 
     interface OnClickListener {
-        fun onClick(position: Int)
+        fun onClick(word: Words)
     }
 }

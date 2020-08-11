@@ -43,7 +43,7 @@ class GroupAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 .error(R.drawable.ic_baseline_error_outline_24)
                 .into(holder.itemView.ivGroup)
 
-        holder.itemView.setOnClickListener { if (onClickListener != null) onClickListener.onClick(position) }
+        holder.itemView.setOnClickListener { if (onClickListener != null) onClickListener.onClick(group) }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -59,6 +59,6 @@ class GroupAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     interface OnClickListener {
-        fun onClick(position: Int)
+        fun onClick(group: Group)
     }
 }
