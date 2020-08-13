@@ -36,8 +36,8 @@ class VocabFragment : BaseFragment(), IVocabContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.attachView(this)
-        presenter.onCreate(savedInstanceState)
         initView()
+        presenter.onCreate(savedInstanceState)
     }
 
     private fun initView() {
@@ -51,7 +51,6 @@ class VocabFragment : BaseFragment(), IVocabContract.View {
             }
         }
         rvWords.adapter = adapter
-        presenter.getWords()
 
         etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) searchWord(etSearch.text.toString())
@@ -92,6 +91,5 @@ class VocabFragment : BaseFragment(), IVocabContract.View {
 
     override fun showMessage(msg: String) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-
     }
 }

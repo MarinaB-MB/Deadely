@@ -1,5 +1,6 @@
 package com.deadely.itl_en.ui.vocab.presenter
 
+import android.os.Bundle
 import com.deadely.itl_en.base.BasePresenter
 import com.deadely.itl_en.database.AppDatabase
 import com.deadely.itl_en.dataclasses.Words
@@ -12,6 +13,12 @@ import javax.inject.Inject
 class VocabPresenter @Inject constructor(var apiInterface: IRestDBService, var db: AppDatabase) : BasePresenter<IVocabContract.View>(), IVocabContract.Presenter {
 
     lateinit var list: MutableList<Words>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        getWords()
+    }
+
     override fun getWords() {
         getMvpView()?.startLoading()
         db.groupDao().deleteAllGroup()

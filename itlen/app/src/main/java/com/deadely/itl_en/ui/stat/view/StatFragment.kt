@@ -6,6 +6,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BaseFragment
 import com.deadely.itl_en.dataclasses.Stat
@@ -27,19 +28,19 @@ class StatFragment : BaseFragment(), IStatContract.View {
         return inflater.inflate(R.layout.fragment_stat, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter.attachView(this)
+        initView()
+        presenter.onCreate(savedInstanceState)
+    }
+
     private fun initView() {
-        presenter.getStat()
+
     }
 
     override fun initData(list: MutableList<Stat>) {
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        presenter.attachView(this)
-        presenter.onCreate(savedInstanceState)
-        initView()
     }
 
     override fun startLoading() {
@@ -64,6 +65,6 @@ class StatFragment : BaseFragment(), IStatContract.View {
     }
 
     override fun showMessage(msg: String) {
-
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 }

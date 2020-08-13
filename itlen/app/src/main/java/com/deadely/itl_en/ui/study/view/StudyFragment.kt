@@ -32,8 +32,8 @@ class StudyFragment : BaseFragment(), IStudyContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.attachView(this)
-        presenter.onCreate(savedInstanceState)
         initView()
+        presenter.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,7 +49,6 @@ class StudyFragment : BaseFragment(), IStudyContract.View {
             }
         }
         rvGroups.adapter = adapter
-        presenter.getGroup()
     }
 
     override fun initData(list: MutableList<Group>) {
@@ -83,7 +82,6 @@ class StudyFragment : BaseFragment(), IStudyContract.View {
         pvLoad.visibility = View.GONE
         rlErrorContainer.visibility = View.VISIBLE
     }
-
 
     override fun showMessage(msg: String) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()

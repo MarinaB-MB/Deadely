@@ -15,6 +15,12 @@ class StatPresenter @Inject constructor(private var db: AppDatabase, private var
     private lateinit var ud: UserDao
     private lateinit var list: MutableList<Stat>
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        ud = db.userDao()
+        getStat()
+    }
+
     override fun getStat() {
         getMvpView()?.startLoading()
         val call = apiInterface.getStats()
@@ -37,11 +43,6 @@ class StatPresenter @Inject constructor(private var db: AppDatabase, private var
                 getMvpView()?.errorLoading()
             }
         })
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        ud = db.userDao()
     }
 }
 

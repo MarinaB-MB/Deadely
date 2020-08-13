@@ -1,5 +1,6 @@
 package com.deadely.itl_en.ui.study.presenter
 
+import android.os.Bundle
 import com.deadely.itl_en.base.BasePresenter
 import com.deadely.itl_en.database.AppDatabase
 import com.deadely.itl_en.dataclasses.Group
@@ -11,6 +12,12 @@ import javax.inject.Inject
 
 class StudyPresenter @Inject constructor(var apiInterface: IRestDBService, var db: AppDatabase) : BasePresenter<IStudyContract.View>(), IStudyContract.Presenter {
     lateinit var list: MutableList<Group>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        getGroup()
+    }
+
     override fun getGroup() {
         getMvpView()?.startLoading()
         db.groupDao().deleteAllGroup()
