@@ -2,7 +2,6 @@ package com.deadely.itl_en.ui.reg.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BaseActivity
@@ -42,10 +41,10 @@ class RegActivity : BaseActivity(), IRegContract.View {
             else showMessage(getString(R.string.create_user_before_auth))
         }
 
-        btnReg.setOnClickListener(View.OnClickListener {
+        btnReg.setOnClickListener {
             if (checkFields())
                 presenter.createNewUser(name, pass, email, active)
-        })
+        }
     }
 
     override fun openMainScreen() {

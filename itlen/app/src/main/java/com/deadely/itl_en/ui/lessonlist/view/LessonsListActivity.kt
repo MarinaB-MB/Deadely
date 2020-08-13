@@ -30,7 +30,7 @@ open class LessonsListActivity : BaseActivity(), ILessonsListContract.View {
     }
 
     private fun getExtras() {
-        group = intent.extras?.getParcelable<Group>("GROUP")!!
+        group = intent.extras?.getParcelable("GROUP")!!
     }
 
     private fun initView() {

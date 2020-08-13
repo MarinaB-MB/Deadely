@@ -9,7 +9,6 @@
     <string name="user_settings">Настройки профиля</string>
     <string name="unexpected_error">Возникла ошибка. Пожалуйста обратитесь позже</string>
     <string name="insert_pass">Введите пароль:</string>
-    <string name="next">Далее</string>
     <string name="reg">Регистрация</string>
     <string name="auth">Авторизация</string>
 
@@ -19,5 +18,11 @@
     <string name="login">войти в аккаунт</string>
     <string name="create_acc">создать аккаунт</string>
     <string name="create_user_before_auth">Зарегистрируйтесь, прежде чем войти</string>
+    <string name="insert_name">Введите имя:</string>
+    <string name="insert_email">Введите email:</string>
+    <string name="insert_password">Введите пароль:</string>
+    <string name="insert_password_again">Введите пароль повторно:</string>
+    <string name="next">Далее</string>
+    <string name="word">word</string>
 
 </resources>

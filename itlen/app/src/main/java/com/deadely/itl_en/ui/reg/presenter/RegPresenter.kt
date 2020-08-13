@@ -55,7 +55,7 @@ class RegPresenter @Inject constructor(private var db: AppDatabase, private var 
         if (ud.getActiveUser(true) != null) {
             val id = ud.getActiveUser(true)._id
             val email = ud.getActiveUser(true).email
-            val put = UserRequestBody(email.toString(), false)
+            val put = UserRequestBody(email, false)
 
             val call = apiInterface.updateUser(id, put)
             call.enqueue(object : retrofit2.Callback<User> {

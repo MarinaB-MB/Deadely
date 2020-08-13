@@ -14,7 +14,7 @@ class LessonsAdapter(context: Context?, private var list: List<Lesson>) : Recycl
 
     var context = context!!
     var layoutInflater: LayoutInflater = LayoutInflater.from(context)
-    lateinit var onClickListener: LessonsAdapter.OnClickListener
+    lateinit var onClickListener: OnClickListener
 
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -24,7 +24,7 @@ class LessonsAdapter(context: Context?, private var list: List<Lesson>) : Recycl
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(layoutInflater.inflate(R.layout.row_lesson, parent, false))
-    override fun getItemCount(): Int = list.let { list.size } ?: 0
+    override fun getItemCount(): Int = list.let { list.size }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val lesson = list[position]
         holder.itemView.tvLessonTitle.text = lesson.title

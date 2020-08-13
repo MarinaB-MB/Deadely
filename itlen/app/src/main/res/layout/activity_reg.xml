@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/margin16"
-    tools:context=".ui.auth.view.AuthActivity">
+    tools:context=".ui.auth.view.AuthActivity"
+    tools:ignore="SpUsage,MissingPrefix,Autofill,LabelFor,TextFields">
 
     <LinearLayout
         android:id="@+id/llName"
@@ -15,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Введите имя:"
+            android:text="@string/insert_name"
             android:textColor="@color/black" />
 
         <EditText
@@ -36,7 +37,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Введите email:"
+            android:text="@string/insert_email"
             android:textColor="@color/black" />
 
         <EditText
@@ -58,7 +59,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Введите пароль:"
+            android:text="@string/insert_password"
             android:textColor="@color/black" />
 
         <EditText
@@ -79,7 +80,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Введите пароль повторно:"
+            android:text="@string/insert_password_again"
             android:textColor="@color/black" />
 
         <EditText
@@ -107,6 +108,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/btn_bg"
-        android:text="Далее"
+        android:text="@string/next"
         android:textColor="@color/white" />
 </RelativeLayout>

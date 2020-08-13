@@ -29,7 +29,6 @@ class App : Application() {
     }
 
     fun getAppDatabase(): AppDatabase? {
-
         return db
     }
 

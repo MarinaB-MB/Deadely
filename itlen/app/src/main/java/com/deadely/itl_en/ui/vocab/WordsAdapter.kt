@@ -14,11 +14,11 @@ class WordsAdapter(context: Context?, private var wordList: List<Words>) : Recyc
 
     var context: Context = context!!
     var layoutInflater: LayoutInflater = LayoutInflater.from(context)
-    lateinit var onClickListener: WordsAdapter.OnClickListener
+    lateinit var onClickListener: OnClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView: View = layoutInflater.inflate(R.layout.row_word, parent, false)
-        return WordsAdapter.ViewHolder(itemView)
+        return ViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {

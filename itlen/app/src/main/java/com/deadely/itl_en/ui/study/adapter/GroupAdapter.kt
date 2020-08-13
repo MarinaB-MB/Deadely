@@ -12,16 +12,10 @@ import com.deadely.itl_en.R
 import com.deadely.itl_en.dataclasses.Group
 import kotlinx.android.synthetic.main.row_group.view.*
 
-class GroupAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    constructor(context: Context?, groupList: List<Group>) {
-        this.context = context!!
-        this.layoutInflater = LayoutInflater.from(context)
-        this.groupList = groupList
-    }
+class GroupAdapter(context: Context?, private var groupList: List<Group>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var groupList: List<Group>
-    var context: Context
-    var layoutInflater: LayoutInflater
+    var context: Context = context!!
+    var layoutInflater: LayoutInflater = LayoutInflater.from(context)
     lateinit var onClickListener: OnClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -61,4 +55,5 @@ class GroupAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     interface OnClickListener {
         fun onClick(group: Group)
     }
+
 }

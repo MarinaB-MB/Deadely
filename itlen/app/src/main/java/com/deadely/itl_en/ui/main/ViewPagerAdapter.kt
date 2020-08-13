@@ -7,7 +7,7 @@ import com.deadely.itl_en.ui.stat.view.StatFragment
 import com.deadely.itl_en.ui.study.view.StudyFragment
 import com.deadely.itl_en.ui.vocab.view.VocabFragment
 
-class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter((fragmentManager!!)) {
+class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter((fragmentManager)) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
