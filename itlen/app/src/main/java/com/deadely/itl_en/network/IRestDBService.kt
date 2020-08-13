@@ -38,4 +38,8 @@ interface IRestDBService {
 
     @GET("word")
     fun getWords(): Call<MutableList<Words>>
+
+    @GET("lesson")
+    fun getLessons(): Call<MutableList<Lesson>>
+
 }

@@ -18,8 +18,8 @@ data class Group(
 
         @SerializedName("image") val image: String,
 
-        @SerializedName("title") val title: String
+        @SerializedName("title") val title: String,
 
-//        @ColumnInfo(name = "lessons")
-//        @SerializedName("lessons") val lessons: List<Lesson>? = null
+        @ColumnInfo(name = "lessons")
+        @SerializedName("lessons") val lessons: List<Lesson>? = null
 ) : Parcelable

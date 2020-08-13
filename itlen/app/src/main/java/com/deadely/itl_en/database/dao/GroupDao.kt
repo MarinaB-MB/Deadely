@@ -8,6 +8,9 @@ interface GroupDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addGroup(group: Group)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addList(list: List<Group>)
+
     @Update
     fun updateGroup(group: Group)
 
@@ -19,5 +22,8 @@ interface GroupDao {
 
     @Query("SELECT * FROM group_table")
     fun getAllGroup(): MutableList<Group>
+
+    @Query("SELECT * FROM group_table WHERE group_id LIKE :id LIMIT 1")
+    fun getGroupById(id: String): Group
 
 }

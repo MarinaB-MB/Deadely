@@ -5,27 +5,24 @@ import com.deadely.itl_en.dataclasses.Words
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.Serializable
-import java.lang.reflect.Type
+import java.util.*
 
 
 class WordTypeConverter : Serializable {
+    val gson = Gson()
+
     @TypeConverter
-    fun fromList(wordList: List<Words>): String? {
-        if (wordList == null) {
-            return null
+    fun toList(data: String?): List<Words?>? {
+        if (data == null) {
+            return Collections.emptyList()
         }
-        val gson = Gson()
-        val type: Type = object : TypeToken<List<Words>>() {}.type
-        return gson.toJson(wordList, type)
+        val listType = object : TypeToken<List<Words>?>() {}.type
+        return gson.fromJson<List<Words>>(data, listType)
     }
 
     @TypeConverter
-    fun toList(optionValuesString: String?): List<Words>? {
-        if (optionValuesString == null) {
-            return null
-        }
-        val gson = Gson()
-        val type: Type = object : TypeToken<List<Words>>() {}.type
-        return gson.fromJson<List<Words>>(optionValuesString, type)
+    fun fromList(list: List<Words>?): String? {
+        return gson.toJson(list)
     }
+
 }

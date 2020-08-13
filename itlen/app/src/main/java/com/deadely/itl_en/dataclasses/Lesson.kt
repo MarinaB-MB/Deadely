@@ -22,8 +22,8 @@ data class Lesson(
         @ColumnInfo(name = "lesson_title")
         @SerializedName("title") val title: String? = "",
 
-        @ColumnInfo(name = "lesson_group_id")
-        @SerializedName("group_id") val group_id: String? = ""
-
-//        @SerializedName("words") val words: List<Words>? = null
+//        @ColumnInfo(name = "lesson_group_id")
+//        @SerializedName("group_id") val group_id: String? = ""
+        @ColumnInfo(name = "words")
+        @SerializedName("lessons") val words: List<Words>? = null
 ) : Parcelable

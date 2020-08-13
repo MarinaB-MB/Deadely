@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.deadely.itl_en.R
@@ -24,6 +25,8 @@ class VocabFragment : BaseFragment(), IVocabContract.View {
     private lateinit var list: MutableList<Words>
 
     private val WORD: String = "WORD"
+    override val progressView: ProgressBar?
+        get() = null
 
     override fun inject(fragmentComponent: FragmentComponent?) {
         fragmentComponent?.inject(this)

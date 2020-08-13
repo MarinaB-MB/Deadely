@@ -17,6 +17,7 @@ class StatPresenter @Inject constructor(private var db: AppDatabase, private var
     private lateinit var ud: UserDao
     private lateinit var list: MutableList<Stat>
     override fun getStat() {
+        getMvpView()?.startLoading()
         val call = apiInterface.getStats()
         call.enqueue(object : retrofit2.Callback<MutableList<Stat>> {
             override fun onResponse(call: Call<MutableList<Stat>>, response: Response<MutableList<Stat>>) {

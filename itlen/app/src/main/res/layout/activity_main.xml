@@ -4,21 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/main"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:menu="@menu/bottom_nav_menu_main" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vp_main"
+    <RelativeLayout
+        android:id="@+id/rlContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:visibility="visible">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/main"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/bottom_nav_menu_main" />
+
+        <fragment
+            android:id="@+id/navFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/bottom_navigation"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/main_navigation" />
+    </RelativeLayout>
+
+
 </RelativeLayout>

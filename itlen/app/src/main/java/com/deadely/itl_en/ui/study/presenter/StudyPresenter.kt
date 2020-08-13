@@ -21,9 +21,10 @@ class StudyPresenter @Inject constructor(var apiInterface: IRestDBService, var d
             override fun onResponse(call: Call<MutableList<Group>>, response: Response<MutableList<Group>>) {
                 if (response.isSuccessful || !response.body().isNullOrEmpty()) {
                     list = response.body()!!
-                    for (group in list) {
-                        db.groupDao().addGroup(group)
-                    }
+//                    for (group in list) {
+//                        db.groupDao().addGroup(group)
+//                    }
+                    db.groupDao().addList(list)
                     getMvpView()?.initData(list)
                 } else {
                     getMvpView()?.showMessage(FieldConverter().getString(R.string.unexpected_error))
@@ -36,5 +37,8 @@ class StudyPresenter @Inject constructor(var apiInterface: IRestDBService, var d
         })
     }
 
+    override fun openGroupScreen(group: Group) {
+        getMvpView()?.showGroupScreen(group)
+    }
 }
 

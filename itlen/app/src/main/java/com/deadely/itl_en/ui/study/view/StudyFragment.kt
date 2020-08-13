@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.deadely.itl_en.R
@@ -12,8 +13,8 @@ import com.deadely.itl_en.base.BaseFragment
 import com.deadely.itl_en.dataclasses.Group
 import com.deadely.itl_en.di.component.FragmentComponent
 import com.deadely.itl_en.ui.lessonlist.view.LessonsListActivity
-import com.deadely.itl_en.ui.study.GroupAdapter
 import com.deadely.itl_en.ui.study.IStudyContract
+import com.deadely.itl_en.ui.study.adapter.GroupAdapter
 import kotlinx.android.synthetic.main.fragment_study.*
 import javax.inject.Inject
 
@@ -24,6 +25,9 @@ class StudyFragment : BaseFragment(), IStudyContract.View {
 
     @Inject
     lateinit var presenter: IStudyContract.Presenter
+
+    override val progressView: ProgressBar?
+        get() = null
 
     override fun inject(fragmentComponent: FragmentComponent?) {
         fragmentComponent?.inject(this)
@@ -46,9 +50,7 @@ class StudyFragment : BaseFragment(), IStudyContract.View {
         adapter = GroupAdapter(context, emptyList())
         adapter.onClickListener = object : GroupAdapter.OnClickListener {
             override fun onClick(group: Group) {
-                val intent = Intent(context, LessonsListActivity::class.java)
-                intent.putExtra(GROUP, group)
-                startActivity(intent)
+                presenter.openGroupScreen(group)
             }
         }
         rvGroups.adapter = adapter
@@ -58,6 +60,12 @@ class StudyFragment : BaseFragment(), IStudyContract.View {
     override fun initData(list: MutableList<Group>) {
         this.list = list
         adapter.setData(list)
+    }
+
+    override fun showGroupScreen(group: Group) {
+        val intent = Intent(context, LessonsListActivity::class.java)
+        intent.putExtra(GROUP, group)
+        startActivity(intent)
     }
 
     override fun showMessage(msg: String) {
