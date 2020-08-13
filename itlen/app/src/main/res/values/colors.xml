@@ -23,5 +23,5 @@
     <color name="mainDark">@color/black</color>
     <!--    <color name="mainDark">#FF8A65</color>-->
 
-    <color name="some">#2196F3</color>
+    <color name="dirty_white">#23909181</color>
 </resources>

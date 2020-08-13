@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/margin50"
     android:layout_margin="@dimen/margin16"
-    android:background="@color/white">
+    android:background="@drawable/bg_row">
 
     <TextView
         android:id="@+id/tvLessonTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_centerVertical="true"
         android:textColor="@color/black"
         tools:text="@string/unexpected_error" />
+
 </RelativeLayout>
