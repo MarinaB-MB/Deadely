@@ -1,12 +1,10 @@
 package com.deadely.itl_en.ui.vocab.presenter
 
-import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BasePresenter
 import com.deadely.itl_en.database.AppDatabase
 import com.deadely.itl_en.dataclasses.Words
 import com.deadely.itl_en.network.IRestDBService
 import com.deadely.itl_en.ui.vocab.IVocabContract
-import com.deadely.itl_en.utils.FieldConverter
 import retrofit2.Call
 import retrofit2.Response
 import javax.inject.Inject
@@ -15,6 +13,7 @@ class VocabPresenter @Inject constructor(var apiInterface: IRestDBService, var d
 
     lateinit var list: MutableList<Words>
     override fun getWords() {
+        getMvpView()?.startLoading()
         db.groupDao().deleteAllGroup()
 
         val call = apiInterface.getWords()
@@ -22,17 +21,16 @@ class VocabPresenter @Inject constructor(var apiInterface: IRestDBService, var d
             override fun onResponse(call: Call<MutableList<Words>>, response: Response<MutableList<Words>>) {
                 if (response.isSuccessful || !response.body().isNullOrEmpty()) {
                     list = response.body()!!
-                    for (word in list) {
-                        db.wordDao().addWord(word)
-                    }
+                    db.wordDao().addList(list)
                     getMvpView()?.initData(list)
+                    getMvpView()?.completeLoading()
                 } else {
-                    getMvpView()?.showMessage(FieldConverter().getString(R.string.unexpected_error))
+                    getMvpView()?.errorLoading()
                 }
             }
 
             override fun onFailure(call: Call<MutableList<Words>>, t: Throwable) {
-                getMvpView()?.showMessage(t.message.toString())
+                getMvpView()?.errorLoading()
             }
         })
     }

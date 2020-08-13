@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.deadely.itl_en.R
@@ -26,18 +25,15 @@ class StudyFragment : BaseFragment(), IStudyContract.View {
     @Inject
     lateinit var presenter: IStudyContract.Presenter
 
-    override val progressView: ProgressBar?
-        get() = null
-
     override fun inject(fragmentComponent: FragmentComponent?) {
         fragmentComponent?.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
         presenter.attachView(this)
         presenter.onCreate(savedInstanceState)
+        initView()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,7 +41,6 @@ class StudyFragment : BaseFragment(), IStudyContract.View {
     }
 
     private fun initView() {
-
         rvGroups.layoutManager = GridLayoutManager(context, 2)
         adapter = GroupAdapter(context, emptyList())
         adapter.onClickListener = object : GroupAdapter.OnClickListener {
@@ -67,6 +62,28 @@ class StudyFragment : BaseFragment(), IStudyContract.View {
         intent.putExtra(GROUP, group)
         startActivity(intent)
     }
+
+    override fun startLoading() {
+        super.startLoading()
+        rlStudyContent.visibility = View.GONE
+        pvLoad.visibility = View.VISIBLE
+        rlErrorContainer.visibility = View.GONE
+    }
+
+    override fun completeLoading() {
+        super.completeLoading()
+        rlStudyContent.visibility = View.VISIBLE
+        pvLoad.visibility = View.GONE
+        rlErrorContainer.visibility = View.GONE
+    }
+
+    override fun errorLoading() {
+        super.errorLoading()
+        rlStudyContent.visibility = View.GONE
+        pvLoad.visibility = View.GONE
+        rlErrorContainer.visibility = View.VISIBLE
+    }
+
 
     override fun showMessage(msg: String) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()

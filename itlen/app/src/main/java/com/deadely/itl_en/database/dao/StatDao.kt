@@ -8,6 +8,9 @@ interface StatDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addStat(stat: Stat)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addList(list: List<Stat>)
+
     @Update
     fun updateStat(stat: Stat)
 

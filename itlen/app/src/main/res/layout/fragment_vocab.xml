@@ -2,19 +2,58 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/rl_search"
-        layout="@layout/layout_search"
-        android:layout_width="match_parent"
-        android:layout_height="45dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvWords"
+    <RelativeLayout
+        android:id="@+id/rlVocabContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rl_search"
-        tools:listitem="@layout/row_word" />
+        android:visibility="visible">
+
+        <include
+            android:id="@+id/rl_search"
+            layout="@layout/layout_search"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvWords"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl_search"
+            tools:listitem="@layout/row_word" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlErrorContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivError"
+            android:layout_marginHorizontal="@dimen/margin42"
+            android:layout_marginTop="@dimen/margin16"
+            android:gravity="center"
+            android:text="@string/unexpected_error" />
+
+        <ImageView
+            android:id="@+id/ivError"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_baseline_error_outline_24" />
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/pvLoad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/progress_bar"
+        android:progressDrawable="@drawable/progress_bar"
+        android:visibility="gone" />
 </RelativeLayout>

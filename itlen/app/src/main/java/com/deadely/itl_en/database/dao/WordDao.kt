@@ -8,6 +8,9 @@ interface WordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addWord(words: Words)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addList(words: List<Words>)
+
     @Update
     fun updateWord(words: Words)
 
