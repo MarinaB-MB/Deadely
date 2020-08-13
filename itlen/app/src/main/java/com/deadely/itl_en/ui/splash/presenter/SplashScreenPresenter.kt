@@ -1,13 +1,11 @@
 package com.deadely.itl_en.ui.splash.presenter
 
-import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BasePresenter
 import com.deadely.itl_en.database.AppDatabase
 import com.deadely.itl_en.database.dao.UserDao
 import com.deadely.itl_en.dataclasses.User
 import com.deadely.itl_en.network.IRestDBService
 import com.deadely.itl_en.ui.splash.ISplashScreenContract
-import com.deadely.itl_en.utils.FieldConverter
 import retrofit2.Call
 import retrofit2.Response
 import javax.inject.Inject
@@ -33,12 +31,12 @@ class SplashScreenPresenter @Inject constructor(private var apiInterface: IRestD
                     }
 
                 } else {
-                    getMvpView()?.showMessage(FieldConverter().getString(R.string.unexpected_error));
+                    getMvpView()?.retry()
                 }
             }
 
             override fun onFailure(call: Call<MutableList<User>>, t: Throwable) {
-                getMvpView()?.showMessage(t.message.toString());
+                getMvpView()?.retry()
             }
         })
     }
@@ -52,5 +50,7 @@ class SplashScreenPresenter @Inject constructor(private var apiInterface: IRestD
         }
     }
 
-
+    override fun openConnectionDialog() {
+        getMvpView()?.showConnectionDialog()
+    }
 }

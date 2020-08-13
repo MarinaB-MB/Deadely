@@ -9,10 +9,13 @@ interface ISplashScreenContract {
         fun openAuthScreen()
         fun openRegScreen()
         fun showMessage(msg: String)
+        fun retry()
+        fun showConnectionDialog()
     }
 
     interface Presenter : IBaseMvpPresenter<View> {
         fun getUsers()
         fun getActiveUser()
+        fun openConnectionDialog()
     }
 }
