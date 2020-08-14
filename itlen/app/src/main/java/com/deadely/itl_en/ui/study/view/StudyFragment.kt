@@ -64,7 +64,7 @@ class StudyFragment : BaseFragment(), IStudyContract.View {
 
     override fun startLoading() {
         super.startLoading()
-        rlStudyContent.visibility = View.GONE
+        rlStudyContent?.visibility = View.GONE
         pvLoad.visibility = View.VISIBLE
         rlErrorContainer.visibility = View.GONE
     }

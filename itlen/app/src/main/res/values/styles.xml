@@ -16,7 +16,7 @@
     <style name="MainTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/main</item>
         <item name="colorPrimaryDark">@color/mainDark</item>
-        <item name="colorAccent">@color/white</item>
+        <item name="colorAccent">#399BDCFA</item>
     </style>
 
     <style name="Toolbar">

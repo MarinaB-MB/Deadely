@@ -43,6 +43,7 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+        supportActionBar?.hide()
         presenter.attachView(this)
         initView()
         presenter.onCreate(savedInstanceState)

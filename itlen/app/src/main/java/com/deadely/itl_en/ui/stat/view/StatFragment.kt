@@ -45,7 +45,7 @@ class StatFragment : BaseFragment(), IStatContract.View {
 
     override fun startLoading() {
         super.startLoading()
-        rlStatContent.visibility = GONE
+        rlStatContent?.visibility = GONE
         pvLoad.visibility = VISIBLE
         rlErrorContainer.visibility = GONE
     }

@@ -77,7 +77,7 @@ class VocabFragment : BaseFragment(), IVocabContract.View {
 
     override fun completeLoading() {
         super.completeLoading()
-        rlVocabContent.visibility = View.VISIBLE
+        rlVocabContent?.visibility = View.VISIBLE
         pvLoad.visibility = View.GONE
         rlErrorContainer.visibility = View.GONE
     }
