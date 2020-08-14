@@ -11,10 +11,11 @@ interface ISplashScreenContract {
         fun showMessage(msg: String)
         fun retry()
         fun showConnectionDialog()
+        fun changeState()
     }
 
     interface Presenter : IBaseMvpPresenter<View> {
-        fun getUsers()
+        fun getUsers(deviceId: String, isFirstSignIn: Boolean)
         fun getActiveUser()
         fun openConnectionDialog()
     }

@@ -23,6 +23,7 @@ class RegPresenter @Inject constructor(private var db: AppDatabase, private var 
         ud = db.userDao()
     }
 
+
     override fun getUsersList(): Boolean {
         return ud.getAllUsers().isNotEmpty()
     }
@@ -72,5 +73,18 @@ class RegPresenter @Inject constructor(private var db: AppDatabase, private var 
         }
     }
 
+    override fun createNewData(id: String) {
+//        val call = apiInterface.newData(Data(id, listOf(User())))
+//        call.enqueue(object : retrofit2.Callback<Data> {
+//            override fun onResponse(call: Call<Data>, response: Response<Data>) {
+//
+//            }
+//
+//            override fun onFailure(call: Call<Data>, t: Throwable) {
+//
+//            }
+//
+//        })
+    }
 
 }

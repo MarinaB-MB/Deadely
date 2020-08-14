@@ -15,5 +15,7 @@ interface IRegContract {
         fun getUsersList(): Boolean
         fun createNewUser(name: String, email: String, password: String, active: Boolean)
         fun clearActiveUser()
+        fun createNewData(id: String)
+
     }
 }

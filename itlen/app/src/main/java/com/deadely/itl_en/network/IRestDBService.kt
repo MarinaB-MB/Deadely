@@ -7,6 +7,12 @@ import retrofit2.http.*
 
 interface IRestDBService {
 
+    @GET("data/{objectId}")
+    fun getDataById(@Path("objectId") id: String): Call<Data>
+
+    @POST("data")
+    fun newData(@Body data: DataRequestBody): Call<Data>
+
     //user response
 
     @GET("users")

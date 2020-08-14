@@ -23,4 +23,10 @@ data class User(
         @SerializedName("password") val password: String,
 
         @SerializedName("name") val name: String
-) : Parcelable
+) : Parcelable {
+    constructor(
+            name: String,
+            email: String,
+            password: String
+    ) : this("", email, true, password, name)
+}

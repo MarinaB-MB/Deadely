@@ -1,7 +1,9 @@
 package com.deadely.itl_en.ui.reg.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Toast
 import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BaseActivity
@@ -42,10 +44,19 @@ class RegActivity : BaseActivity(), IRegContract.View {
         }
 
         btnReg.setOnClickListener {
-            if (checkFields())
-                presenter.createNewUser(name, pass, email, active)
+            if (checkFields()) {
+            }
+//                createDataObject()
+//                presenter.createNewUser(name, pass, email, active)
         }
     }
+
+    @SuppressLint("HardwareIds")
+    private fun createDataObject() {
+        val deviceId = Settings.Secure.getString(baseContext.contentResolver, Settings.Secure.ANDROID_ID)
+        presenter.createNewData(deviceId)
+    }
+
 
     override fun openMainScreen() {
         startActivity(Intent(applicationContext, MainActivity::class.java))

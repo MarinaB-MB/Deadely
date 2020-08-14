@@ -8,6 +8,10 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addUser(user: User)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addUserList(users: List<User>)
+
+
     @Update
     fun updateUser(user: User)
 
@@ -29,4 +33,5 @@ interface UserDao {
 
     @Query("SELECT * FROM user_table WHERE email LIKE :email AND password LIKE :pass")
     fun getByEmailAndPass(email: String, pass: String): User
+
 }

@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BaseActivity
@@ -14,6 +16,7 @@ import com.deadely.itl_en.ui.auth.view.AuthActivity
 import com.deadely.itl_en.ui.main.view.MainActivity
 import com.deadely.itl_en.ui.reg.view.RegActivity
 import com.deadely.itl_en.ui.splash.ISplashScreenContract
+import com.deadely.itl_en.utils.StatePreferences
 import com.deadely.itl_en.view.NoConnectionDialog
 import javax.inject.Inject
 
@@ -22,6 +25,10 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
 
     private lateinit var intentFilter: IntentFilter
     val BROADCAST_ACTION = "android.net.conn.CONNECTIVITY_CHANGE"
+    private val FIRST_SIGNIN = "firstSignIn"
+    private var firstSignIn: Boolean = true
+    val pref = StatePreferences(baseContext, FIRST_SIGNIN)
+    lateinit var deviceId: String
 
     @Inject
     lateinit var presenter: ISplashScreenContract.Presenter
@@ -47,6 +54,17 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
         presenter.attachView(this)
         initView()
         presenter.onCreate(savedInstanceState)
+        setupData()
+    }
+
+    private fun setupData() {
+        Log.e(TAG, "isFirstSignIn: $firstSignIn")
+        pref.isFirstSignIn = false
+        Log.e(TAG, "isFirstSignIn: ${pref.isFirstSignIn}")
+    }
+
+    override fun changeState() {
+        pref.isFirstSignIn = false
     }
 
     override fun inject(activityComponent: ActivityComponent) {
@@ -54,6 +72,7 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
     }
 
     private fun initView() {
+        deviceId = Settings.Secure.getString(baseContext.contentResolver, Settings.Secure.ANDROID_ID)
         intentFilter = IntentFilter(BROADCAST_ACTION)
         registerReceiver(receiver, intentFilter);
     }
@@ -78,7 +97,7 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
     }
 
     override fun retry() {
-        if (NetworkInfo().isConnectingAvailable(baseContext)) presenter.getUsers()
+        if (NetworkInfo().isConnectingAvailable(baseContext)) presenter.getUsers(deviceId, firstSignIn)
         else presenter.openConnectionDialog()
     }
 
