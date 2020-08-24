@@ -27,17 +27,6 @@ class UserRequestBody {
         this.email = email
         this.active = active
     }
+
 }
 
-class DataRequestBody {
-    @SerializedName("deviceId")
-    private var deviceId: String
-
-    @SerializedName("users")
-    private lateinit var users: List<User>
-
-    constructor(deviceId: String, users: List<User>) {
-        this.deviceId = deviceId
-        this.users = users
-    }
-}

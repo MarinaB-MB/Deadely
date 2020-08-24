@@ -1,15 +1,13 @@
 package com.deadely.itl_en.utils
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
-
-open class SharedPreferencesManager {
-
+object PreferencesManager {
     fun defaultPrefs(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-
-    fun customPrefs(context: Context, name: String): SharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE)
+    fun customPrefs(context: Context, name: String): SharedPreferences = context.getSharedPreferences(name, MODE_PRIVATE)
 
     inline fun SharedPreferences.edit(operation: (SharedPreferences.Editor) -> Unit) {
         val editor = this.edit()
@@ -17,10 +15,7 @@ open class SharedPreferencesManager {
         editor.apply()
     }
 
-    /**
-     * puts a key value pair in shared prefs if doesn't exists, otherwise updates value on given [key]
-     */
-    open operator fun SharedPreferences.set(key: String, value: Any?) {
+    operator fun SharedPreferences.set(key: String, value: Any?) {
         when (value) {
             is String? -> edit { it.putString(key, value) }
             is Int -> edit { it.putInt(key, value) }
@@ -31,11 +26,6 @@ open class SharedPreferencesManager {
         }
     }
 
-    /**
-     * finds value on given key.
-     * [T] is the type of value
-     * @param defaultValue optional default value - will take null for strings, false for bool and -1 for numeric values if [defaultValue] is not specified
-     */
     inline operator fun <reified T : Any> SharedPreferences.get(key: String, defaultValue: T? = null): T? {
         return when (T::class) {
             String::class -> getString(key, defaultValue as? String) as T?

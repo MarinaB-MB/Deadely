@@ -40,7 +40,8 @@ class AuthActivity : BaseActivity(), IAuthContract.View {
         tvCreateAcc.setOnClickListener { openRegScreen() }
 
         btnAuth.setOnClickListener {
-            if (checkFieldsWithDB()) openMainScreen()
+            if (checkFieldsWithDB()) presenter.findUser(etEmail.text.toString())
+            //openMainScreen()
         }
     }
 
@@ -63,7 +64,8 @@ class AuthActivity : BaseActivity(), IAuthContract.View {
                 showMessage(FieldConverter().getString(R.string.short_pass_length))
                 false
             } else {
-                presenter.compareUserDate(etEmail.text.toString(), etPassOne.text.toString())
+                true
+//                presenter.compareUserDate(etEmail.text.toString(), etPassOne.text.toString())
             }
         }
     }

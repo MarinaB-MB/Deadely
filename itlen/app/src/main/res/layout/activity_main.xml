@@ -15,9 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/main"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
+            android:background="@color/white"
+            app:itemIconTint="@color/main"
+            app:itemTextColor="@color/main"
             app:menu="@menu/bottom_nav_menu_main" />
 
         <fragment

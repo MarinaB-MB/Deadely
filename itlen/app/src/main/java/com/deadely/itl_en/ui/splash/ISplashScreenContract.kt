@@ -9,14 +9,15 @@ interface ISplashScreenContract {
         fun openAuthScreen()
         fun openRegScreen()
         fun showMessage(msg: String)
-        fun retry()
-        fun showConnectionDialog()
+
+        //        fun retry()
+//        fun showConnectionDialog()
         fun changeState()
     }
 
     interface Presenter : IBaseMvpPresenter<View> {
-        fun getUsers(deviceId: String, isFirstSignIn: Boolean)
-        fun getActiveUser()
-        fun openConnectionDialog()
+        fun getUser(isFirstSignIn: Boolean)
+//        fun getActiveUser()
+//        fun openConnectionDialog()
     }
 }

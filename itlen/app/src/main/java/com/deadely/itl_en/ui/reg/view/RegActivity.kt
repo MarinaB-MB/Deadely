@@ -1,9 +1,10 @@
 package com.deadely.itl_en.ui.reg.view
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
+import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BaseActivity
@@ -27,6 +28,7 @@ class RegActivity : BaseActivity(), IRegContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reg)
+        presenter.attachView(this)
         presenter.onCreate(savedInstanceState)
         initView()
     }
@@ -39,24 +41,15 @@ class RegActivity : BaseActivity(), IRegContract.View {
         title = getString(R.string.reg)
 
         tvLogIn.setOnClickListener {
-            if (presenter.getUsersList()) openAuthScreen()
-            else showMessage(getString(R.string.create_user_before_auth))
+            openAuthScreen()
         }
 
         btnReg.setOnClickListener {
             if (checkFields()) {
+                presenter.createNewUser(name, pass, email, active)
             }
-//                createDataObject()
-//                presenter.createNewUser(name, pass, email, active)
         }
     }
-
-    @SuppressLint("HardwareIds")
-    private fun createDataObject() {
-        val deviceId = Settings.Secure.getString(baseContext.contentResolver, Settings.Secure.ANDROID_ID)
-        presenter.createNewData(deviceId)
-    }
-
 
     override fun openMainScreen() {
         startActivity(Intent(applicationContext, MainActivity::class.java))
@@ -64,24 +57,18 @@ class RegActivity : BaseActivity(), IRegContract.View {
     }
 
     override fun checkFields(): Boolean {
-        if (etName.text.toString() == "" || etEmail.text.toString() == "" || etPassOne.text.toString() == "" || etPassTwo.text.toString() == "") {
+        return if (etName.text.toString() == "" || etEmail.text.toString() == "" || etPassOne.text.toString() == "") {
             showMessage(FieldConverter().getString(R.string.empty_fields))
-            return false
+            false
         } else {
-            return if (etPassOne.text.toString() != etPassTwo.text.toString()) {
-                showMessage(FieldConverter().getString(R.string.pass_is_not_compare))
+            if (etPassOne.text.toString().length < 6) {
+                showMessage(FieldConverter().getString(R.string.short_pass_length))
                 false
             } else {
-                if (etPassOne.text.toString().length < 6) {
-                    showMessage(FieldConverter().getString(R.string.short_pass_length))
-                    false
-                } else {
-                    email = etEmail.text.toString()
-                    name = etName.text.toString()
-                    pass = etPassOne.text.toString()
-                    true
-                }
-
+                email = etEmail.text.toString()
+                name = etName.text.toString()
+                pass = etPassOne.text.toString()
+                true
             }
         }
     }
@@ -89,6 +76,30 @@ class RegActivity : BaseActivity(), IRegContract.View {
     override fun openAuthScreen() {
         startActivity(Intent(applicationContext, AuthActivity::class.java))
         finish()
+    }
+
+    override fun startLoading() {
+        super.startLoading()
+        rlContent.visibility = GONE
+        pvLoad.visibility = VISIBLE
+    }
+
+    override fun completeLoading() {
+        super.completeLoading()
+        rlContent.visibility = VISIBLE
+        pvLoad.visibility = GONE
+    }
+
+    override fun errorLoading() {
+        super.errorLoading()
+        rlContent.visibility = GONE
+        pvLoad.visibility = GONE
+        rlErrorContainer.visibility = VISIBLE
+    }
+
+    override fun showEmailError(msg: String) {
+        tvEmailError.visibility = View.VISIBLE
+        tvEmailError.text = msg
     }
 
     override fun showMessage(msg: String) {

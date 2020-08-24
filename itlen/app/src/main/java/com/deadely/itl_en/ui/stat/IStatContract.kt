@@ -8,10 +8,10 @@ import com.deadely.itl_en.dataclasses.Stat
 interface IStatContract {
     interface View : IBaseProgressView, IBaseMvpView {
         fun showMessage(msg: String)
-        fun initData(list: MutableList<Stat>)
+        fun initData(lastStat: Stat)
     }
 
     interface Presenter : IBaseMvpPresenter<View> {
-        fun getStat()
+        fun getUserStat()
     }
 }

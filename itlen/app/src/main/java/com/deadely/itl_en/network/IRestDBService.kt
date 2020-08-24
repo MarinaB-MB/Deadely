@@ -7,12 +7,6 @@ import retrofit2.http.*
 
 interface IRestDBService {
 
-    @GET("data/{objectId}")
-    fun getDataById(@Path("objectId") id: String): Call<Data>
-
-    @POST("data")
-    fun newData(@Body data: DataRequestBody): Call<Data>
-
     //user response
 
     @GET("users")
@@ -23,6 +17,9 @@ interface IRestDBService {
 
     @DELETE("users/{id}")
     fun deleteUserById(@Path("id") id: String): Call<User>
+
+    @GET("users")
+    fun getUserByEmail(@Query("q") params: String): Call<User>
 
     @POST("users")
     fun createUser(@Body RequestBody: UserRequestBody): Call<User>
@@ -47,5 +44,6 @@ interface IRestDBService {
 
     @GET("lesson")
     fun getLessons(): Call<MutableList<Lesson>>
+
 
 }

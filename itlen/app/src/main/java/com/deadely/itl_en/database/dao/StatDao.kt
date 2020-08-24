@@ -20,10 +20,6 @@ interface StatDao {
     @Query("DELETE FROM stat_table")
     fun deleteAllStats()
 
-    @Query("SELECT * FROM stat_table WHERE stat_user_id LIKE :id LIMIT 1")
-    fun getStatByUserId(id: String): Stat
-
-
     @Query("SELECT * FROM stat_table WHERE stat_id LIKE :id LIMIT 1")
     fun getStatById(id: String): Stat
 

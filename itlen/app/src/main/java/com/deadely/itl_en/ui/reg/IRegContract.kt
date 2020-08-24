@@ -2,11 +2,13 @@ package com.deadely.itl_en.ui.reg
 
 import com.deadely.itl_en.base.mvp.IBaseMvpPresenter
 import com.deadely.itl_en.base.mvp.IBaseMvpView
+import com.deadely.itl_en.base.mvp.IBaseProgressView
 
 interface IRegContract {
-    interface View : IBaseMvpView {
+    interface View : IBaseMvpView, IBaseProgressView {
         fun openMainScreen()
         fun showMessage(msg: String)
+        fun showEmailError(msg: String)
         fun checkFields(): Boolean
         fun openAuthScreen()
     }
@@ -15,7 +17,5 @@ interface IRegContract {
         fun getUsersList(): Boolean
         fun createNewUser(name: String, email: String, password: String, active: Boolean)
         fun clearActiveUser()
-        fun createNewData(id: String)
-
     }
 }

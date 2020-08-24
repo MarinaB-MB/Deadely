@@ -1,34 +1,31 @@
 package com.deadely.itl_en.ui.splash.view
 
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import com.deadely.itl_en.R
 import com.deadely.itl_en.base.BaseActivity
 import com.deadely.itl_en.di.component.ActivityComponent
-import com.deadely.itl_en.network.NetworkInfo
 import com.deadely.itl_en.ui.auth.view.AuthActivity
 import com.deadely.itl_en.ui.main.view.MainActivity
 import com.deadely.itl_en.ui.reg.view.RegActivity
 import com.deadely.itl_en.ui.splash.ISplashScreenContract
-import com.deadely.itl_en.utils.StatePreferences
-import com.deadely.itl_en.view.NoConnectionDialog
+import com.deadely.itl_en.utils.PreferencesManager
+import com.deadely.itl_en.utils.PreferencesManager.get
+import com.deadely.itl_en.utils.PreferencesManager.set
 import javax.inject.Inject
 
 
 class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
 
-    private lateinit var intentFilter: IntentFilter
-    val BROADCAST_ACTION = "android.net.conn.CONNECTIVITY_CHANGE"
+    //    private lateinit var intentFilter: IntentFilter
+//    val broadcastAction = "android.net.conn.CONNECTIVITY_CHANGE"
     private val FIRST_SIGNIN = "firstSignIn"
-    private var firstSignIn: Boolean = true
-    val pref = StatePreferences(baseContext, FIRST_SIGNIN)
-    lateinit var deviceId: String
+    private var firstSignIn: Boolean = false
+    private lateinit var preferences: SharedPreferences
+//    val preferences = PreferencesManager()
 
     @Inject
     lateinit var presenter: ISplashScreenContract.Presenter
@@ -37,34 +34,29 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
         const val TAG = "SplashScreenActivity"
     }
 
-    private var receiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            when (intent.action) {
-                BROADCAST_ACTION -> {
-                    retry()
-                }
-            }
-        }
-    }
+//    private var receiver: BroadcastReceiver = object : BroadcastReceiver() {
+//        override fun onReceive(context: Context, intent: Intent) {
+//            when (intent.action) {
+//                BROADCAST_ACTION -> {
+//                    retry()
+//                }
+//            }
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         supportActionBar?.hide()
         presenter.attachView(this)
-        initView()
         presenter.onCreate(savedInstanceState)
-        setupData()
-    }
-
-    private fun setupData() {
-        Log.e(TAG, "isFirstSignIn: $firstSignIn")
-        pref.isFirstSignIn = false
-        Log.e(TAG, "isFirstSignIn: ${pref.isFirstSignIn}")
+        initView()
     }
 
     override fun changeState() {
-        pref.isFirstSignIn = false
+        preferences["isFirstSignIn"] = true
+        firstSignIn = preferences["isFirstSignIn", false]!!
+        Log.e(TAG, "changeState: $firstSignIn")
     }
 
     override fun inject(activityComponent: ActivityComponent) {
@@ -72,9 +64,12 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
     }
 
     private fun initView() {
-        deviceId = Settings.Secure.getString(baseContext.contentResolver, Settings.Secure.ANDROID_ID)
-        intentFilter = IntentFilter(BROADCAST_ACTION)
-        registerReceiver(receiver, intentFilter);
+        preferences = PreferencesManager.defaultPrefs(this)
+        firstSignIn = preferences["isFirstSignIn", false]!!
+        Log.e(TAG, "changeState: $firstSignIn")
+        presenter.getUser(firstSignIn)
+//        intentFilter = IntentFilter(BROADCAST_ACTION)
+//        registerReceiver(receiver, intentFilter);
     }
 
     override fun openRegScreen() {
@@ -92,21 +87,21 @@ class SplashScreenActivity : BaseActivity(), ISplashScreenContract.View {
         finish()
     }
 
-    override fun showConnectionDialog() {
-        val dialog = NoConnectionDialog(this).run { show() }
-    }
+//    override fun showConnectionDialog() {
+//        val dialog = NoConnectionDialog(this).run { show() }
+//    }
 
-    override fun retry() {
-        if (NetworkInfo().isConnectingAvailable(baseContext)) presenter.getUsers(deviceId, firstSignIn)
-        else presenter.openConnectionDialog()
+//    override fun retry() {
+//        if (NetworkInfo().isConnectingAvailable(baseContext)) presenter.getUsers(firstSignIn)
+//        else presenter.openConnectionDialog()
+//    }
+
+    override fun showMessage(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(receiver)
-    }
-
-    override fun showMessage(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+//        unregisterReceiver(receiver)
     }
 }

@@ -12,6 +12,7 @@ import com.deadely.itl_en.base.BaseFragment
 import com.deadely.itl_en.dataclasses.Stat
 import com.deadely.itl_en.di.component.FragmentComponent
 import com.deadely.itl_en.ui.stat.IStatContract
+import com.deadely.itl_en.utils.Utils
 import kotlinx.android.synthetic.main.fragment_stat.*
 import javax.inject.Inject
 
@@ -39,7 +40,14 @@ class StatFragment : BaseFragment(), IStatContract.View {
 
     }
 
-    override fun initData(list: MutableList<Stat>) {
+    override fun initData(lastStat: Stat) {
+        val count: Int = lastStat.count_all
+        val countSuccess: Int = lastStat.count_success
+        val countFail: Int = lastStat.count_fail
+        val date: String = Utils().formatDate(lastStat.date)
+
+        tv_count_words.text = count.toString()
+        tvCountSuccess.text = countSuccess.toString()
 
     }
 
