@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.deadely.itl_en.R
+import com.deadely.itl_en.model.User
 import com.deadely.itl_en.ui.main.view.MainActivity
 import com.deadely.itl_en.ui.reg.view.RegActivity
 import com.deadely.itl_en.utils.DataState
@@ -56,14 +57,22 @@ class AuthActivity : AppCompatActivity(R.layout.activity_auth) {
                     Log.e(TAG, "${it.data}")
                     if (it.data.isNotEmpty() && it.data != null) {
                         viewModel.user = it.data.first()
-                        viewModel.setEvent(Event.addUser)
-                        openMainScreen()
+                        compareUser(viewModel.user, etEmail.text.toString(), etPassOne.text.toString())
                     } else {
                         showMessage("not found")
                     }
                 }
             }
         })
+    }
+
+    private fun compareUser(user: User, email: String, password: String) {
+        if (user.email == email && user.password == password) {
+            viewModel.setEvent(Event.addUser)
+            openMainScreen()
+        } else {
+            Toast.makeText(this, FieldConverter().getString(R.string.data_different_try_again), Toast.LENGTH_SHORT).show()
+        }
     }
 
 

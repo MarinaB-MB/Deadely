@@ -22,7 +22,8 @@ object DatabaseModule {
                     context,
                     AppDatabase::class.java,
                     AppDatabase.DATABASE_NAME
-            ).fallbackToDestructiveMigration().build()
+            ).allowMainThreadQueries()
+                    .fallbackToDestructiveMigration().build()
 
     @Singleton
     @Provides

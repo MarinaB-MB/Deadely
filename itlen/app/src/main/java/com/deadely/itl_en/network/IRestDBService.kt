@@ -9,7 +9,7 @@ interface IRestDBService {
     @GET("users/{objectId}")
     suspend fun getUserById(@Path("id") id: String): User
 
-    @GET("users{q}")
+    @GET("users")
     suspend fun getUserByEmail(@Query("q") email: String): List<User>
 
     @POST("users")

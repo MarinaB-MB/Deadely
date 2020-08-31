@@ -25,7 +25,7 @@ data class UserEntity(
         @SerializedName("password") val password: String,
 
         @SerializedName("name") val name: String,
-        @SerializedName("stats") val stats: List<User.Stat>
+        @SerializedName("stats") val stats: List<User.Stat>?
 ) : Parcelable
 
 @Parcelize

@@ -13,11 +13,8 @@ class SplashViewModel @ViewModelInject constructor(
 
     var mUser: User? = null
 
-    init {
-        getActiveUser()
-    }
 
-    private fun getActiveUser() {
+    fun getActiveUser() {
         viewModelScope.launch {
             mUser = repository.getActiveUser()
         }
