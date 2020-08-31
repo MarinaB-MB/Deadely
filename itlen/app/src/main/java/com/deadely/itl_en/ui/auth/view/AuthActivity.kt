@@ -2,32 +2,28 @@ package com.deadely.itl_en.ui.auth.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.deadely.itl_en.R
-import com.deadely.itl_en.base.BaseActivity
-import com.deadely.itl_en.di.component.ActivityComponent
-import com.deadely.itl_en.ui.auth.IAuthContract
 import com.deadely.itl_en.ui.main.view.MainActivity
 import com.deadely.itl_en.ui.reg.view.RegActivity
+import com.deadely.itl_en.utils.DataState
+import com.deadely.itl_en.utils.Event
 import com.deadely.itl_en.utils.FieldConverter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_auth.*
-import kotlinx.android.synthetic.main.activity_reg.etEmail
-import kotlinx.android.synthetic.main.activity_reg.etPassOne
-import javax.inject.Inject
 
-class AuthActivity : BaseActivity(), IAuthContract.View {
-    @Inject
-    lateinit var presenter: IAuthContract.Presenter
+@AndroidEntryPoint
+class AuthActivity : AppCompatActivity(R.layout.activity_auth) {
+
+    private val viewModel: AuthViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auth)
-        presenter.attachView(this)
-        presenter.onCreate(savedInstanceState)
         initView()
-    }
-
-    override fun inject(activityComponent: ActivityComponent) {
-        activityComponent.inject(this)
     }
 
     companion object {
@@ -35,27 +31,43 @@ class AuthActivity : BaseActivity(), IAuthContract.View {
     }
 
     private fun initView() {
-        title = getString(R.string.auth)
-
+        supportActionBar?.hide()
         tvCreateAcc.setOnClickListener { openRegScreen() }
-
         btnAuth.setOnClickListener {
-            if (checkFieldsWithDB()) presenter.findUser(etEmail.text.toString())
-            //openMainScreen()
+            if (checkFieldsWithDB()) getUser()
         }
     }
 
-
-    override fun openMainScreen() {
-        startActivity(Intent(applicationContext, MainActivity::class.java))
-        finish()
+    private fun getUser() {
+        viewModel.email = etEmail.text.toString()
+        viewModel.setEvent(Event.getUserByEmail)
+        viewModel.mUsers.observe(this, Observer {
+            when (it) {
+                is DataState.Loading -> {
+                    Log.e(TAG, "loading")
+                }
+                is DataState.Error -> {
+                    Log.e(TAG, "error")
+                    Log.e(TAG, it.exception.localizedMessage)
+                    showMessage(it.exception.localizedMessage)
+                }
+                is DataState.Success -> {
+                    Log.e(TAG, "success")
+                    Log.e(TAG, "${it.data}")
+                    if (it.data.isNotEmpty() && it.data != null) {
+                        viewModel.user = it.data.first()
+                        viewModel.setEvent(Event.addUser)
+                        openMainScreen()
+                    } else {
+                        showMessage("not found")
+                    }
+                }
+            }
+        })
     }
 
-    override fun showMessage(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-    }
 
-    override fun checkFieldsWithDB(): Boolean {
+    private fun checkFieldsWithDB(): Boolean {
         return if (etEmail.text.toString() == "" || etPassOne.text.toString() == "") {
             showMessage(FieldConverter().getString(R.string.empty_fields))
             false
@@ -65,14 +77,22 @@ class AuthActivity : BaseActivity(), IAuthContract.View {
                 false
             } else {
                 true
-//                presenter.compareUserDate(etEmail.text.toString(), etPassOne.text.toString())
             }
         }
     }
 
-    override fun openRegScreen() {
+    private fun openMainScreen() {
+        startActivity(Intent(applicationContext, MainActivity::class.java))
+        finish()
+    }
+
+    private fun openRegScreen() {
         startActivity(Intent(applicationContext, RegActivity::class.java))
         finish()
+    }
+
+    private fun showMessage(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
 }

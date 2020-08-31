@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.deadely.itl_en.R
-import com.deadely.itl_en.dataclasses.Words
+import com.deadely.itl_en.model.Group
 import kotlinx.android.synthetic.main.row_word.view.*
 
-class WordsAdapter(context: Context?, private var wordList: List<Words>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WordsAdapter(context: Context?, private var wordList: List<Group.Lesson.Word>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var context: Context = context!!
     var layoutInflater: LayoutInflater = LayoutInflater.from(context)
@@ -38,12 +38,12 @@ class WordsAdapter(context: Context?, private var wordList: List<Words>) : Recyc
     }
 
 
-    fun setData(list: List<Words>) {
+    fun setData(list: List<Group.Lesson.Word>) {
         wordList = list
         notifyDataSetChanged()
     }
 
     interface OnClickListener {
-        fun onClick(word: Words)
+        fun onClick(word: Group.Lesson.Word)
     }
 }

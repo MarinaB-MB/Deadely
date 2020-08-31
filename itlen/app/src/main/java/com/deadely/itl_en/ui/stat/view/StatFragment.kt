@@ -1,46 +1,26 @@
 package com.deadely.itl_en.ui.stat.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.deadely.itl_en.R
-import com.deadely.itl_en.base.BaseFragment
-import com.deadely.itl_en.dataclasses.Stat
-import com.deadely.itl_en.di.component.FragmentComponent
-import com.deadely.itl_en.ui.stat.IStatContract
+import com.deadely.itl_en.model.User
 import com.deadely.itl_en.utils.Utils
 import kotlinx.android.synthetic.main.fragment_stat.*
-import javax.inject.Inject
 
 
-class StatFragment : BaseFragment(), IStatContract.View {
-    @Inject
-    lateinit var presenter: IStatContract.Presenter
-
-    override fun inject(fragmentComponent: FragmentComponent?) {
-        fragmentComponent?.inject(this)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_stat, container, false)
-    }
-
+class StatFragment : Fragment(R.layout.fragment_stat) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.attachView(this)
         initView()
-        presenter.onCreate(savedInstanceState)
     }
 
     private fun initView() {
 
     }
 
-    override fun initData(lastStat: Stat) {
+    fun initData(lastStat: User.Stat) {
         val count: Int = lastStat.count_all
         val countSuccess: Int = lastStat.count_success
         val countFail: Int = lastStat.count_fail
@@ -51,28 +31,7 @@ class StatFragment : BaseFragment(), IStatContract.View {
 
     }
 
-    override fun startLoading() {
-        super.startLoading()
-        rlStatContent?.visibility = GONE
-        pvLoad.visibility = VISIBLE
-        rlErrorContainer.visibility = GONE
-    }
-
-    override fun completeLoading() {
-        super.completeLoading()
-        rlStatContent.visibility = VISIBLE
-        pvLoad.visibility = GONE
-        rlErrorContainer.visibility = GONE
-    }
-
-    override fun errorLoading() {
-        super.errorLoading()
-        rlStatContent.visibility = GONE
-        pvLoad.visibility = GONE
-        rlErrorContainer.visibility = VISIBLE
-    }
-
-    override fun showMessage(msg: String) {
+    fun showMessage(msg: String) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 }

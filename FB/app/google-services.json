@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "907853238936",
+    "firebase_url": "https://fbexample-fb12a.firebaseio.com",
+    "project_id": "fbexample-fb12a",
+    "storage_bucket": "fbexample-fb12a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907853238936:android:9e2b0ad85259156cad76ed",
+        "android_client_info": {
+          "package_name": "com.example.fb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907853238936-jc31tldq29m1rf2gu9lq0juqft16n8nj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUbMp_8lUfPm_1L-i6mUrsHofXqE0jJoI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907853238936-jc31tldq29m1rf2gu9lq0juqft16n8nj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

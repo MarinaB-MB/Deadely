@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mobile_navigation.xml"
+    app:startDestination="@id/navigation_stat">
+    <fragment
+        android:id="@+id/navigation_stat"
+        android:name="com.example.fb.ui.stat.StatFragment"
+        android:label="@string/title_stat"
+        tools:layout="@layout/fragment_stat" />
+    <fragment
+        android:id="@+id/navigation_study"
+        android:name="com.example.fb.ui.study.StudyFragment"
+        android:label="@string/title_study"
+        tools:layout="@layout/fragment_study" />
+    <fragment
+        android:id="@+id/navigation_vocab"
+        android:name="com.example.fb.ui.vocab.VocabFragment"
+        android:label="@string/title_stat"
+        tools:layout="@layout/fragment_vocab" />
+    <fragment
+        android:id="@+id/navigation_group"
+        android:name="com.example.fb.ui.group.GroupFragment"
+        android:label="@string/title_group"
+        tools:layout="@layout/fragment_group" />
+</navigation>

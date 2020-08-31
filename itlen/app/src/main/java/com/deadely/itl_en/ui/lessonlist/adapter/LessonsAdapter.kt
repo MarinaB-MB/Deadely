@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.deadely.itl_en.R
-import com.deadely.itl_en.dataclasses.Lesson
+import com.deadely.itl_en.model.Group
 import kotlinx.android.synthetic.main.row_lesson.view.*
 
-class LessonsAdapter(context: Context?, private var list: List<Lesson>) : RecyclerView.Adapter<LessonsAdapter.ViewHolder>() {
+class LessonsAdapter(context: Context?, private var list: List<Group.Lesson>) : RecyclerView.Adapter<LessonsAdapter.ViewHolder>() {
 
     var context = context!!
     var layoutInflater: LayoutInflater = LayoutInflater.from(context)
@@ -31,12 +31,12 @@ class LessonsAdapter(context: Context?, private var list: List<Lesson>) : Recycl
         holder.itemView.setOnClickListener { onClickListener.let { onClickListener.onClick(lesson) } }
     }
 
-    fun setData(list: List<Lesson>) {
+    fun setData(list: List<Group.Lesson>) {
         this.list = list
         notifyDataSetChanged()
     }
 
     interface OnClickListener {
-        fun onClick(lesson: Lesson)
+        fun onClick(lesson: Group.Lesson)
     }
 }

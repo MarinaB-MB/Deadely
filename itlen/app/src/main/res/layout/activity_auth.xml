@@ -1,96 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin16"
     tools:context=".ui.auth.view.AuthActivity"
     tools:ignore="SpUsage,MissingPrefix,Autofill,LabelFor,TextFields">
 
-    <ImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margin20"
-        android:src="@color/black" />
-
     <RelativeLayout
-        android:id="@+id/rlContentFields"
+        android:id="@+id/rlContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivLogo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginHorizontal="@dimen/margin50"
-        android:layout_marginTop="@dimen/margin50">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/llEmail"
+            android:id="@+id/llContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin16"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Введите email:"
-                android:textColor="@color/black" />
+            <include
+                android:id="@+id/ivLogo"
+                layout="@layout/logo" />
 
-            <EditText
-                android:id="@+id/etEmail"
+            <RelativeLayout
+                android:id="@+id/rlFields"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:textSize="@dimen/margin22" />
+                android:layout_below="@id/ivLogo"
+                android:layout_marginHorizontal="@dimen/margin50"
+                android:layout_marginTop="@dimen/margin20"
+                android:layout_marginBottom="@dimen/margin50">
+
+                <LinearLayout
+                    android:id="@+id/llEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin16"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Введите email:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/margin14" />
+
+                    <EditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:textSize="@dimen/margin22" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llPassOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/llEmail"
+                    android:layout_marginTop="@dimen/margin16"
+                    android:layout_marginBottom="@dimen/margin150"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/insert_pass"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/margin14" />
+
+                    <EditText
+                        android:id="@+id/etPassOne"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textWebPassword"
+                        android:maxLines="1"
+                        android:textSize="@dimen/margin22" />
+                </LinearLayout>
+
+            </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/llPassOne"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/llEmail"
-            android:layout_marginTop="@dimen/margin16"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_below="@id/llContent"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="@dimen/margin20">
 
             <TextView
+                android:id="@+id/tvCreateAcc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/insert_pass"
-                android:textColor="@color/black" />
+                android:layout_marginHorizontal="@dimen/margin50"
+                android:layout_marginTop="@dimen/margin50"
+                android:layout_marginBottom="@dimen/margin10"
+                android:gravity="end"
+                android:text="@string/create_acc"
+                android:textColor="@color/main"
+                android:textSize="@dimen/margin14" />
 
-            <EditText
-                android:id="@+id/etPassOne"
+            <Button
+                android:id="@+id/btnAuth"
                 android:layout_width="match_parent"
-                android:maxLines="1"
                 android:layout_height="wrap_content"
-                android:inputType="textWebPassword"
-                android:textSize="@dimen/margin22" />
-        </LinearLayout>
+                android:layout_below="@id/tvCreateAcc"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="@dimen/margin50"
+                android:background="@drawable/btn_bg"
+                android:text="@string/next"
+                android:textColor="@color/white" />
+        </RelativeLayout>
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/tvCreateAcc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btnAuth"
-        android:layout_marginHorizontal="@dimen/margin50"
-        android:layout_marginTop="@dimen/margin10"
-        android:layout_marginBottom="@dimen/margin16"
-        android:gravity="end"
-        android:padding="@dimen/margin5"
-        android:text="@string/create_acc"
-        android:textColor="@color/main" />
-
-    <Button
-        android:id="@+id/btnAuth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginHorizontal="@dimen/margin50"
-        android:background="@drawable/btn_bg"
-        android:text="@string/next"
-        android:textColor="@color/white" />
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>

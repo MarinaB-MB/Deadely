@@ -25,4 +25,9 @@
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:background">@color/main</item>
     </style>
+
+    <style name="FullScreen" parent="MainTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
 </resources>

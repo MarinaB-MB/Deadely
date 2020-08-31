@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FB</string>
+    <string name="title_stat">Статистика</string>
+    <string name="title_vocab">Словарь</string>
+    <string name="title_study">Обучение</string>
+    <string name="title_group">Разделы</string>
+</resources>

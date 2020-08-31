@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.deadely.itl_en.R
-import com.deadely.itl_en.dataclasses.Group
+import com.deadely.itl_en.model.Group
 import kotlinx.android.synthetic.main.row_group.view.*
 
 class GroupAdapter(context: Context?, private var groupList: List<Group>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

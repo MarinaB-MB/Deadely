@@ -1,6 +1,6 @@
 package com.deadely.itl_en.utils
 
-import com.deadely.itl_en.App
+import com.deadely.itl_en.base.App
 
 class FieldConverter {
 

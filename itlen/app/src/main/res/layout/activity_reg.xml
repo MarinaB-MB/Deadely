@@ -1,166 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin16"
     tools:context=".ui.auth.view.AuthActivity"
     tools:ignore="SpUsage,MissingPrefix,Autofill,LabelFor,TextFields">
 
     <RelativeLayout
-        android:id="@+id/rlContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/ivLogo"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin20"
-            android:src="@color/black" />
+        <RelativeLayout
+            android:id="@+id/rlContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <include
+                android:id="@+id/ivLogo"
+                layout="@layout/logo" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivLogo"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/margin50">
+
+                <LinearLayout
+                    android:id="@+id/llName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/insert_name"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/etName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textSize="@dimen/margin22" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/llName"
+                    android:layout_marginTop="@dimen/margin16"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/insert_email"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:textSize="@dimen/margin22" />
+
+                    <TextView
+                        android:id="@+id/tvEmailError"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red"
+                        android:visibility="gone"
+                        tools:text="@string/unexpected_error" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llPassOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/llEmail"
+                    android:layout_marginTop="@dimen/margin16"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/insert_password"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/etPassOne"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textWebPassword"
+                        android:maxLines="1"
+                        android:textSize="@dimen/margin22" />
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ivLogo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="@dimen/margin50"
-            android:layout_marginTop="@dimen/margin50">
-
-            <LinearLayout
-                android:id="@+id/llName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/insert_name"
-                    android:textColor="@color/black" />
-
-                <EditText
-                    android:id="@+id/etName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:textSize="@dimen/margin22" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/llName"
-                android:layout_marginTop="@dimen/margin16"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/insert_email"
-                    android:textColor="@color/black" />
-
-                <EditText
-                    android:id="@+id/etEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:textSize="@dimen/margin22" />
-
-                <TextView
-                    android:id="@+id/tvEmailError"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/red"
-                    android:visibility="gone"
-                    tools:text="@string/unexpected_error" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llPassOne"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/llEmail"
-                android:layout_marginTop="@dimen/margin16"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/insert_password"
-                    android:textColor="@color/black" />
-
-                <EditText
-                    android:id="@+id/etPassOne"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textWebPassword"
-                    android:maxLines="1"
-                    android:textSize="@dimen/margin22" />
-            </LinearLayout>
-        </RelativeLayout>
-
-
-        <TextView
-            android:id="@+id/tvLogIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/btnReg"
-            android:layout_marginHorizontal="@dimen/margin50"
-            android:layout_marginTop="@dimen/margin10"
-            android:layout_marginBottom="@dimen/margin16"
-            android:gravity="end"
-            android:padding="@dimen/margin5"
-            android:text="@string/login"
-            android:textColor="@color/main" />
-
-
-        <Button
-            android:id="@+id/btnReg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rlContent"
             android:layout_alignParentBottom="true"
-            android:layout_marginHorizontal="@dimen/margin50"
-            android:background="@drawable/btn_bg"
-            android:text="@string/next"
-            android:textColor="@color/white" />
+            android:layout_marginTop="@dimen/margin50"
+            android:paddingBottom="@dimen/margin20"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvLogIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin50"
+                android:layout_marginTop="@dimen/margin50"
+                android:layout_marginBottom="@dimen/margin10"
+                android:gravity="end"
+                android:text="@string/login"
+                android:textColor="@color/main"
+                android:textSize="@dimen/margin14" />
+
+            <Button
+                android:id="@+id/btnReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvLogIn"
+                android:layout_alignParentBottom="true"
+                android:layout_marginHorizontal="@dimen/margin50"
+                android:background="@drawable/btn_bg"
+                android:text="@string/next"
+                android:textColor="@color/white" />
+        </RelativeLayout>
     </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
 
-    <RelativeLayout
-        android:id="@+id/rlErrorContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/rlErrorContainer"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:visibility="gone">-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivError"
-            android:layout_marginHorizontal="@dimen/margin42"
-            android:layout_marginTop="@dimen/margin16"
-            android:gravity="center"
-            android:text="@string/unexpected_error" />
+    <!--<TextView-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:layout_below="@+id/ivError"-->
+    <!--    android:layout_marginHorizontal="@dimen/margin42"-->
+    <!--    android:layout_marginTop="@dimen/margin16"-->
+    <!--    android:gravity="center"-->
+    <!--    android:text="@string/unexpected_error" />-->
 
-        <ImageView
-            android:id="@+id/ivError"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_baseline_error_outline_24" />
-    </RelativeLayout>
+    <!--<ImageView-->
+    <!--    android:id="@+id/ivError"-->
+    <!--    android:layout_width="56dp"-->
+    <!--    android:layout_height="56dp"-->
+    <!--    android:layout_centerInParent="true"-->
+    <!--    android:src="@drawable/ic_baseline_error_outline_24" />-->
+    <!--</RelativeLayout>-->
 
-    <ProgressBar
-        android:id="@+id/pvLoad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:indeterminateDrawable="@drawable/progress_bar"
-        android:progressDrawable="@drawable/progress_bar"
-        android:visibility="gone" />
-
-</RelativeLayout>
+    <!--<ProgressBar-->
+    <!--android:id="@+id/pvLoad"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:indeterminateDrawable="@drawable/progress_bar"-->
+    <!--android:progressDrawable="@drawable/progress_bar"-->
+    <!--android:visibility="gone" />-->
