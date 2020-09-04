@@ -28,7 +28,7 @@ interface UserDao {
     suspend fun getActiveUser(active: Boolean): UserEntity?
 
     @Query("SELECT * FROM user_table")
-    fun getAllUsers(): List<UserEntity>
+    suspend fun getAllUsers(): List<UserEntity>
 
     @Query("SELECT * FROM user_table WHERE email LIKE :email AND password LIKE :pass")
     suspend fun getByEmailAndPass(email: String, pass: String): UserEntity

@@ -1,6 +1,5 @@
 package com.deadely.itl_en.repository
 
-import android.util.Log
 import com.deadely.itl_en.database.dao.UserDao
 import com.deadely.itl_en.model.User
 import com.deadely.itl_en.network.IRestDBService
@@ -29,7 +28,6 @@ class Repository
         try {
             emit(DataState.Loading)
             val emailData = "{\"email\":\"$email\"}"
-            Log.e("repository", "getUserByEmailFromApi: $emailData")
             val currentUserFromApi = api.getUserByEmail(emailData)
             emit(DataState.Success(currentUserFromApi))
         } catch (e: java.lang.Exception) {
