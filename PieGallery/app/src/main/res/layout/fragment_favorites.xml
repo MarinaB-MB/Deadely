@@ -6,12 +6,12 @@
     android:background="@color/darkGray">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swiperl_fav"
+        android:id="@+id/swiperlFav"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_fav_list"
+            android:id="@+id/rvFavList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/darkGray"
@@ -21,14 +21,14 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
-        android:id="@+id/pb_fav"
+        android:id="@+id/pbFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/tv_empty"
+        android:id="@+id/tvEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

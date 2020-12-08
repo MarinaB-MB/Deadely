@@ -3,13 +3,11 @@
     <string name="favorites">Избранное</string>
     <string name="photo">Фото</string>
     <string name="info">Информация</string>
-    <string name="title_activity_nav">NavActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+
     <string name="list_of_libs">Список библиотек, используемых в проекте</string>
     <string name="developer">Разработчик: MarinaB</string>
     <string name="libs_list">Dagger 2 + Room + RecyclerView + SwipeRefreshLayout + Glide</string>
+
     <string name="show_on_map">Показать на карте</string>
     <string name="add_to_favorite">Добавить в избранное</string>
     <string name="added_to_favorites">Добавлено в Избранное</string>
@@ -26,4 +24,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="error">Возникла ошибка</string>
     <string name="check_connection">Проверьте Ваше соединение с Интернетом</string>
+
+    <string name="by_user">By %s</string>
+    <string name="user_of_unsplash">User of Unsplash</string>
+    <string name="likes">%s Likes</string>
 </resources>
