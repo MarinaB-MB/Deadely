@@ -1,10 +1,11 @@
 package com.deadely.piegallery
 
 import com.deadely.piegallery.database.PhotoDao
+import com.deadely.piegallery.database.PhotoEntity
 import com.deadely.piegallery.dataclasses.Photo
 import com.deadely.piegallery.network.RestService
 import com.deadely.piegallery.utils.mapToEntity
-import com.deadely.piegallery.utils.mapToModelList
+import io.reactivex.Single
 import javax.inject.Inject
 
 class Repository @Inject constructor(private val api: RestService, private val pd: PhotoDao) {
@@ -19,7 +20,5 @@ class Repository @Inject constructor(private val api: RestService, private val p
         pd.deleteFavoritePhoto(photo.mapToEntity())
     }
 
-    fun getFavorites(): List<Photo> {
-        return pd.getAllFavorites().mapToModelList()
-    }
+    fun getFavorites(): Single<List<PhotoEntity>> = pd.getAllFavorites()
 }

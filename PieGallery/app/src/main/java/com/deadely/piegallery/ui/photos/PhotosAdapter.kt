@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ddd.androidutils.DoubleClick
 import com.ddd.androidutils.DoubleClickListener
 import com.deadely.piegallery.R
@@ -50,12 +51,16 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
         fun bind(photo: Photo) {
             with(itemView) {
                 tvCountLikes.text = context.resources.getString(R.string.likes_count).format(photo.likes)
+//                ivUserPhoto.setImageBitmap(null)
                 Glide.with(context).load(photo.user?.profileImage?.medium)
                     .error(R.drawable.ic_user_no_image)
                     .circleCrop()
                     .into(ivUserPhoto)
+//                ivPhoto.setImageBitmap(null)
                 Glide.with(context)
                     .load(photo.urls?.regular)
+                    .override(500, 500)
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
                     .error(R.drawable.ic_no_image)
                     .into(ivPhoto)
                 tvUsername.text = photo.user?.username
@@ -98,15 +103,15 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
                             photo.isFavorite = true
                             ivFavorite.setImageResource(R.drawable.ic_favorite_24)
                             listener?.addToFavorite(photo)
-                            ivLike.alpha = 0.70F
-                            ivLike.makeVisible()
-                            if (ivLike.drawable is AnimatedVectorDrawableCompat) {
-                                avd = ivLike.drawable as AnimatedVectorDrawableCompat
-                                avd?.start()
-                            } else if (ivLike.drawable is AnimatedVectorDrawable) {
-                                avd2 = ivLike.drawable as AnimatedVectorDrawable
-                                avd2?.start()
-                            }
+                        }
+                        ivLike.alpha = 0.70F
+                        ivLike.makeVisible()
+                        if (ivLike.drawable is AnimatedVectorDrawableCompat) {
+                            avd = ivLike.drawable as AnimatedVectorDrawableCompat
+                            avd?.start()
+                        } else if (ivLike.drawable is AnimatedVectorDrawable) {
+                            avd2 = ivLike.drawable as AnimatedVectorDrawable
+                            avd2?.start()
                         }
                     }
                 })

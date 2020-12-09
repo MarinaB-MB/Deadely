@@ -5,20 +5,14 @@
     android:layout_height="match_parent"
     android:background="@color/darkGray">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swiperlFav"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFavList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvFavList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/darkGray"
-            android:visibility="gone"
-            tools:listitem="@layout/row_photo" />
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        android:layout_height="match_parent"
+        android:background="@color/darkGray"
+        android:visibility="visible"
+        tools:listitem="@layout/row_photo" />
 
     <ProgressBar
         android:id="@+id/pbFav"
