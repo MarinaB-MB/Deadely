@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkGray">
+    android:background="#534F4F">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
@@ -13,10 +13,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPhotoList"
+            android:visibility="visible"
             android:layout_width="match_parent"
+            android:overScrollMode="never"
             android:layout_height="match_parent"
             android:background="@color/darkGray"
-            tools:listitem="@layout/rv_item" />
+            tools:listitem="@layout/row_photo_post" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar

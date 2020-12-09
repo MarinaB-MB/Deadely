@@ -1,7 +1,13 @@
 package com.deadely.piegallery.ui.info.presenter
 
 import com.deadely.piegallery.base.BasePresenter
-import com.deadely.piegallery.ui.info.IInfoContract
+import com.deadely.piegallery.ui.info.InfoView
+import moxy.InjectViewState
 import javax.inject.Inject
 
-class InfoPresenter @Inject constructor() : BasePresenter<IInfoContract.View>(), IInfoContract.Presenter
+@InjectViewState
+class InfoPresenter @Inject constructor() : BasePresenter<InfoView>() {
+    fun exit() {
+        router.exit()
+    }
+}

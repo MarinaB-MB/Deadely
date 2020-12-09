@@ -2,25 +2,23 @@ package com.deadely.piegallery.ui.info.view
 
 import com.deadely.piegallery.R
 import com.deadely.piegallery.base.BaseFragment
-import com.deadely.piegallery.ui.info.IInfoContract
+import com.deadely.piegallery.ui.info.InfoView
+import com.deadely.piegallery.ui.info.presenter.InfoPresenter
 import dagger.hilt.android.AndroidEntryPoint
+import moxy.ktx.moxyPresenter
 import javax.inject.Inject
+import javax.inject.Provider
 
 @AndroidEntryPoint
-class InfoFragment : BaseFragment(R.layout.fragment_info), IInfoContract.View {
+class InfoFragment : BaseFragment(R.layout.fragment_info), InfoView {
     @Inject
-    lateinit var presenter: IInfoContract.Presenter
+    lateinit var presenterProvider: Provider<InfoPresenter>
 
-    override fun initObserver() {
-    }
+    private val presenter by moxyPresenter { presenterProvider.get() }
 
     override fun setListeners() {
     }
 
     override fun initView() {
-    }
-
-    override fun attachPresenter() {
-        presenter.attachView(this@InfoFragment)
     }
 }

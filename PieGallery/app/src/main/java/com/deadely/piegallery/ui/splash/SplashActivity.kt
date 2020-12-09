@@ -1,17 +1,16 @@
 package com.deadely.piegallery.ui.splash
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import com.deadely.piegallery.R
+import androidx.appcompat.app.AppCompatActivity
 import com.deadely.piegallery.ui.main.view.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-class SplashActivity : Activity() {
-
+@AndroidEntryPoint
+class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
         Handler().postDelayed(
             {
                 startActivity(Intent(this@SplashActivity, MainActivity::class.java))

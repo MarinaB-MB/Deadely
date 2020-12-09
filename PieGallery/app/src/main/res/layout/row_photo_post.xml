@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin10"
+        android:background="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="@dimen/margin10">
+
+        <ImageView
+            android:id="@+id/ivUserPhoto"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginVertical="5dp"
+            android:layout_marginStart="18dp"
+            android:src="@drawable/ic_user_no_image" />
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="18dp"
+            android:layout_toEndOf="@id/ivUserPhoto"
+            android:gravity="bottom"
+            android:maxLines="2"
+            android:textColor="#000"
+            android:textSize="16sp"
+            tools:text="golden boy" />
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ivContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivPhoto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="200dp"
+            android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_delete_white_24dp" />
+
+        <ImageView
+            android:id="@+id/ivLike"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:alpha="0"
+            android:src="@drawable/like_anim"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="5dp">
+
+        <ImageView
+            android:id="@+id/ivFavorite"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_not_favorite_24_border" />
+
+        <TextView
+            android:id="@+id/tvCountLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivFavorite"
+            android:textColor="#000"
+            tools:text="@string/likes_count" />
+
+        <TextView
+            android:id="@+id/tvDescPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvCountLikes"
+            android:ellipsize="end"
+            tools:text="aromatixe golden ceylona fanmfariko" />
+    </RelativeLayout>
+
+    <!-- <View
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:background="#17FDFCFC" />-->
+</LinearLayout><!--
+<RelativeLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="@color/white">
+
+<TextView
+    android:id="@+id/tvDescPhoto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxLines="2"
+    android:padding="@dimen/margin12"
+    android:textColor="#514D4D"
+    tools:text="By name sparky golden boy" />
+</RelativeLayout>
+-->

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Profile_Image(
+data class ProfileImage(
     @SerializedName("small")
     var small: String,
     @SerializedName("medium")

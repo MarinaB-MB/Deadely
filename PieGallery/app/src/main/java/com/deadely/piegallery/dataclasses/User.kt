@@ -8,12 +8,7 @@ import kotlinx.android.parcel.Parcelize
 data class User(
 
     @SerializedName("id")
-
     var id: String?,
-
-    @SerializedName("updated_at")
-
-    var updatedAt: String?,
 
     @SerializedName("username")
     var username: String?,
@@ -33,43 +28,12 @@ data class User(
 
     var twitterUsername: String?,
 
-    @SerializedName("portfolio_url")
-
-    var portfolioUrl: String?,
-
-    @SerializedName("bio")
-
-    var bio: String?,
-
-    @SerializedName("location")
-
-    var location: String?,
-
-    @SerializedName("links")
-
-    var links: Links_2?,
-
     @SerializedName("profile_image")
 
-    var profileImage: Profile_Image?,
+    var profileImage: ProfileImage?,
 
     @SerializedName("instagram_username")
 
-    var instagramUsername: String?,
+    var instagramUsername: String?
 
-    @SerializedName("total_collections")
-
-    var totalCollections: Int?,
-
-    @SerializedName("total_likes")
-
-    var totalLikes: Int?,
-
-    @SerializedName("total_photos")
-
-    var totalPhotos: Int?,
-
-    @SerializedName("accepted_tos")
-
-    var acceptedTos: Boolean?
 ) : Parcelable

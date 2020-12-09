@@ -1,7 +1,13 @@
 package com.deadely.piegallery.ui.main.presenter
 
 import com.deadely.piegallery.base.BasePresenter
-import com.deadely.piegallery.ui.main.IMainContract
+import com.deadely.piegallery.ui.main.MainView
+import moxy.InjectViewState
 import javax.inject.Inject
 
-class MainPresenter @Inject constructor() : BasePresenter<IMainContract.View>(), IMainContract.Presenter
+@InjectViewState
+class MainPresenter @Inject constructor() : BasePresenter<MainView>() {
+    fun exit() {
+        router.exit()
+    }
+}

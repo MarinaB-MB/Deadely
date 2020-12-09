@@ -7,19 +7,24 @@ import com.deadely.piegallery.R
 import com.deadely.piegallery.base.BaseActivity
 import com.deadely.piegallery.ui.favorites.view.FavoritesFragment
 import com.deadely.piegallery.ui.info.view.InfoFragment
-import com.deadely.piegallery.ui.main.IMainContract
+import com.deadely.piegallery.ui.main.MainView
+import com.deadely.piegallery.ui.main.presenter.MainPresenter
 import com.deadely.piegallery.ui.photos.view.PhotosFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import moxy.ktx.moxyPresenter
 import javax.inject.Inject
+import javax.inject.Provider
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity(R.layout.activity_main), IMainContract.View {
+class MainActivity : BaseActivity(R.layout.activity_main), MainView {
     @Inject
-    lateinit var presenter: IMainContract.Presenter
+    lateinit var presenterProvider: Provider<MainPresenter>
+    private val presenter by moxyPresenter { presenterProvider.get() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        presenter.onCreate(savedInstanceState)
     }
 
     private fun loadFragment(fragment: Fragment?): Boolean {
@@ -44,10 +49,5 @@ class MainActivity : BaseActivity(R.layout.activity_main), IMainContract.View {
         }
     }
 
-    override fun initObserver() {}
     override fun setListeners() {}
-
-    override fun attachPresenter() {
-        presenter.attachView(this)
-    }
 }

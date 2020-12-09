@@ -7,4 +7,9 @@
         <item name="colorPrimaryDark">@color/lightGray</item>
         <item name="colorAccent">@color/white</item>
     </style>
+
+    <style name="Fullscreen" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/ic_logo</item>
+    </style>
 </resources>

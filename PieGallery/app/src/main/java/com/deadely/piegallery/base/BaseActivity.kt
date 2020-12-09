@@ -10,7 +10,7 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import javax.inject.Inject
 
-abstract class BaseActivity(layout: Int) : MvpAppCompatActivity(layout) {
+abstract class BaseActivity(layout: Int) : MvpAppCompatActivity(layout), BaseView {
     @Inject
     lateinit var router: Router
 
@@ -31,14 +31,12 @@ abstract class BaseActivity(layout: Int) : MvpAppCompatActivity(layout) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        attachPresenter()
         setListeners()
         initView()
     }
 
     abstract fun setListeners()
     abstract fun initView()
-    abstract fun attachPresenter()
     override fun onBackPressed() {
         val fm = supportFragmentManager
         var fragment: Fragment? = null

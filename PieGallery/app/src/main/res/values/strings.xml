@@ -28,4 +28,6 @@
     <string name="by_user">By %s</string>
     <string name="user_of_unsplash">User of Unsplash</string>
     <string name="likes">%s Likes</string>
+    <string name="likes_count">Likes: %s</string>
+    <string name="user_say">\"%s %s \"</string>
 </resources>
