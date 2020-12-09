@@ -51,16 +51,13 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
         fun bind(photo: Photo) {
             with(itemView) {
                 tvCountLikes.text = context.resources.getString(R.string.likes_count).format(photo.likes)
-//                ivUserPhoto.setImageBitmap(null)
                 Glide.with(context).load(photo.user?.profileImage?.medium)
                     .error(R.drawable.ic_user_no_image)
                     .circleCrop()
                     .into(ivUserPhoto)
-//                ivPhoto.setImageBitmap(null)
                 Glide.with(context)
                     .load(photo.urls?.regular)
-                    .override(500, 500)
-                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .error(R.drawable.ic_no_image)
                     .into(ivPhoto)
                 tvUsername.text = photo.user?.username

@@ -38,7 +38,6 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(photo: Photo) {
             with(itemView) {
-//                ivPhoto.setImageBitmap(null)
                 Glide.with(context)
                     .load(photo.urls?.regular)
                     .centerCrop()
@@ -47,6 +46,7 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
                     .into(ivPhoto)
                 tvDescPhoto.text = photo.user?.username
                 ivPhoto.setOnLongClickListener {
+                    llDelete.layoutParams.apply { height = ivPhoto.height }
                     llDelete.makeVisible()
                     ivPhoto.makeGone()
                     tvDescPhoto.makeGone()
