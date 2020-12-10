@@ -8,11 +8,15 @@ import com.deadely.piegallery.dataclasses.ProfileImage
 import com.deadely.piegallery.dataclasses.User
 
 fun Photo.mapToEntity(): PhotoEntity {
-    return PhotoEntity(id?:"", color, description, altDescription, urls, likes, likedByUser, user?.mapToEntity(), isFavorite)
+    return PhotoEntity(
+        id
+            ?: "",
+        color, description, width, height, altDescription, urls, likes, likedByUser, user?.mapToEntity(), isFavorite
+    )
 }
 
 fun PhotoEntity.mapToModel(): Photo {
-    return Photo(id, color, description, altDescription, urls, likes, likedByUser, user?.mapToModel(), isFavorite)
+    return Photo(id, color, description, width, height, altDescription, urls, likes, likedByUser, user?.mapToModel(), isFavorite)
 }
 
 fun List<PhotoEntity>.mapToModelList(): List<Photo> {
@@ -20,7 +24,11 @@ fun List<PhotoEntity>.mapToModelList(): List<Photo> {
 }
 
 fun User.mapToEntity(): UserEntity {
-    return UserEntity(id?:"", username, name, firstName, lastName, twitterUsername, profileImage?.mapToEntity(), instagramUsername)
+    return UserEntity(
+        id
+            ?: "",
+        username, name, firstName, lastName, twitterUsername, profileImage?.mapToEntity(), instagramUsername
+    )
 }
 
 fun ProfileImage.mapToEntity(): ProfileImageEntity {

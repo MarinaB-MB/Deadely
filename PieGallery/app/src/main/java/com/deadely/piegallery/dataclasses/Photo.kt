@@ -12,6 +12,10 @@ data class Photo(
     var color: String?,
     @SerializedName("description")
     var description: String?,
+    @SerializedName("width")
+    var width: Int?,
+    @SerializedName("height")
+    var height: Int?,
     @SerializedName("alt_description")
     var altDescription: String?,
     @SerializedName("urls")

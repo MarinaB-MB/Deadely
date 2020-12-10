@@ -14,12 +14,12 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ddd.androidutils.DoubleClick
 import com.ddd.androidutils.DoubleClickListener
 import com.deadely.piegallery.R
 import com.deadely.piegallery.dataclasses.Photo
 import com.deadely.piegallery.utils.makeVisible
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_photo_post.view.*
 
 class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
@@ -55,12 +55,17 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
                     .error(R.drawable.ic_user_no_image)
                     .circleCrop()
                     .into(ivUserPhoto)
-                Glide.with(context)
-                    .load(photo.urls?.regular)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .error(R.drawable.ic_no_image)
-                    .into(ivPhoto)
+                /*   Glide.with(context)
+                       .load(photo.urls?.regular)
+                       .diskCacheStrategy(DiskCacheStrategy.ALL)
+                       .error(R.drawable.ic_no_image)
+                       .into(ivPhoto)*/
                 tvUsername.text = photo.user?.username
+                Picasso.get()
+                    .load(photo.urls?.regular)
+                    .error(R.drawable.ic_no_image)
+                    .placeholder(R.drawable.ic_image_loading)
+                    .into(ivPhoto)
                 photo.description?.let {
                     val username = photo.user?.username
                     val userText = photo.description

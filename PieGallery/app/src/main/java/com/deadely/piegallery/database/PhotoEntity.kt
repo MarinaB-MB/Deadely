@@ -16,6 +16,8 @@ data class PhotoEntity(
     var id: String,
     var color: String?,
     var description: String?,
+    var width: Int?,
+    var height: Int?,
     var altDescription: String?,
     @Embedded
     var urls: Urls?,

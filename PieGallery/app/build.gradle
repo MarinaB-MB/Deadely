@@ -121,7 +121,7 @@ dependencies {
 
     //double click
     implementation 'com.gitlab.developerdeveloperdeveloper:androidutilslibrary:1.0.0'
-    
-    implementation 'com.google.android:flexbox:2.0.1'
 
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
