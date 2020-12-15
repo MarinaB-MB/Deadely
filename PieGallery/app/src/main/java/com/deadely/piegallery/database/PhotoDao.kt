@@ -1,6 +1,6 @@
 package com.deadely.piegallery.database
 
-import androidx.room.*
+import androidx.room.* // ktlint-disable no-wildcard-imports
 import io.reactivex.Single
 
 @Dao
@@ -13,4 +13,7 @@ interface PhotoDao {
 
     @Delete
     fun deleteFavoritePhoto(photoEntity: PhotoEntity)
+
+    @Query("DELETE FROM favorite_table")
+    fun deleteFavorites()
 }

@@ -8,4 +8,6 @@
     <color name="whiteInvisible26">#26FFFFFF</color>
     <color name="darkGray">#1C1B1B</color>
     <color name="lightGray">#3C3F41</color>
+    <color name="splash_color">#2B2C2B</color>
+    <color name="black">#000000</color>
 </resources>

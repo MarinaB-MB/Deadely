@@ -20,7 +20,6 @@
     <string name="dont_exist">Такого элемента не существует в Избранном</string>
     <string name="deleted_from_fav">Удалено из Избранного</string>
     <string name="fav_list_is_empty">Список \"Избранное\" пуст</string>
-    <string name="clear_list">Очистить список</string>
     <string name="title_activity_maps">Map</string>
     <string name="error">Возникла ошибка</string>
     <string name="check_connection">Проверьте Ваше соединение с Интернетом</string>
@@ -29,5 +28,8 @@
     <string name="user_of_unsplash">User of Unsplash</string>
     <string name="likes">%s Likes</string>
     <string name="likes_count">Likes: %s</string>
+    <string name="search_menu_item">Поиск</string>
     <string name="user_say">\"%s %s \"</string>
+    <string name="clear_list">Очистить список</string>
+    <string name="more">%s …еще</string>
 </resources>

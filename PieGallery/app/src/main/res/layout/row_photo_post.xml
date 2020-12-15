@@ -12,6 +12,7 @@
         android:background="@color/white" />
 
     <RelativeLayout
+        android:id="@+id/rlUserData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -50,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:minHeight="200dp"
-            android:scaleType="center"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,6 +84,13 @@
             android:layout_height="28dp"
             android:src="@drawable/ic_not_favorite_24_border" />
 
+        <ImageView
+            android:id="@+id/ivShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/share_selector" />
+
         <TextView
             android:id="@+id/tvCountLikes"
             android:layout_width="wrap_content"
@@ -97,26 +105,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvCountLikes"
             android:ellipsize="end"
-            tools:text="aromatixe golden ceylona fanmfariko" />
+            android:maxLines="2"
+            tools:text="aromatixe golden ceylona fanmfarikoaromatixe golden ceylona fanmfarikoaromatixearomatixe golden ceylona fanmfarikoaromatixe golden ceylona fanmfarikoaromatixe golden ceylona fanmfariko" />
     </RelativeLayout>
 
-    <!-- <View
-         android:layout_width="match_parent"
-         android:layout_height="1dp"
-         android:background="#17FDFCFC" />-->
-</LinearLayout><!--
-<RelativeLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:background="@color/white">
-
-<TextView
-    android:id="@+id/tvDescPhoto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:maxLines="2"
-    android:padding="@dimen/margin12"
-    android:textColor="#514D4D"
-    tools:text="By name sparky golden boy" />
-</RelativeLayout>
--->
+</LinearLayout>

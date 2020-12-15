@@ -1,7 +1,9 @@
 package com.deadely.piegallery.ui.photos
 
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.AnimatedVectorDrawable
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.text.Spannable
 import android.text.SpannableString
@@ -19,14 +21,12 @@ import com.ddd.androidutils.DoubleClickListener
 import com.deadely.piegallery.R
 import com.deadely.piegallery.dataclasses.Photo
 import com.deadely.piegallery.utils.makeVisible
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_photo_post.view.*
 
 class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
     private var dataList = mutableListOf<Photo>()
     fun setData(list: List<Photo>) {
         dataList.apply {
-            clear()
             addAll(list)
         }
         notifyDataSetChanged()
@@ -45,6 +45,11 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = dataList.size
 
+    fun clear() {
+        dataList = mutableListOf()
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var avd: AnimatedVectorDrawableCompat? = null
         var avd2: AnimatedVectorDrawable? = null
@@ -55,17 +60,14 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
                     .error(R.drawable.ic_user_no_image)
                     .circleCrop()
                     .into(ivUserPhoto)
-                /*   Glide.with(context)
-                       .load(photo.urls?.regular)
-                       .diskCacheStrategy(DiskCacheStrategy.ALL)
-                       .error(R.drawable.ic_no_image)
-                       .into(ivPhoto)*/
-                tvUsername.text = photo.user?.username
-                Picasso.get()
+                ivPhoto.layoutParams.apply { height = photo.height?.div(5) ?: 200 }
+                Glide.with(context)
                     .load(photo.urls?.regular)
-                    .error(R.drawable.ic_no_image)
                     .placeholder(R.drawable.ic_image_loading)
+                    .error(R.drawable.ic_no_image)
+                    .centerCrop()
                     .into(ivPhoto)
+                tvUsername.text = photo.user?.username
                 photo.description?.let {
                     val username = photo.user?.username
                     val userText = photo.description
@@ -75,6 +77,13 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                     )
                     tvDescPhoto.setText(spannable, TextView.BufferType.SPANNABLE)
+                    if (tvDescPhoto.lineCount > 2) {
+                        val textWithMarker = context.resources.getString(R.string.more).format(spannable.lines()[0])
+                        spannable.lines().forEachIndexed { index, s ->
+                            if (index != 0) textWithMarker.plus(s)
+                        }
+                        tvDescPhoto.setText(textWithMarker, TextView.BufferType.SPANNABLE)
+                    }
                 } ?: run {
                     tvDescPhoto.text = "..."
                 }
@@ -117,7 +126,15 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
                         }
                     }
                 })
+                ivShare.setOnClickListener {
+                    val bitmap = (ivPhoto.drawable as BitmapDrawable).bitmap
+                    listener?.onSharePhoto(photo, bitmap)
+                }
                 ivPhoto.setOnClickListener(doubleClick)
+                rlUserData.setOnClickListener { listener?.onUserDataClick(photo) }
+                ivUserPhoto.setOnClickListener { listener?.onUserDataClick(photo) }
+                tvUsername.setOnClickListener { listener?.onUserDataClick(photo) }
+                tvDescPhoto.setOnClickListener { tvDescPhoto.maxLines = Int.MAX_VALUE }
             }
         }
     }
@@ -125,5 +142,7 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
     interface OnClickListener {
         fun addToFavorite(photo: Photo)
         fun deleteFromFavorite(photo: Photo)
+        fun onUserDataClick(photo: Photo)
+        fun onSharePhoto(photo: Photo, bitmap: Bitmap)
     }
 }

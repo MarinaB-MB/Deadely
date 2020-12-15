@@ -12,6 +12,4 @@ abstract class BasePresenter<T : MvpView> : MvpPresenter<T>() {
     @Inject
     lateinit var router: Router
 
-    @ApplicationContext
-    lateinit var context: Context
 }

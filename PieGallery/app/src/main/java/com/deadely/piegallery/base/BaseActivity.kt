@@ -17,7 +17,7 @@ abstract class BaseActivity(layout: Int) : MvpAppCompatActivity(layout), BaseVie
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
-    private val navigator: Navigator = AppNavigator(this, R.id.container)
+    private val navigator: Navigator = AppNavigator(this, R.id.fragmentСontainer)
 
     override fun onResume() {
         super.onResume()
@@ -31,12 +31,14 @@ abstract class BaseActivity(layout: Int) : MvpAppCompatActivity(layout), BaseVie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getExtras()
         setListeners()
         initView()
     }
 
     abstract fun setListeners()
     abstract fun initView()
+    abstract fun getExtras()
     override fun onBackPressed() {
         val fm = supportFragmentManager
         var fragment: Fragment? = null

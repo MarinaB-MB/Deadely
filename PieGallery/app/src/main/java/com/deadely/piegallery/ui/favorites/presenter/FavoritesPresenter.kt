@@ -1,8 +1,9 @@
 package com.deadely.piegallery.ui.favorites.presenter
 
-import com.deadely.piegallery.Repository
 import com.deadely.piegallery.base.BasePresenter
 import com.deadely.piegallery.dataclasses.Photo
+import com.deadely.piegallery.navigation.Screens
+import com.deadely.piegallery.repository.Repository
 import com.deadely.piegallery.ui.favorites.FavoritesView
 import com.deadely.piegallery.utils.mapToModelList
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,7 +14,7 @@ import javax.inject.Inject
 @InjectViewState
 class FavoritesPresenter @Inject constructor(private val repository: Repository) : BasePresenter<FavoritesView>() {
     fun exit() {
-        router.exit()
+        router.replaceScreen(Screens.PhotosScreen())
     }
 
     fun getFavoritesPhotos() {
@@ -38,6 +39,10 @@ class FavoritesPresenter @Inject constructor(private val repository: Repository)
     }
 
     fun openDetailScreen(photo: Photo) {
-        TODO("Not yet implemented")
+    }
+
+    fun clearList() {
+        repository.clearFavoriteList()
+        getFavoritesPhotos()
     }
 }

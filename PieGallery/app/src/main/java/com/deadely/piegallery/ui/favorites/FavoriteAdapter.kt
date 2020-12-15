@@ -46,14 +46,19 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
                     .into(ivPhoto)
                 tvDescPhoto.text = photo.user?.username
                 ivPhoto.setOnLongClickListener {
-                    llDelete.layoutParams.apply { height = ivPhoto.height }
                     llDelete.makeVisible()
                     ivPhoto.makeGone()
                     tvDescPhoto.makeGone()
+                    llDelete.layoutParams.apply { height = ivPhoto.height }
                     true
                 }
                 clContainer.setBackgroundColor(Color.parseColor(photo.color))
-                llDelete.setOnClickListener { listener?.onDeleteClick(photo) }
+                ivDelete.setOnClickListener { listener?.onDeleteClick(photo) }
+                llDelete.setOnClickListener {
+                    ivPhoto.makeVisible()
+                    llDelete.makeGone()
+                    tvDescPhoto.makeVisible()
+                }
                 itemView.setOnClickListener { listener?.onDetailClick(photo) }
             }
         }

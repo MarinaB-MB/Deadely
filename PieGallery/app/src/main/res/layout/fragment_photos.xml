@@ -1,39 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nsvContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#534F4F">
+    android:background="#534F4F"
+    android:fillViewport="true"
+    android:focusable="false"
+    android:focusableInTouchMode="true"
+    android:overScrollMode="never">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:background="#534F4F">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPhotoList"
-            android:visibility="visible"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/darkGray"
-            tools:listitem="@layout/row_photo_post" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:visibility="gone">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPhotoList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/darkGray"
+                android:visibility="visible"
+                tools:listitem="@layout/row_photo_post" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:visibility="gone"
-        tools:text="@string/error" />
-</RelativeLayout>
+        <ProgressBar
+            android:id="@+id/pbPhotos"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            tools:text="@string/error" />
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
