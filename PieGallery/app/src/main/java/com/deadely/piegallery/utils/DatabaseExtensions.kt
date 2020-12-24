@@ -23,10 +23,6 @@ fun List<PhotoEntity>.mapToModelList(): List<Photo> {
     return map { it.mapToModel() }
 }
 
-fun List<Photo>.mapToEntityList(): List<PhotoEntity> {
-    return map { it.mapToEntity() }
-}
-
 fun User.mapToEntity(): UserEntity {
     return UserEntity(
         id
